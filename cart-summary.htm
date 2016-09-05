@@ -1,9 +1,9 @@
 {module_shoppingcartsummary template="" collection="CartSummary"}
 <li class="menubar-cart">
-<a href="{{CartSummary.cartUrl | default: '#'}}" class="awemenu-icon menu-shopping-cart" title="Your Cart: ({{CartSummary.itemCount | default: 0}} Items) - {{CartSummary.totalAmount | default: '0.00' | money}}">
-<span class="cart-label">Cart</span>
-<em class="icon icon-shopping-bag"></em>
-<span id="cartSummaryCount" class="{% if CartSummary.itemCount &gt; 999 -%}cart-number-lg{% else %}cart-number{% endif %}" data-count="{{CartSummary.itemCount | default: 0}}">{{CartSummary.itemCount | default: 0}}</span>
-<span id="cartSummaryValue" class="cart-value" data-value="{{CartSummary.totalAmount | default: '0.00'}}">{{CartSummary.totalAmount | default: '0.00' | money}}</span>
-</a>
+    <a href="{{CartSummary.cartUrl | default: '#'}}" class="awemenu-icon menu-shopping-cart" title="Your Cart: ({{CartSummary.itemCount | default: 0}} Items) - {{CartSummary.totalAmount | default: '0.00' | money}}">
+        <span class="cart-label">Cart</span>
+        <em class="icon icon-shopping-bag"></em>
+        <span id="cartSummaryCount" class="{% if CartSummary.itemCount > 999 -%}cart-number-lg{% else %}cart-number{% endif %}" data-count="{{CartSummary.itemCount | default: 0}}">{{CartSummary.itemCount | default: 0}}</span>
+        <span id="cartSummaryValue" class="cart-value" data-value="{{CartSummary.totalAmount | default: '0.00'}}">{{CartSummary.totalAmount | default: '0.00' | money}}</span>
+    </a>
 </li>

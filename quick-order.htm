@@ -1,581 +1,553 @@
 <!DOCTYPE html>
-<html class="no-js" lang=""><!-- InstanceBegin template="/Templates/New Main Template.dwt" codeOutsideHTMLIsLocked="false" -->
-
+<html class="no-js" lang="">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <!-- InstanceBeginEditable name="doctitle" --><title data-bc-test="Main_Template.dwt">Quick Order | Siam Wholesale Organic Body Jewelry</title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
-        
-        <meta name="description" content="Login to Siam Wholesale Organic Body Jewelry." />
-    <!-- InstanceEndEditable -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,700,400italic,700italic&amp;subset=latin,vietnamese">
-
-    <!-- build:css css/bootstrap.css -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <!-- endbuild -->
-
-    <!-- build:css css/plugins.css -->
-    <link rel="stylesheet" href="/css/awe-icon.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/owl.carousel.css">
-    <link rel="stylesheet" href="/css/awemenu.css">
-    <link rel="stylesheet" href="/css/swiper.css">
-    <link rel="stylesheet" href="/css/easyzoom.css">
-    <!-- endbuild -->
-
-    <!-- build:css css/styles.css -->
-    <link rel="stylesheet" href="/css/awe-background.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <!-- endbuild -->
-
-    <!-- Custom Siam Styles -->
-    <link rel="stylesheet" href="/css/custom.css">
-
-    <!-- build:js js/vendor.js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-    <!-- endbuild -->
-
+    <title>Quick Order | Siam Wholesale Organic Body Jewelry</title>
+    <meta name="description" content="Login to Siam Wholesale Organic Body Jewelry.">
 </head>
-
 <body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="//browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->    
-        
-    <div id="wrapper" class="main-wrapper">
-       
-        {module_contentholder, name="Site_Header"}
-       
-        <!-- InstanceBeginEditable name="ContentArea" -->
-        <!-- Main Content -->
-        <div id="main">
+    
+    <!-- Main Content -->
+    <div id="main">
         {% comment -%}
-        Set any BC install specific 'hardcoded' variable values here.
+            Set any BC install specific 'hardcoded' variable values here.
         {% endcomment %}
-        {% assign catalogRootId = "175767" -%}
+        {% assign catalogRootId = "175767" -%}        
         {% assign catalogAllProductsId = "175768" -%}
         {% assign catalogAllProductsName = "All Products" -%}
         {% assign catalogAllProductsUrl = "/products/all" -%}
         {module_pageaddress collection="pageAddress" template=""}
         {module_shoppingcartsummary template="" collection="CartSummary"}
         {% comment -%}
-        Set variables to store the search text and search catalog ID if they're supplied via querystring parameters.
+            Set variables to store the search text and search catalog ID if they're supplied via querystring parameters.
         {% endcomment %}
         {% if globals.get.search -%}
-        {% assign searchText = globals.get.search -%}
+            {% assign searchText = globals.get.search -%}
         {% else %}
-        {% assign searchText = '' -%}
+            {% assign searchText = '' -%}
         {% endif %}
         {% if globals.get.cat and globals.get.cat != null and globals.get.cat != "" -%}
-        {% assign searchCatalogId = globals.get.cat -%}
+            {% assign searchCatalogId = globals.get.cat -%}
         {% endif %}
         {% comment -%}
-        Set variable to store the 'sort' and 'order' parameter values if they are contained in a session cookie.
-        {% endcomment %}
+            Set variable to store the 'sort' and 'order' parameter values if they are contained in a session cookie. 
+        {% endcomment %}        
         {% if globals.cookie.sortByName -%}
-        {% if globals.cookie.sortByName == "price" -%}
-        {% if globals.cookie.sortByOrder == "desc" -%}
-        {% assign sort = "-salePrice" -%}
+            {% if globals.cookie.sortByName == "price" -%}
+                {% if globals.cookie.sortByOrder == "desc" -%}
+                    {% assign sort = "-salePrice" -%}
+                {% else %}
+                    {% assign sort = "salePrice" -%}
+                {% endif %}
+            {% endif %}
+            {% if globals.cookie.sortByName == "name" -%}
+                {% if globals.cookie.sortByOrder == "desc" -%}
+                    {% assign sort = "-product.name" -%}
+                {% else %}
+                    {% assign sort = "product.name" -%}
+                {% endif %}
+            {% endif %}
         {% else %}
-        {% assign sort = "salePrice" -%}
-        {% endif %}
-        {% endif %}
-        {% if globals.cookie.sortByName == "name" -%}
-        {% if globals.cookie.sortByOrder == "desc" -%}
-        {% assign sort = "-product.name" -%}
-        {% else %}
-        {% assign sort = "product.name" -%}
-        {% endif %}
-        {% endif %}
-        {% else %}
-        {% assign sort = "-product.releaseDate" -%}
-        {% endif %}
+            {% assign sort = "-product.releaseDate" -%}                
+        {% endif %}              
         {% comment -%}
-        Now overwrite with the URL parameter value if they are set.
-        {% endcomment %}
+            Now overwrite with the URL parameter value if they are set.
+        {% endcomment %}      
         {% if globals.get.sort == "price" -%}
-        {% if globals.get.order == "desc" -%}
-        {% assign sort = "-salePrice" -%}
-        {% else %}
-        {% assign sort = "salePrice" -%}
-        {% endif %}
+            {% if globals.get.order == "desc" -%}
+                {% assign sort = "-salePrice" -%}
+            {% else %}
+                {% assign sort = "salePrice" -%}
+            {% endif %}
         {% endif %}
         {% if globals.get.sort == "name" -%}
-        {% if globals.get.order == "desc" -%}
-        {% assign sort = "-product.name" -%}
-        {% else %}
-        {% assign sort = "product.name" -%}
-        {% endif %}
-        {% endif %}
+            {% if globals.get.order == "desc" -%}
+                {% assign sort = "-product.name" -%}
+            {% else %}
+                {% assign sort = "product.name" -%}
+            {% endif %}
+        {% endif %}              
         {% comment -%}
-        Set variable which stores the 'skip' parameter value obtained from the URL (or set to default of 0).
-        {% endcomment %}
+            Set variable which stores the 'skip' parameter value obtained from the URL (or set to default of 0).
+        {% endcomment %}          
         {% if globals.get.skip -%}
-        {% assign skip = globals.get.skip | convert: "number" -%}
+            {% assign skip = globals.get.skip | convert: "number" -%}
         {% else %}
-        {% assign skip = 0 -%}
+            {% assign skip = 0 -%}
         {% endif %}
         {% comment -%}
-        Set hardcoded 'limit' of 10. Seems the right number of products to list on each page at a maximum.
-        {% endcomment %}
+            Set hardcoded 'limit' of 10. Seems the right number of products to list on each page at a maximum.
+        {% endcomment %} 
         {% assign limit = 10 -%}
         {% comment -%}
-        Get a list of Catalogs. Need this to populate the 'Select Category' search filter options.
-        {% endcomment %}
-        {module_data resource="catalogs" version="v3" fields="id,parentId,name,title,url" limit="30" order="name" collection="CatalogList"}
+            Get a list of Catalogs. Need this to populate the 'Select Category' search filter options.
+        {% endcomment %}         
+        {module_data resource="catalogs" version="v3" fields="id,parentId,name,title,url" limit="30" order="name" collection="CatalogList"}        
         {% if searchCatalogId %}
-        {module_data resource="catalogproducts" version="v3" fields="productId" where="\{'catalogue.id':'{{searchCatalogId}}'\}" skip="0" limit="500" order="catalogueId" collection="CatalogProducts"}
-        {% assign searchCatalogProductIDs = CatalogProducts.items | map: 'productId' -%}
-        {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'$or':\[\{'product.name':\{'$contains':'{{searchText}}'\}\},\{'product.productCode':\{'$contains':'{{searchText}}'\}\}\],'$and':\[\{'product.id':\{'$in':{{searchCatalogProductIDs | JSON}}\}\},\{\}\]\}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}
-        {% comment -%}
-        Calculate pagination.
-        {% endcomment %}
-        {% assign moduloCheck =  ProductPrices.totalItemsCount | modulo : limit -%}
-        {% if moduloCheck == 0 -%}
-        {% assign totalPages = ProductPrices.totalItemsCount | divided_by: limit -%}
-        {% else %}
-        {% assign totalPages = ProductPrices.totalItemsCount | divided_by: limit | plus: 1 -%}
-        {% endif %}
-        {% comment -%}
-        Calculate product results counts.
-        {% endcomment %}
-        {% assign currentPage =  skip | divided_by: limit | plus: 1 -%}
-        {% assign firstItemNumber = currentPage | minus: 1 | times: limit | plus: 1 -%}
-        {% assign maxPageItems = currentPage | times: limit -%}
-        {% if maxPageItems &gt; ProductPrices.totalItemsCount -%}
-        {% assign lastItemNumber = ProductPrices.totalItemsCount -%}
-        {% else %}
-        {% assign lastItemNumber = currentPage | times: limit -%}
-        {% endif %}
-        {% if globals.get.sort -%}
-        {% if globals.get.order -%}
-        {% assign urlSortFilters = '&amp;sort=' | append: globals.get.sort | append: '&amp;order=' | append: globals.get.order -%}
-        {% else %}
-        {% assign urlSortFilters = '&amp;sort=' | append: globals.get.sort -%}
-        {% endif %}
-        {% endif %}
-        {% endif %}
+            {module_data resource="catalogproducts" version="v3" fields="productId" where="\{'catalogue.id':'{{searchCatalogId}}'\}" skip="0" limit="500" order="catalogueId" collection="CatalogProducts"}
+            {% assign searchCatalogProductIDs = CatalogProducts.items | map: 'productId' -%}
+            {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'$or':\[\{'product.name':\{'$contains':'{{searchText}}'\}\},\{'product.productCode':\{'$contains':'{{searchText}}'\}\}\],'$and':\[\{'product.id':\{'$in':{{searchCatalogProductIDs | JSON}}\}\},\{\}\]\}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}
+            {% comment -%}
+                Calculate pagination.
+            {% endcomment %}                 
+            {% assign moduloCheck =  ProductPrices.totalItemsCount | modulo : limit -%}
+            {% if moduloCheck == 0 -%}
+                {% assign totalPages = ProductPrices.totalItemsCount | divided_by: limit -%}
+            {% else %}
+                {% assign totalPages = ProductPrices.totalItemsCount | divided_by: limit | plus: 1 -%}
+            {% endif %}
+            {% comment -%}
+                Calculate product results counts.
+            {% endcomment %}                         
+            {% assign currentPage =  skip | divided_by: limit | plus: 1 -%}        
+            {% assign firstItemNumber = currentPage | minus: 1 | times: limit | plus: 1 -%}
+            {% assign maxPageItems = currentPage | times: limit -%}
+            {% if maxPageItems > ProductPrices.totalItemsCount -%}
+                {% assign lastItemNumber = ProductPrices.totalItemsCount -%}                                            
+            {% else %}                
+                {% assign lastItemNumber = currentPage | times: limit -%}
+            {% endif %}             
+            {% if globals.get.sort -%}
+                {% if globals.get.order -%}                                    
+                    {% assign urlSortFilters = '&sort=' | append: globals.get.sort | append: '&order=' | append: globals.get.order -%}
+                {% else %}
+                    {% assign urlSortFilters = '&sort=' | append: globals.get.sort -%}
+                {% endif %}                                                            
+            {% endif %}                                     
+        {% endif %}                                                               
         <!-- Category Header -->
         <div class="main-header background background-image-heading-login">
-        <div class="container">
-        <h1>Quick Order</h1>
+            <div class="container">
+                <h1>Quick Order</h1>
+            </div>
         </div>
-        </div>
-        <!-- / Category Header -->
+        <!-- / Category Header -->            
+
         <!-- Breadcrumb Navigation -->
         <div id="breadcrumb">
-        <div class="container">
-        <ol class="breadcrumb page">
-            <li><a href="\">Home</a></li>
-            <li class="active"><span>Quick Order</span></li>
-        </ol>
-        </div>
-        </div>
+            <div class="container">
+                <ol class="breadcrumb page">
+                <li><a href="\">Home</a></li>
+                <li class="active"><span>Quick Order</span></li>
+                </ol>
+            </div>
+        </div>          
         <!-- / Breadcrumb Navigation -->
-        <!-- Quick Order Page Content -->
+
+        <!-- Quick Order Page Content -->              
         <div class="container quick-order">
-        <!-- Intro text. -->
-        <div class="row margin-bottom-30">
-        <div class="col-md-12 body-content">
-        <p>Please select a Category and <em>optionally</em> enter any keywords to search for (e.g. the Product Code or part of the Product Name), then click the 'Search' button to find the products you wish to order and add them to your Shopping Cart.</p>
-        </div>
-        </div>
-        <!-- Search Actions -->
-        <div class="row">
-        <div class="col-md-12">
-        <div class="product-header-actions">
-        <form id="searchActions" method="POST" class="form-inline">
-            <div class="row">
-            <div class="col-md-12">
-            <div class="form-show-sort">
-            <!-- Category Filter ("#actionFilterByCatalog") -->
-            <div class="form-group pull-left">
-            <label for="p_cat">Category:</label>
-            <select name="p_cat" id="actionFilterByCatalog" class="form-control input-sm">
-            <option>-- Please Select --</option>
-            {% comment -%}Handle "Sections" first.{% endcomment %}
-            <optgroup label="Sections">
-            {% for catalog in CatalogList.items -%}
-            {% if catalog.name contains '*' -%}
-            <option catalog.id="=" value="{{catalog.id}}">{{catalog.name | replace: '*',''}}</option>
-            {% endif %}
-            {% endfor %}
-            </optgroup>
-            {% comment -%}
-            Now handle "Categories"...
-            {% endcomment %}
-            <optgroup label="Categories">
-            {% for catalog in CatalogList.items -%}
-            {% unless catalog.name contains '*' -%}
-            {% if catalog.parentId == catalogRootId -%}
-            {% comment -%}Parent Catalog{% endcomment %}
-            <option catalog.id="=" value="{{catalog.id}}">{{catalog.name}}</option>
-            {% for potentialChildCatalog in CatalogList.items -%}
-            {% if potentialChildCatalog.parentId == catalog.id -%}
-            {% comment -%}Child Catalog{% endcomment %}
-            <option potentialchildcatalog.id="=" value="{{potentialChildCatalog.id}}">{{potentialChildCatalog.name | prepend: '&nbsp;&nbsp;&nbsp;'}}</option>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-            {% endunless %}
-            {% endfor %}
-            </optgroup>
-            </select>
+                    
+            <!-- Intro text. -->
+            <div class="row margin-bottom-30">
+                <div class="col-md-12 body-content">
+                    <p>Please select a Category and <em>optionally</em> enter any keywords to search for (e.g. the Product Code or part of the Product Name), then click the 'Search' button to find the products you wish to order and add them to your Shopping Cart.</p>  
+                </div>
             </div>
-            <!-- /.form-group -->
-            <!-- Keyword Search Filter ("#actionFilterByKeyword")-->
-            <div class="form-group pull-left">
-            <label for="p_keyword_search">Search:</label>
-            <input -%}value="{{searchText}}" name="p_keyword_search" type="text" id="actionFilterByKeyword" placeholder="Enter keywords or leave blank to see all products..." class="form-control input-sm" />
+
+            <!-- Search Actions -->
+            <div class="row">      
+                <div class="col-md-12">                                                  
+                    <div class="product-header-actions">
+                        <form id="searchActions" action="" method="POST" class="form-inline">
+                            <div class="row">
+                                <div class="col-md-12">     
+                                    <div class="form-show-sort">
+                                        <!-- Category Filter ("#actionFilterByCatalog") -->
+                                        <div class="form-group pull-left">   
+                                            <label for="p_cat">Category:</label>
+                                            <select name="p_cat" id="actionFilterByCatalog" class="form-control input-sm">
+                                                <option value>-- Please Select --</option>
+                                                {% comment -%}Handle "Sections" first.{% endcomment %}
+                                                <optgroup label="Sections">
+                                                {% for catalog in CatalogList.items -%}                                                    
+                                                    {% if catalog.name contains '*' -%}
+                                                        <option {% if catalog.id == searchCatalogId -%}selected{% endif %} value="{{catalog.id}}">{{catalog.name | replace: '*',''}}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </optgroup>                                                
+                                                {% comment -%}
+                                                    Now handle "Categories"...
+                                                {% endcomment %}
+                                                <optgroup label="Categories">
+                                                {% for catalog in CatalogList.items -%}                                                    
+                                                    {% unless catalog.name contains '*' -%}
+                                                        {% if catalog.parentId == catalogRootId -%}                                                        
+                                                            {% comment -%}Parent Catalog{% endcomment %}
+                                                            <option {% if catalog.id == searchCatalogId -%}selected{% endif %} value="{{catalog.id}}">{{catalog.name}}</option>
+                                                            {% for potentialChildCatalog in CatalogList.items -%}
+                                                                {% if potentialChildCatalog.parentId == catalog.id -%}
+                                                                {% comment -%}Child Catalog{% endcomment %}                                                                
+                                                                <option {% if potentialChildCatalog.id == searchCatalogId -%}selected{% endif %} value="{{potentialChildCatalog.id}}">{{potentialChildCatalog.name | prepend: '&nbsp;&nbsp;&nbsp;'}}</option>
+                                                                {% endif %}
+                                                            {% endfor %}                                    
+                                                        {% endif %}                                                                 
+                                                    {% endunless %}                                                    
+                                                {% endfor %}       
+                                                </optgroup>                                                                                         
+                                            </select>
+                                        </div><!-- /.form-group -->
+                                        <!-- Keyword Search Filter ("#actionFilterByKeyword")-->
+                                        <div class="form-group pull-left">
+                                            <label for="p_keyword_search">Search:</label>
+                                            <input {% if searchText -%}value="{{searchText}}"{% endif %} name="p_keyword_search" type="text" id="actionFilterByKeyword" placeholder="Enter keywords or leave blank to see all products..." class="form-control input-sm">
+                                        </div><!-- /.form-group -->
+
+                                        <!-- Sort Order ("#actionSortBy")-->
+                                        <div class="form-group pull-right text-right">
+                                            <label for="p_sort_by">Sort:</label>
+                                            <select name="p_sort_by" id="actionSortBy" class="form-control input-sm">
+                                                <option value="newest-first"{% if sort == "-product.releaseDate" or sort == null -%} selected{% endif-%}>Newest First</option>
+                                                {% if globals.user.isLoggedIn == 'true' -%}    
+                                                <option value="price"{% if sort == "salePrice" -%} selected{% endif-%}>Price: Low to High</option>
+                                                <option value="price-desc"{% if sort == "-salePrice" -%} selected{% endif-%}>Price: High to Low</option>
+                                                {% endif %}                                                    
+                                                <option value="name"{% if sort == "product.name" -%} selected{% endif-%}>Name: A to Z</option>
+                                                <option value="name-desc"{% if sort == "-product.name" -%} selected{% endif-%}>Name: Z to A</option>
+                                            </select>
+                                            <a href="javascript:void(0)" id="actionReset" class="btn btn-red btn-outline" title="Reset Search">Reset</a>           
+                                            <a href="javascript:void(0)" id="actionSearch" class="btn btn-dark" title="Run Search">Search</a>                                         
+                                        </div><!-- /.form-group -->
+
+                                    </div>
+                                </div>
+                            </div><!-- /.row -->
+                        </form>
+                    </div><!-- /.product-header-actions -->                                            
+                </div>
             </div>
-            <!-- /.form-group -->
-            <!-- Sort Order ("#actionSortBy")-->
-            <div class="form-group pull-right text-right">
-            <label for="p_sort_by">Sort:</label>
-            <select name="p_sort_by" id="actionSortBy" class="form-control input-sm">
-            <option value="newest-first" sort="=">Newest First</option>
-            {% if globals.user.isLoggedIn == 'true' -%}
-            <option value="price" sort="=">Price: Low to High</option>
-            <option value="price-desc" sort="=">Price: High to Low</option>
-            {% endif %}
-            <option value="name" sort="=">Name: A to Z</option>
-            <option value="name-desc" sort="=">Name: Z to A</option>
-            </select>
-            <a href="javascript:void(0)" id="actionReset" class="btn btn-red btn-outline" title="Reset Search">Reset</a>
-            <a href="javascript:void(0)" id="actionSearch" class="btn btn-dark" title="Run Search">Search</a>
-            </div>
-            <!-- /.form-group -->
-            </div>
-            </div>
-            </div>
-            <!-- /.row -->
-        </form>
-        </div>
-        <!-- /.product-header-actions -->
-        </div>
-        </div>
-        <!-- ./Search Actions-->
-        <!-- Result Count and Pagination - TOP -->
-        <div class="row margin-bottom-15">
-        <div class="col-md-12">
-        <div class="form-show-sort">
-        <!-- Result Count -->
-        <div class="form-group pull-left result-count">
-        {% if ProductPrices.totalItemsCount &gt;= 1 -%}
-        <p id="searchResultMessage">Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
-        {% elsif searchCatalogId  %}
-        <p id="searchResultMessage">No products were found. <strong>Tip:</strong> change the Category and any Search keywords and then try searching again.</p>
-        {% else %}
-        <p>Click the 'Search' button to find products.</p>
-        {% endif %}
-        </div>
-        <!-- Pagination -->
-        <!-- Jump to Page - id: #actionJumpToPage -->
-        {% if ProductPrices.totalItemsCount &gt; limit -%}
-        <div class="form-group pull-right text-right pagination-controls">
-        <label for="actionJumpToPage">Page</label>
-        <select name="actionJumpToPage" id="actionJumpToPage" class="form-control input-sm" title="Jump to Page">
-        {% for pageNum in (1..totalPages) -%}
-        {% if pageNum == currentPage -%}
-        <option value="{{pageNum}}">{{pageNum}}</option>
-        {% else %}
-        <option value="{{pageNum}}" data-skip="{{pageNum | minus: 1 | times: limit}}">{{pageNum}}</option>
-        {% endif %}
-        {% endfor %}
-        </select>
-        <strong>of {{totalPages}}</strong>
-        <ul class="pagination">
-            {% if currentPage &gt; 1 -%}
-            <li class="pagination-prev"><a href="{{globals.get.ID}}?cat={{searchCatalogId}}&amp;search={{searchText}}&amp;skip={{ currentPage | minus: 2 | times: limit }}&amp;limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif %}" data-toggle="tooltip" data-original-title="Page {{currentPage | minus: 1}}" title="Page {{currentPage | minus: 1}}"><em class="icon icon-arrow-prev"></em></a></li>
-            {% else %}
-            <li class="pagination-prev"><span><em class="icon icon-arrow-prev"></em></span></li>
-            {% endif %}
-            {% if currentPage != totalPages -%}
-            <li class="pagination-next"><a href="{{globals.get.ID}}?cat={{searchCatalogId}}&amp;search={{searchText}}&amp;skip={{ currentPage | times: limit }}&amp;limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif %}" data-toggle="tooltip" data-original-title="Page {{currentPage | plus: 1}}" title="Page {{currentPage | plus: 1}}"><em class="icon icon-arrow-next"></em></a></li>
-            {% else %}
-            <li class="pagination-next"><span><em class="icon icon-arrow-next"></em></span></li>
-            {% endif %}
-        </ul>
-        </div>
-        <!-- /.form-group -->
-        {% endif %}
-        </div>
-        </div>
-        </div>
-        <!-- ./Result Count -->
-        {% if ProductPrices.totalItemsCount &gt;= 1 -%}
-        {% comment -%}
-        Make a call to module_product to force the BC 'AddToCart' JS scripts to be included.
-        {% endcomment %}
-        {% if ProductPrices.items[0] -%}
-        {module_product catalogId="{{searchCatalogId}}" productId="{{ProductPrices.items[0].productId}}" template="" collection="DummyProduct"}
-        {% endif %}
-        <!-- Search Results -->
-        <div id="searchResults" class="table-responsive">
-        {% for item in ProductPrices.items -%}
-        {% if item.product.minUnits &gt; 1 -%}
-        {% assign unitTypePluralized = item.product.unitType | append: 's' -%}
-        {% else %}
-        {% assign unitTypePluralized = item.product.unitType -%}
-        {% endif %}
-        {module_data resource="productsattributes" version="v3" fields="id,productId,groupName,fieldTypeId,mandatory" where="\{'productId':'{{item.productId}}'\}" order="id" collection="ProductAttributes"}
-        {% endfor %}
-        <table class="table-bordered table table-cart">
-            <thead>
-                <tr>
-                    <th style="text-align: left; padding-left: 10px;">Product</th>
-                    <th>Options</th>
-                    <th>Unit Price</th>
-                    <th>Qty</th>
-                    <th>Subtotal</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="catProdAttributes2_{{item.productId}}">
-                    <td class="cart-product">
-                    <a href="{{item.product.canonicalUrl}}" name="{{item.product.name}}" class="product-link">
-                    <div class="product-image">
-                    <img src="{{item.product.popletImage3}}" alt="{{item.product.name}}" />
+            <!-- ./Search Actions-->
+
+            <!-- Result Count and Pagination - TOP -->
+            <div class="row margin-bottom-15">
+                <div class="col-md-12">
+                    <div class="form-show-sort">
+                        <!-- Result Count -->
+                        <div class="form-group pull-left result-count">
+                        {% if ProductPrices.totalItemsCount >= 1 -%}         
+                            <p id="searchResultMessage">Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
+                        {% elsif searchCatalogId  %}
+                            <p id="searchResultMessage">No products were found. <strong>Tip:</strong> change the Category and any Search keywords and then try searching again.</p>
+                        {% else %}
+                            <p>Click the 'Search' button to find products.</p>
+                        {% endif %}                                                                        
+                        </div>
+
+                        <!-- Pagination -->
+                        <!-- Jump to Page - id: #actionJumpToPage -->
+                        {% if ProductPrices.totalItemsCount > limit -%}                        
+                        <div class="form-group pull-right text-right pagination-controls">
+                            <label for="actionJumpToPage">Page</label>
+                            <select name="actionJumpToPage" id="actionJumpToPage" class="form-control input-sm" title="Jump to Page">
+                            {% for pageNum in (1..totalPages) -%}
+                                {% if pageNum == currentPage -%}
+                                <option value="{{pageNum}}" selected>{{pageNum}}</option>
+                                {% else %}
+                                <option value="{{pageNum}}" data-skip="{{pageNum | minus: 1 | times: limit}}">{{pageNum}}</option>
+                                {% endif %}
+                            {% endfor %}
+                            </select>
+                            <strong>of {{totalPages}}</strong>
+                            <ul class="pagination">
+                                {% if currentPage > 1 -%}
+                                <li class="pagination-prev"><a href="{{globals.get.ID}}?cat={{searchCatalogId}}&search={{searchText}}&skip={{ currentPage | minus: 2 | times: limit }}&limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif %}" data-toggle="tooltip" data-original-title="Page {{currentPage | minus: 1}}" title="Page {{currentPage | minus: 1}}"><i class="icon icon-arrow-prev"></i></a></li>                                                    
+                                {% else %}
+                                <li class="pagination-prev"><span><i class="icon icon-arrow-prev"></i></span></li>
+                                {% endif %}
+
+                                {% if currentPage != totalPages -%}
+                                <li class="pagination-next"><a href="{{globals.get.ID}}?cat={{searchCatalogId}}&search={{searchText}}&skip={{ currentPage | times: limit }}&limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif %}" data-toggle="tooltip" data-original-title="Page {{currentPage | plus: 1}}" title="Page {{currentPage | plus: 1}}"><i class="icon icon-arrow-next"></i></a></li>
+                                {% else %}
+                                <li class="pagination-next"><span><i class="icon icon-arrow-next"></i></span></li>
+                                {% endif %}
+                            </ul>      
+                        </div><!-- /.form-group -->                                                                                                                   
+                        {% endif %}
                     </div>
-                    <div class="product-description">
-                    <h3 class="product-title">{{item.product.name}}</h3>
-                    <span class="product-units">({{unitTypePluralized}})</span>
-                    <span class="product-sku">{{item.product.productCode}}</span>
-                    <span class="min-order"><strong>Min Order:</strong> {{item.product.minUnits}} {{unitTypePluralized}}</span>
+                </div>
+            </div>
+            <!-- ./Result Count -->
+
+            {% if ProductPrices.totalItemsCount >= 1 -%} 
+                {% comment -%}
+                    Make a call to module_product to force the BC 'AddToCart' JS scripts to be included.
+                {% endcomment %}
+                {% if ProductPrices.items[0] -%}
+                    {module_product catalogId="{{searchCatalogId}}" productId="{{ProductPrices.items[0].productId}}" template="" collection="DummyProduct"}
+                {% endif %}
+            <!-- Search Results -->
+            <div id="searchResults" class="table-responsive">
+                <table class="table-bordered table table-cart">
+                    <thead>
+                    <tr>
+                        <th style="text-align:left;padding-left:10px;">Product</th>
+                        <th>Options</th>
+                        <th>Unit Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                    </thead>                    
+                    <tbody>
+                    {% for item in ProductPrices.items -%}
+                        {% if item.product.minUnits > 1 -%}                                    
+                            {% assign unitTypePluralized = item.product.unitType | append: 's' -%}
+                        {% else %}
+                            {% assign unitTypePluralized = item.product.unitType -%}
+                        {% endif %}
+                        {module_data resource="productsattributes" version="v3" fields="id,productId,groupName,fieldTypeId,mandatory" where="\{'productId':'{{item.productId}}'\}" order="id" collection="ProductAttributes"}
+                        <tr id="catProdAttributes2_{{item.productId}}">
+                            <td class="cart-product">
+                                <a href="{{item.product.canonicalUrl}}" name="{{item.product.name}}" class="product-link">
+                                    <div class="product-image">                            
+                                        <img src="{{item.product.popletImage3}}" alt="{{item.product.name}}">                                                                                   
+                                    </div> 
+                                    <div class="product-description">
+                                        <h3 class="product-title">{{item.product.name}}</h3>
+                                        <span class="product-units">({{unitTypePluralized}})</span>
+                                        <span class="product-sku">{{item.product.productCode}}</span>
+                                        <span class="min-order"><strong>Min Order:</strong> {{item.product.minUnits}} {{unitTypePluralized}}</span>
+                                    </div>        
+                                </a> 
+                            </td>
+                            <td class="product-options">
+                                {% if ProductAttributes.items.size >= 1 -%}
+                                    {% for productAttribute in ProductAttributes.items -%}                                
+                                        {% comment -%}
+                                            Get list of attribute Options with Prices for current Attribute.
+                                            Unfortunately, we can't just call 'productsattributeoptionsprices' because some Options have no price.
+                                        {% endcomment %}                                                                     
+                                        {module_data resource="productsattributeoptions" version="v3" fields="id,optionName" limit="50" where="\{'groupId':'{{productAttribute.id}}'\}" order="id" collection="ProductAttributeOptions"}
+                                        {module_data resource="productsattributeoptionsprices" version="v3" fields="id,price,options" limit="50" where="\{'options.groupId':'{{productAttribute.id}}'\}" order="id" collection="ProductAttributeOptionsPrices"}
+
+                                        {% assign attrName = productAttribute.groupName | replace: ' ', '' | replace: '/', '' -%}
+                                        {% assign attrDomID = attrName | prepend: 'dom' -%}
+                                        {% assign helpModalID = attrName | prepend: 'helpModal' -%}                                        
+
+                                        <div class="form-group clearfix">
+                                            <div style="float:left;text-align:right;width:35%">
+                                                <label for="{{attrDomID}}">{{productAttribute.groupName}} <span data-toggle="modal" data-target="#{{helpModalID}}"><a class="help" data-toggle="tooltip" title="Help on {{productAttribute.groupName}}"><i class="icon icon-help"></i></a></span></label>
+                                            </div>
+                                            <div style="float:right;text-align:left;width:60%">
+                                                <select {% if productAttribute.mandatory -%}mandatory="1"{% endif %} name="{{attrDomID}}" id="{{attrDomID}}_{{item.productId}}" class="input-sm product-attribute_{{item.productId}}" onchange="updatePrices({{item.productId}});">
+                                                    <option data-price="0" value>-- Please Select --</option>
+                                                    {% for option in ProductAttributeOptions.items -%}
+                                                        {% if globals.user.isLoggedIn == 'true' -%}
+                                                            {% assign optionPrice = 0 -%}
+                                                            {% for optionPrice in ProductAttributeOptionsPrices.items -%}
+                                                                {% if optionPrice.id == option.id -%}
+                                                                    {% assign optionPrice = optionPrice.price -%}
+                                                                    {% break -%}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}    
+                                                        {% assign defaultOption = false -%}   
+                                                        {% case attrName -%}
+                                                            {% when 'WearableSurface' -%}
+                                                                {% if option.optionName contains 'Average Ears' -%}
+                                                                    {% assign defaultOption = true -%}
+                                                                {% endif %}                                                                    
+                                                            {% when 'WearingStyle' -%}
+                                                                {% if option.optionName contains 'Double Flare' -%}
+                                                                    {% assign defaultOption = true -%}
+                                                                {% endif %}
+                                                        {% endcase %}                                                                                                             
+                                                        <option data-price="{{optionPrice}}" value="{{option.id}}"{% if defaultOption -%}selected{% endif %}>{{option.optionName}}{% if optionPrice > 0 -%} {{ optionPrice | number: 'N2' | prepend: '+ $'}}{% endif %}</option>  
+                                                    {% endfor %}                                                       
+                                                </select>
+                                            </div>
+                                        </div>                                                                                             
+                                    {% endfor %}
+                                {% else %}    
+                                <span>---</span>                                     
+                                {% endif %}                                                                  
+                            </td> 
+                            <td class="unit-price">
+                                {% if globals.user.isLoggedIn == 'true' -%}
+                                <span class="price" id="unitPrice_{{item.productId}}" data-base-price="{{item.salePrice}}">${{item.salePrice}}</span>
+                                {% else %}
+                                <span class="login"><a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Price">Login</a></span>
+                                {% endif %}
+                            </td>
+                            <td class="quantity"><input name="p_qty" type="text" id="Units_{{item.productId}}" data-min-qty="{{item.product.minUnits | default: '1'}}" value="{{item.product.minUnits | default: '1'}}" class="qty" data-toggle="tooltip" data-original-title="Min Order: {{item.product.minUnits}} {{unitTypePluralized}}" onchange="updatePrices({{item.productId}});"><span class="product-units"> ({{unitTypePluralized}})</span></td>                                    
+                            <td class="sub-total">
+                                {% if globals.user.isLoggedIn == 'true' -%}                                            
+                                <span class="price" id="subTotal_{{item.productId}}">${{item.salePrice | times: item.product.minUnits}}</span>
+                                {% else %}
+                                <span class="login"><a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Price">N/A</a></span>
+                                {% endif %}                                                                                
+                            </td>
+                            <td class="action">
+                                {% if globals.user.isLoggedIn == 'true' -%}                                                                                    
+                                <a onclick="AddToCart({{searchCatalogId}},{{item.productId}},'',3,'','',false);return false;" class="btn btn-green" title="Add to Cart">Add to Cart</a>
+                                {% else %}
+                                <a href="javascript:alert('Please Login to add items to the Cart.')" class="btn btn-green" title="Add to Cart">Add to Cart</a>
+                                {% endif %}                                                                                                                                                                
+                            </td>
+                        </tr> 
+                    {% endfor %}                                                                                                                                                              
+                    </tbody>
+                </table>
+            </div> 
+            <!-- ./Search Results -->
+            {% endif %} 
+
+            <!-- Result Count and Pagination - BOTTOM -->
+            <div class="row margin-bottom-15">
+                <div class="col-md-12">
+                    <div class="form-show-sort">
+                        <!-- Result Count -->
+                        <div class="form-group pull-left result-count">
+                        {% if ProductPrices.totalItemsCount > 1 -%}         
+                            <p>Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
+                        {% endif %}                                                                        
+                        </div>
+
+                        <!-- Pagination -->
+                        <!-- Jump to Page - id: #actionJumpToPage -->
+                        {% if ProductPrices.totalItemsCount > limit -%}                        
+                        <div class="form-group pull-right text-right pagination-controls">
+                            <label for="actionJumpToPage2">Page</label>
+                            <select name="actionJumpToPage2" id="actionJumpToPage2" class="form-control input-sm" title="Jump to Page">
+                            {% for pageNum in (1..totalPages) -%}
+                                {% if pageNum == currentPage -%}
+                                <option value="{{pageNum}}" selected>{{pageNum}}</option>
+                                {% else %}
+                                <option value="{{pageNum}}" data-skip="{{pageNum | minus: 1 | times: limit}}">{{pageNum}}</option>
+                                {% endif %}
+                            {% endfor %}
+                            </select>
+                            <strong>of {{totalPages}}</strong>
+                            <ul class="pagination">
+                                {% if currentPage > 1 -%}
+                                <li class="pagination-prev"><a href="{{globals.get.ID}}?cat={{searchCatalogId}}&search={{searchText}}&skip={{ currentPage | minus: 2 | times: limit }}&limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif %}" data-toggle="tooltip" data-original-title="Page {{currentPage | minus: 1}}" title="Page {{currentPage | minus: 1}}"><i class="icon icon-arrow-prev"></i></a></li>                                                    
+                                {% else %}
+                                <li class="pagination-prev"><span><i class="icon icon-arrow-prev"></i></span></li>
+                                {% endif %}
+
+                                {% if currentPage != totalPages -%}
+                                <li class="pagination-next"><a href="{{globals.get.ID}}?cat={{searchCatalogId}}&search={{searchText}}&skip={{ currentPage | times: limit }}&limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif %}" data-toggle="tooltip" data-original-title="Page {{currentPage | plus: 1}}" title="Page {{currentPage | plus: 1}}"><i class="icon icon-arrow-next"></i></a></li>
+                                {% else %}
+                                <li class="pagination-next"><span><i class="icon icon-arrow-next"></i></span></li>
+                                {% endif %}
+                            </ul>      
+                        </div><!-- /.form-group -->                                                                                                                   
+                        {% endif %}
                     </div>
-                    </a>
-                    </td>
-                    <td class="product-options">
-                    {% if ProductAttributes.items.size &gt;= 1 -%}
-                    {% for productAttribute in ProductAttributes.items -%}
-                    {% comment -%}
-                    Get list of attribute Options with Prices for current Attribute.
-                    Unfortunately, we can't just call 'productsattributeoptionsprices' because some Options have no price.
-                    {% endcomment %}
-                    {module_data resource="productsattributeoptions" version="v3" fields="id,optionName" limit="50" where="\{'groupId':'{{productAttribute.id}}'\}" order="id" collection="ProductAttributeOptions"}
-                    {module_data resource="productsattributeoptionsprices" version="v3" fields="id,price,options" limit="50" where="\{'options.groupId':'{{productAttribute.id}}'\}" order="id" collection="ProductAttributeOptionsPrices"}
-                    {% assign attrName = productAttribute.groupName | replace: ' ', '' | replace: '/', '' -%}
-                    {% assign attrDomID = attrName | prepend: 'dom' -%}
-                    {% assign helpModalID = attrName | prepend: 'helpModal' -%}
-                    <div class="form-group clearfix">
-                    <div style="float: left; text-align: right; width: 35%;">
-                    <label for="{{attrDomID}}">{{productAttribute.groupName}} <span data-toggle="modal" data-target="#{{helpModalID}}"><a class="help" data-toggle="tooltip" title="Help on {{productAttribute.groupName}}"><em class="icon icon-help"></em></a></span></label>
-                    </div>
-                    <div style="float: right; text-align: left; width: 60%;">
-                    <select -%}mandatory="1" name="{{attrDomID}}" id="{{attrDomID}}_{{item.productId}}" class="input-sm product-attribute_{{item.productId}}" onchange="updatePrices({{item.productId}});">
-                    <option data-price="0">-- Please Select --</option>
-                    {% for option in ProductAttributeOptions.items -%}
-                    {% if globals.user.isLoggedIn == 'true' -%}
-                    {% assign optionPrice = 0 -%}
-                    {% for optionPrice in ProductAttributeOptionsPrices.items -%}
-                    {% if optionPrice.id == option.id -%}
-                    {% assign optionPrice = optionPrice.price -%}
-                    {% break -%}
-                    {% endif %}
-                    {% endfor %}
-                    {% endif %}
-                    {% assign defaultOption = false -%}
-                    {% case attrName -%}
-                    {% when 'WearableSurface' -%}
-                    {% if option.optionName contains 'Average Ears' -%}
-                    {% assign defaultOption = true -%}
-                    {% endif %}
-                    {% when 'WearingStyle' -%}
-                    {% if option.optionName contains 'Double Flare' -%}
-                    {% assign defaultOption = true -%}
-                    {% endif %}
-                    {% endcase %}
-                    <option data-price="{{optionPrice}}" value="{{option.id}}">{{option.optionName}}{% if optionPrice &gt; 0 -%} {{ optionPrice | number: 'N2' | prepend: '+ $'}}{% endif %}</option>
-                    {% endfor %}
-                    </select>
-                    </div>
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                    <span>---</span>
-                    {% endif %}
-                    </td>
-                    <td class="unit-price">
-                    {% if globals.user.isLoggedIn == 'true' -%}
-                    <span class="price" id="unitPrice_{{item.productId}}" data-base-price="{{item.salePrice}}">${{item.salePrice}}</span>
-                    {% else %}
-                    <span class="login"><a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Price">Login</a></span>
-                    {% endif %}
-                    </td>
-                    <td class="quantity"><input name="p_qty" type="text" id="Units_{{item.productId}}" data-min-qty="{{item.product.minUnits | default: '1'}}" value="{{item.product.minUnits | default: '1'}}" class="qty" data-toggle="tooltip" data-original-title="Min Order: {{item.product.minUnits}} {{unitTypePluralized}}" onchange="updatePrices({{item.productId}});" /><span class="product-units"> ({{unitTypePluralized}})</span></td>
-                    <td class="sub-total">
-                    {% if globals.user.isLoggedIn == 'true' -%}
-                    <span class="price" id="subTotal_{{item.productId}}">${{item.salePrice | times: item.product.minUnits}}</span>
-                    {% else %}
-                    <span class="login"><a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Price">N/A</a></span>
-                    {% endif %}
-                    </td>
-                    <td class="action">
-                    {% if globals.user.isLoggedIn == 'true' -%}
-                    <a onclick="AddToCart({{searchCatalogId}},{{item.productId}},'',3,'','',false);return false;" class="btn btn-green" title="Add to Cart">Add to Cart</a>
-                    {% else %}
-                    <a href="javascript:alert('Please Login to add items to the Cart.')" class="btn btn-green" title="Add to Cart">Add to Cart</a>
-                    {% endif %}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-        <!-- ./Search Results -->
-        {% endif %}
-        <!-- Result Count and Pagination - BOTTOM -->
-        <div class="row margin-bottom-15">
-        <div class="col-md-12">
-        <div class="form-show-sort">
-        <!-- Result Count -->
-        <div class="form-group pull-left result-count">
-        {% if ProductPrices.totalItemsCount &gt; 1 -%}
-        <p>Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
-        {% endif %}
-        </div>
-        <!-- Pagination -->
-        <!-- Jump to Page - id: #actionJumpToPage -->
-        {% if ProductPrices.totalItemsCount &gt; limit -%}
-        <div class="form-group pull-right text-right pagination-controls">
-        <label for="actionJumpToPage2">Page</label>
-        <select name="actionJumpToPage2" id="actionJumpToPage2" class="form-control input-sm" title="Jump to Page">
-        {% for pageNum in (1..totalPages) -%}
-        {% if pageNum == currentPage -%}
-        <option value="{{pageNum}}">{{pageNum}}</option>
-        {% else %}
-        <option value="{{pageNum}}" data-skip="{{pageNum | minus: 1 | times: limit}}">{{pageNum}}</option>
-        {% endif %}
-        {% endfor %}
-        </select>
-        <strong>of {{totalPages}}</strong>
-        <ul class="pagination">
-            {% if currentPage &gt; 1 -%}
-            <li class="pagination-prev"><a href="{{globals.get.ID}}?cat={{searchCatalogId}}&amp;search={{searchText}}&amp;skip={{ currentPage | minus: 2 | times: limit }}&amp;limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif %}" data-toggle="tooltip" data-original-title="Page {{currentPage | minus: 1}}" title="Page {{currentPage | minus: 1}}"><em class="icon icon-arrow-prev"></em></a></li>
-            {% else %}
-            <li class="pagination-prev"><span><em class="icon icon-arrow-prev"></em></span></li>
+                </div>
+            </div> 
+            <!-- ./Result Count -->
+
+
+            <!-- View Cart Button -->
+            {% if ProductPrices.totalItemsCount >= 1 -%}  
+            <div class="row text-right">
+                <div class="col-md-12">
+                    <a href="{{CartSummary.cartUrl | default: '#'}}" class="btn btn-primary margin-right-5" title="View Cart">View Cart <i class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>                
+            </div>
             {% endif %}
-            {% if currentPage != totalPages -%}
-            <li class="pagination-next"><a href="{{globals.get.ID}}?cat={{searchCatalogId}}&amp;search={{searchText}}&amp;skip={{ currentPage | times: limit }}&amp;limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif %}" data-toggle="tooltip" data-original-title="Page {{currentPage | plus: 1}}" title="Page {{currentPage | plus: 1}}"><em class="icon icon-arrow-next"></em></a></li>
-            {% else %}
-            <li class="pagination-next"><span><em class="icon icon-arrow-next"></em></span></li>
-            {% endif %}
-        </ul>
-        </div>
-        <!-- /.form-group -->
-        {% endif %}
-        </div>
-        </div>
-        </div>
-        <!-- ./Result Count -->
-        <!-- View Cart Button -->
-        {% if ProductPrices.totalItemsCount &gt;= 1 -%}
-        <div class="row text-right">
-        <div class="col-md-12">
-        <a href="{{CartSummary.cartUrl | default: '#'}}" class="btn btn-primary margin-right-5" title="View Cart">View Cart <em class="glyphicon glyphicon-chevron-right"></em></a>
-        </div>
-        </div>
-        {% endif %}
-        <!-- //TODO: Templatize the Help Modals -->
-        <!-- Help Modal for Size -->
-        <div id="helpModalSize" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Size</h4>
-        </div>
-        <div class="modal-body">
-        <div class="row">
-        <div class="col-md-6">Left Column</div>
-        <div class="col-md-6">Right Column</div>
-        </div>
-        <div class="row margin-top-20">
-        <div class="col-md-12">
-        <p>Footer content can go in here...</p>
-        </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        </div>
-        </div>
-        <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-        <!-- Help Modal for Wearing Length -->
-        <div id="helpModalWearingLength" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Wearing Length</h4>
-        </div>
-        <div class="modal-body">
-        <div class="row">
-        <div class="col-md-6">Left Column</div>
-        <div class="col-md-6">Right Column</div>
-        </div>
-        <div class="row margin-top-20">
-        <div class="col-md-12">
-        <p>Footer content can go in here...</p>
-        </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        </div>
-        </div>
-        <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-        <!-- Help Modal for Wearing Style -->
-        <div id="helpModalWearingStyle" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Wearing Style</h4>
-        </div>
-        <div class="modal-body">
-        <div class="row">
-        <div class="col-md-6">Left Column</div>
-        <div class="col-md-6">Right Column</div>
-        </div>
-        <div class="row margin-top-20">
-        <div class="col-md-12">
-        <p>Footer content can go in here...</p>
-        </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        </div>
-        </div>
-        <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-        <script>
+
+            <!-- //TODO: Templatize the Help Modals -->
+
+            <!-- Help Modal for Size -->
+            <div id="helpModalSize" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Size</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">Left Column</div>
+                            <div class="col-md-6">Right Column</div>
+                        </div>
+                        <div class="row margin-top-20">
+                            <div class="col-md-12">
+                                <p>Footer content can go in here...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->              
+
+            <!-- Help Modal for Wearing Length -->
+            <div id="helpModalWearingLength" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Wearing Length</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">Left Column</div>
+                            <div class="col-md-6">Right Column</div>
+                        </div>
+                        <div class="row margin-top-20">
+                            <div class="col-md-12">
+                                <p>Footer content can go in here...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->     
+
+            <!-- Help Modal for Wearing Style -->
+            <div id="helpModalWearingStyle" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Wearing Style</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">Left Column</div>
+                            <div class="col-md-6">Right Column</div>
+                        </div>
+                        <div class="row margin-top-20">
+                            <div class="col-md-12">
+                                <p>Footer content can go in here...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->                              
+
+            <script>
                 $(function() { 
 
                                
                 });
             </script>
+
         </div>
-        </div>
-        <!-- /main content -->
-        <script type="text/javascript">
+           
+    </div>
+    <!-- /main content -->
+
+    <script type="text/javascript">
         function updatePrices(productId) {
             // Get the base price.
             var basePrice = parseFloat($("#unitPrice_" + productId).data("base-price"));
@@ -598,8 +570,9 @@
                 }
             }                                                               
         }
-    </script>
-        <script type="text/javascript">
+    </script>    
+
+    <script type="text/javascript">
         
         $(function(){          
 
@@ -732,33 +705,9 @@
 
         });
     </script>
-        <script src="/js/plugins/js.cookie.min.js"></script>
-    <!-- InstanceEndEditable -->
-    
-        {module_contentholder, name="Site_Footer"}
 
-    </div>
-    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <script>
-        $.widget.bridge('uitooltip', $.ui.tooltip);
-    </script>
-
-    <!-- build:js js/plugins.js -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="/js/plugins/awemenu.min.js"></script>
-    <script src="/js/plugins/headroom.min.js"></script>
-    <script src="/js/plugins/swiper.min.js"></script>
-    <script src="/js/plugins/owl.carousel.min.js"></script>
-    <script src="/js/plugins/easyzoom.js"></script>
-    <script src="/js/plugins/jurlp.min.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js js/main.js -->
-    <script src="/js/awe/awe-carousel-testimonial.js"></script>
-    <script src="/js/awe-hosoren.js"></script>
-    <script src="/js/main.js"></script>
-    <!-- endbuild -->
+    <script src="/js/plugins/js.cookie.min.js"></script>    
 
 </body>
 
-<!-- InstanceEnd --></html>
+</html>        
