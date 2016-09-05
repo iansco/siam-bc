@@ -1,0 +1,207 @@
+{% comment %}
+    Set any BC install specific 'hardcoded' variable values here.
+{% endcomment %}
+
+{% assign newArrivalsCatalogId = "459863" -%}
+{% assign newArrivalsCatalogUrl = "/products/new" -%}
+
+{% assign bestSellersCatalogId = "459864" -%}
+{% assign bestSellersCatalogUrl = "/products/best-sellers" -%}
+
+{% assign onSaleCatalogId = "459865" -%}
+{% assign onSaleCatalogUrl = "/products/on-sale" -%}
+
+{module_data resource="catalogs" resourceId="{{newArrivalsCatalogId}}" subresource="products" fields="product" version="v3" collection="NewArrivals" limit="3" where="\{'product.keywords':\{'$contains':'homepage'\}\}" order="-product.createDate"}
+{module_data resource="catalogs" resourceId="{{bestSellersCatalogId}}" subresource="products" fields="product" version="v3" collection="BestSellers" limit="3" where="\{'product.keywords':\{'$contains':'homepage'\}\}" order="-product.createDate"}
+{module_data resource="catalogs" resourceId="{{onSaleCatalogId}}" subresource="products" fields="product" version="v3" collection="OnSale" limit="3" where="\{'product.keywords':\{'$contains':'homepage'\}\}" order="-product.createDate"}
+                            <div class="section-header center">
+                                <h2>New Arrivals</h2>
+                            </div>
+
+                            <div class="products products-grid-wrapper">
+                                <div class="row">
+                                    {% for item in NewArrivals.items -%}
+                                    {module_data resource="prices" version="v3" collection="Price" where="\{'productId':'{{item.product.id}}'\}" limit="1"}
+                                    <div class="col-md-4 col-sm-4 col-xs-12">                                                                                                                        
+                                        <div class="product product-grid">
+                                            <a href="{{newArrivalsCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">
+                                                <div class="product-media">
+                                                    <div class="product-thumbnail">
+                                                        <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current">
+                                                    </div><!-- /.product-thumbnail -->                                                                                                                                           
+                                                    <span class="product-label new">
+                                                        <span>new</span>
+                                                    </span>                                                
+                                                </div><!-- /.product-media -->
+                                                <div class="product-body">
+                                                    <h2 class="product-name">{{item.product.name}}</h2><!-- /.product-product -->
+
+                                                    <div class="product-sku">
+                                                        <span>{{item.product.productCode}}</span>
+                                                    </div>
+
+                                                    <div class="product-category">
+                                                        <span>{{item.product.custom1}}</span>
+                                                    </div><!-- /.product-category -->
+                                                    
+                                                    {% if globals.user.isLoggedIn == 'true' -%}
+                                                    <div class="product-price">
+                                                        <span class="amount">${{Price.items[0].wSalePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>
+                                                    </div><!-- /.product-price -->
+                                                    <div class="product-price-msrp">
+                                                        <span>MSRP ${{Price.items[0].retailPrice}}</span>
+                                                    </div>                                                                               
+                                                    {% endif -%}                                                                                                                                                         
+
+                                                </div><!-- /.product-body -->
+                                            </a>
+
+                                            {% if globals.user.isLoggedIn != 'true' -%}
+                                            {module_pageaddress collection="pageAddress" template=""}                            
+                                            <div class="product-price-login">
+                                                <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
+                                            </div><!-- /.product-price-login -->                                                    
+                                            {% endif -%}                                            
+
+                                        </div><!-- /.product -->
+                                    </div>                                            
+                                    {% endfor -%}                                                                                                        
+                                </div><!-- /.row -->
+
+                                <div class="row">
+                                    <div class="center">
+                                        <a href="{{newArrivalsCatalogUrl}}" title="View All New Arrivals" class="btn btn-lg btn-dark btn-outline">
+                                            <span>View All New Arrivals</span>
+                                        </a>
+                                    </div> 
+                                </div><!-- /.row -->
+                            </div><!-- /.products -->      
+
+                            <div class="divider margin-vertical-50"></div>
+
+                            <div class="section-header center">
+                                <h2>Best Sellers</h2>
+                            </div>    
+
+                            <div class="products products-grid-wrapper">
+                                <div class="row">
+                                    {% for item in BestSellers.items -%}
+                                    {module_data resource="prices" version="v3" collection="Price" where="\{'productId':'{{item.product.id}}'\}" limit="1"}
+                                    <div class="col-md-4 col-sm-4 col-xs-12">                                                                                                                
+                                        <div class="product product-grid">
+                                            <a href="{{bestSellersCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">        
+                                                <div class="product-media">
+                                                    <div class="product-thumbnail">
+                                                        <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current">
+                                                    </div><!-- /.product-thumbnail -->                                                                                                                                           
+                                                    <span class="product-label hot">
+                                                        <span>Best Seller</span>
+                                                    </span>                                                
+                                                </div><!-- /.product-media -->
+                                                <div class="product-body">
+                                                    <h2 class="product-name">{{item.product.name}}</h2><!-- /.product-product -->
+
+                                                    <div class="product-sku">
+                                                        <span>{{item.product.productCode}}</span>
+                                                    </div>
+
+                                                    <div class="product-category">
+                                                        <span>{{item.product.custom1}}</span>
+                                                    </div><!-- /.product-category -->
+                                                    
+                                                    {% if globals.user.isLoggedIn == 'true' -%}
+                                                    <div class="product-price">
+                                                        <span class="amount">${{Price.items[0].wSalePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                    
+                                                    </div><!-- /.product-price -->
+                                                    <div class="product-price-msrp">
+                                                        <span>MSRP ${{Price.items[0].retailPrice}}</span>
+                                                    </div>                        
+                                                    {% endif -%}   
+
+                                                </div><!-- /.product-body -->
+                                            </a> 
+
+                                            {% if globals.user.isLoggedIn != 'true' -%}
+                                            {module_pageaddress collection="pageAddress" template=""}                            
+                                            <div class="product-price-login">
+                                                <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
+                                            </div><!-- /.product-price-login -->                                                    
+                                            {% endif -%}
+
+                                        </div><!-- /.product -->                                        
+                                    </div>                                            
+                                    {% endfor -%}                                                                                                        
+                                </div><!-- /.row -->
+
+                                <div class="row">
+                                    <div class="center">
+                                        <a href="{{bestSellersCatalogUrl}}" title="View All Best Sellers" class="btn btn-lg btn-dark btn-outline">
+                                            <span>View All Best Sellers</span>
+                                        </a>
+                                    </div> 
+                                </div><!-- /.row -->
+                            </div><!-- /.products -->       
+
+                            <div class="divider margin-vertical-50"></div>                                                                                   
+
+                            <div class="section-header center">
+                                <h2>On Sale</h2>
+                            </div>    
+
+                            <div class="products products-grid-wrapper">
+                                <div class="row">
+                                    {% for item in OnSale.items -%}
+                                    {module_data resource="prices" version="v3" collection="Price" where="\{'productId':'{{item.product.id}}'\}" limit="1"}
+                                    <div class="col-md-4 col-sm-4 col-xs-12">                                                                                                                  
+                                        <div class="product product-grid">
+                                            <a href="{{onSaleCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">      
+                                                <div class="product-media">
+                                                    <div class="product-thumbnail">
+                                                        <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current">
+                                                    </div><!-- /.product-thumbnail -->                                                                                                                                           
+                                                    <span class="product-label sale">
+                                                        <span>On Sale</span>
+                                                    </span>                                                
+                                                </div><!-- /.product-media -->
+                                                <div class="product-body">
+                                                    <h2 class="product-name">{{item.product.name}}</h2><!-- /.product-product -->
+
+                                                    <div class="product-sku">
+                                                        <span>{{item.product.productCode}}</span>
+                                                    </div>
+
+                                                    <div class="product-category">
+                                                        <span>{{item.product.custom1}}</span>
+                                                    </div><!-- /.product-category -->
+
+                                                    {% if globals.user.isLoggedIn == 'true' -%}
+                                                    <div class="product-price">
+                                                        <span class="amount">${{Price.items[0].wSalePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                    
+                                                    </div><!-- /.product-price -->
+                                                    <div class="product-price-msrp">
+                                                        <span>MSRP ${{Price.items[0].retailPrice}}</span>
+                                                    </div>  
+                                                    {% endif -%}                         
+
+                                                </div><!-- /.product-body -->
+                                            </a>     
+
+                                            {% if globals.user.isLoggedIn != 'true' -%}
+                                            {module_pageaddress collection="pageAddress" template=""}                            
+                                            <div class="product-price-login">
+                                                <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
+                                            </div><!-- /.product-price-login -->                                                    
+                                            {% endif -%}                                            
+
+                                        </div><!-- /.product -->
+                                    </div>                                            
+                                    {% endfor -%}                                                                                                        
+                                </div><!-- /.row -->
+                                <div class="row">
+                                    <div class="center">
+                                        <a href="{{onSaleCatalogUrl}}" title="View All On Sale" class="btn btn-lg btn-dark btn-outline">
+                                            <span>View All On Sale</span>
+                                        </a>
+                                    </div> 
+                                </div><!-- /.row -->                                
+                            </div><!-- /.products -->

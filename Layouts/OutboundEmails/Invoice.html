@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <style type="text/css">
+            body { margin: 18px; }
+            body, table { font: 12px/18px "Lucida Grande", Arial, Verdana, sans-serif; }
+            table.border { font: 11px/18px "Lucida Grande", Arial, Verdana, sans-serif; }
+            table.border { border-right: 1px solid #eee; border-bottom: 1px solid #eee; }
+            table.border td { border-top: 1px solid #eee; border-left: 1px solid #eee; }
+            table span { color: #888;}
+            #order-details div {min-height: 30px; height: auto !important; height: 30px;}
+        </style>
+    </head>
+    <body>
+        <p>Dear {tag_recipientname},</p>
+        <p>Thank you very much for your order!</p>
+        <p>Please find your invoice below with all shipping and packing costs included. <strong>Please note:</strong> EMS courier post delivers your order to your door and all customs clearance fees are included in their charge.</p>
+        <p>Payments can be made with your credit card through PayPal or by wire transfer [TT].</p>
+        <table class="invoice" width="100%" cellspacing="0" cellpadding="6">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                    <hr />
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                    <h3>Your Order from Siam Intercontinental Handicrafts (Order No: #{tag_invoicenumber})</h3>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Invoice Date</strong><br />
+                    {tag_invoicedate}
+                    </td>
+                    <td align="right"><strong>Order Number</strong><br />
+                    {tag_invoicenumber}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><strong>Customer Name / Invoice Address</strong><br />
+                    {tag_recipientname}<br />
+                    {tag_addressdefault}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                    <table id="order-details" class="border" width="100%" cellspacing="0" cellpadding="6">
+                        <tbody>
+                            <tr>
+                                <td style="width: 10%;"><span><strong>Product Code</strong></span></td>
+                                <td style="width: 35%;"><span><strong>Product</strong></span></td>
+                                <td style="width: 15%;"><span><strong>Details</strong></span></td>
+                                <td style="width: 10%;"><span><strong>Unit Price</strong></span></td>
+                                <td style="width: 10%;"><span><strong>Tax</strong></span></td>
+                                <td style="width: 10%;"><span><strong>Quantity</strong></span></td>
+                                <td style="width: 10%;"><span><strong>Total</strong></span></td>
+                            </tr>
+                            <tr class="text">
+                                <td style="width: 10%;">{tag_productcode}</td>
+                                <td style="width: 35%;">{tag_productname}</td>
+                                <td style="width: 15%;">{tag_productdescription}</td>
+                                <td style="width: 10%;">{tag_productextaxamount}</td>
+                                <td style="width: 10%;">{tag_producttaxamount}</td>
+                                <td style="width: 10%;">{tag_productquantity}</td>
+                                <td style="width: 10%;">{tag_producttotal}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="100%" class="textb" border="0" cellspacing="0" cellpadding="6">
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><br />
+                                <hr />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="width: 90%;"><strong>Shipping Cost:</strong></td>
+                                <td class="text">{tag_shippingextaxamount}</td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="width: 90%;"><strong>Grand Total:</strong></td>
+                                <td>{tag_invoicetotal}</td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="width: 90%;"><strong>Paid Already:</strong></td>
+                                <td>{tag_amountpaid}</td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="width: 90%;"><strong>Outstanding:</strong></td>
+                                <td>{tag_amountoutstanding}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>How to Proceed</h2>
+        <p>If you would like to proceed with your order, please ensure that the following shipping address is correct and that the lead times are acceptable, and then follow the instructions below on <strong>How to Pay by Wire Transfer</strong> or on <strong>How to Pay by PayPal</strong>.</p>
+        <h3>Shipping Address</h3>
+        <p>{tag_addressshipping}</p>
+        <h3>Lead Times</h3>
+        <p>Estimated lead time for your order at present will be {tag_shippingattention} from the date we receive payment.</p>
+        <h3>How To Pay by Wire Transfer</h3>
+        <p>If you would like to pay by wire transfer then the order total will be US{tag_invoicetotal}. Payment can be made by transferring payment to our bank account:</p>
+        <p><strong>Bank:</strong> BANGKOK BANK PCL<br />
+        <strong>Branch: </strong>53-59&nbsp; TAPHAE RD.<br />
+        <strong>City: </strong>CHIANG MAI<br />
+        <strong>Country: </strong>THAILAND<br />
+        <strong>Phone:&nbsp;</strong>66 [0]53 282100<br />
+        <strong>Account No:</strong> 251-4-600440<br />
+        <strong>Account Name: </strong>SIAM INTERCONTINENTAL HANDICRAFTS<br />
+        <strong>SWIFT Code: </strong>BKKBTHBK
+        </p>
+        <p><strong>For U.S. Customers Only:</strong></p>
+        <p>If you are a U.S. resident and would like to pay into a U.S. bank account, then payment can be made to our U.S. bank account:</p>
+        <p><strong>Bank:</strong> Union Bank of&nbsp;California<br />
+        <strong>Branch:</strong> Palm Springs #322<br />
+        500 S.Indian Canyon Drive<br />
+        Palm Springs<br />
+        California 92264<br />
+        <strong>Name:</strong> Barry Raven<br />
+        <strong>Account No:</strong> 3221089646<br />
+        <strong>Phone:</strong>  800 238 4486<br />
+        <strong>Routing number:</strong> 122 000 496
+        </p>
+        <h3>How To Pay by PayPal</h3>
+        <p>If you are already a PayPal member, simply send a payment to our Paypal ID: sales@siaminterhandicrafts.com, or you can click on the PayPal icon at top left of our website.</p>
+        <p>If you are not a current PayPal member and would like to join free of charge please go to their website at <a href="http://www.paypal.com/" target="_blank">www.paypal.com</a></p>
+        <p>If you have any questions regarding this order, please do not hesitate to contact us quoting your Invoice Number (#{tag_invoicenumber}).</p>
+        <p><strong>Yours sincerely,</strong></p>
+        <p><strong>Siam Intercontinental Handicrafts</strong></p>
+        <p> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
+        Quality Unique Thai Handicrafts and Body Jewelry<br />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br />
+        191/7 Mare Kwar Moong Soi 3<br />
+        Chang Kian Rd. T. Chang Phuek<br />
+        Amphur Muang<br />
+        Chiang Mai 50300<br />
+        Thailand<br />
+        Phone: +66 [0] 53 357631<br />
+        Fax: +66 [0] 53 357632<br />
+        Mobile: +66 [0] 81 5955125<br />
+        E-mail: sales@SiamInterHandicrafts.com<br />
+        http://www.SiamInterHandicrafts.com<br />
+        Paypal ID: sales@SiamInterHandicrafts.com<br />
+        Skype: oohemgum</p>
+        <p>
+        </p>
+    </body>
+</html>

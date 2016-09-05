@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="no-js" lang=""><!-- InstanceBegin template="/Templates/New Main Template.dwt" codeOutsideHTMLIsLocked="false" -->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- InstanceBeginEditable name="doctitle" --><title data-bc-test="Main_Template.dwt">Wholesaler Login | Siam</title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+        
+        <meta name="description" content="Login to Siam Wholesale Organic Body Jewelry." />
+    <!-- InstanceEndEditable -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,700,400italic,700italic&amp;subset=latin,vietnamese">
+
+    <!-- build:css css/bootstrap.css -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- endbuild -->
+
+    <!-- build:css css/plugins.css -->
+    <link rel="stylesheet" href="/css/awe-icon.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/awemenu.css">
+    <link rel="stylesheet" href="/css/swiper.css">
+    <link rel="stylesheet" href="/css/easyzoom.css">
+    <!-- endbuild -->
+
+    <!-- build:css css/styles.css -->
+    <link rel="stylesheet" href="/css/awe-background.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- endbuild -->
+
+    <!-- Custom Siam Styles -->
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <!-- build:js js/vendor.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- endbuild -->
+
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="//browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->    
+        
+    <div id="wrapper" class="main-wrapper">
+       
+        {module_contentholder, name="Site_Header"}
+       
+        <!-- InstanceBeginEditable name="ContentArea" -->
+        <!-- Main Content -->
+        <div id="main">
+        <!-- Category Header -->
+        <div class="main-header background background-image-heading-login">
+        <div class="container">
+        <h1>Login</h1>
+        </div>
+        </div>
+        <!-- / Category Header -->
+        <!-- Breadcrumb Navigation -->
+        <div id="breadcrumb">
+        <div class="container">
+        <ol class="breadcrumb page small">
+            <li><a href="\">Home</a></li>
+            <li class="active"><span>Login</span></li>
+        </ol>
+        </div>
+        </div>
+        <!-- / Breadcrumb Navigation -->
+        <!-- Login Content -->
+        <div class="login-register-wrapper body-content">
+        <div class="container">
+        <div class="row">
+        <form name="catseczoneform16658" onsubmit="return checkWholeForm16658(this)" method="post" action="/ZoneProcess.aspx?ZoneID=51&amp;Referrer={module_siteUrl,true,true}&amp;OID={module_oid}&amp;OTYPE={module_otype}&amp;PageID={{globals.get.ref | url_param_escape}}">
+            <div class="col-md-6 col-centered" id="customer">
+            <h2>Login</h2>
+            <p>If you're an existing Siam customer who has been issued with a Username and Password, please login to view prices and create orders.</p>
+            <p>Not yet a Siam customer and would like to become one? Then please <a href="register-siam.html">apply for a wholesale account</a>.</p>
+            <div class="form-group">
+            <label for="SZUsername" class="login">Username<sup>*</sup></label>
+            <input type="texts" name="Username" id="SZUsername" class="form-control dark" maxlength="255" />
+            </div>
+            <!-- /.form-group -->
+            <div class="row">
+            <div class="col-md-12">
+            <div class="form-group">
+            <label for="SZPassword" class="login">Password<sup>*</sup></label>
+            <input type="password" name="Password" id="SZPassword" class="form-control dark" size="30" />
+            </div>
+            <!-- /.form-group -->
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-12">
+            <div class="form-group">
+            <label for="RememberMe" class="login">Remember Me</label>
+            <input type="checkbox" name="RememberMe" id="RememberMe" />
+            </div>
+            <!-- /.form-group -->
+            </div>
+            </div>
+            <div class="margin-top-15">
+            <p>
+            <a href="/_System/SystemPages/PasswordRetrieveRequest">Forgot your password?</a>
+            </p>
+            </div>
+            <div class="action_bottom">
+            <input type="submit" class="btn btn-lg btn-green margin-top-30 margin-bottom-30" name="Login" value="Login" />
+            </div>
+            </div>
+            <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b2050.r494698-phase1"></script>
+            <script type="text/javascript">
+                                //<![CDATA[
+                                function checkWholeForm16658(theForm) {
+                                    var why = "";
+                                    if (theForm.Username) why += isEmpty(theForm.Username.value, "Username");
+                                    if (theForm.Password) why += isEmpty(theForm.Password.value, "Password");
+                                    if (why != "") {
+                                        alert(why);
+                                        return false;
+                                    }
+                                    theForm.submit();
+                                    return false;
+                                }
+                                //]]>
+                            </script>
+        </form>
+        </div>
+        <!-- / Login Content -->
+        </div>
+        <!-- /.container -->
+        </div>
+        </div>
+        <!-- /main content -->
+    <!-- InstanceEndEditable -->
+    
+        {module_contentholder, name="Site_Footer"}
+
+    </div>
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script>
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+
+    <!-- build:js js/plugins.js -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/js/plugins/awemenu.min.js"></script>
+    <script src="/js/plugins/headroom.min.js"></script>
+    <script src="/js/plugins/swiper.min.js"></script>
+    <script src="/js/plugins/owl.carousel.min.js"></script>
+    <script src="/js/plugins/easyzoom.js"></script>
+    <script src="/js/plugins/jurlp.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/main.js -->
+    <script src="/js/awe/awe-carousel-testimonial.js"></script>
+    <script src="/js/awe-hosoren.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- endbuild -->
+
+</body>
+
+<!-- InstanceEnd --></html>

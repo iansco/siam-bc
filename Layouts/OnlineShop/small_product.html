@@ -1,0 +1,17 @@
+<!--
+SVN Revision Information
+Revision: $Rev: 307 $
+Date: $Date: 2011-02-15 13:18:01 +0700 (Tue, 15 Feb 2011) $
+Author: $Author: ian $
+-->
+<li>
+<div class="image">
+{tag_smallimage}
+</div>
+{tag_name}
+<p class="code">Item Number: <span>{tag_productcode}</span></p>
+{% if this.globals.user.isLoggedIn -%}
+<p class="price">{tag_saleprice}</p>
+{% endif -%}
+<p class="price-note">LOGIN FOR PRICE</p>
+</li>

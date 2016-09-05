@@ -1,0 +1,121 @@
+<h1>{tag_name}</h1>
+<div class="twocolumns">
+  <div class="info">
+    <strong class="number"><span>ITEM NUMBER:&nbsp;</span>{tag_productcode}</strong>
+    <div class="picture">
+      {tag_largeimage}
+    </div>
+    <div class="description">
+      <div class="heading">
+        <h2>Product Description</h2>
+      </div>
+      {tag_description}
+      {% for attribute in attributes -%}
+        {% if attribute[0] == "Wearing Length" -%}
+          {module_contentholder,name="Wearing Length Explanation (Product Detail Page)"}
+          {% break %}
+        {% endif -%}
+      {% endfor -%}
+      <div class="heading more">
+        <h2>More Images</h2>
+      </div>
+      {tag_poplets}
+    </div>
+  </div>
+  <div class="aside">
+    <div class="options">
+      <h3>Select Your Options:</h3>
+      <div id="catProdAttributes2_{{id}}" class="productAttributes">
+{% for attribute in attributes -%}
+  {% assign attributeName = attribute[0] -%}
+  {% assign attributeOptions = attribute[1] -%}
+  {% assign attributeType = attributeOptions[0].displayType -%}  
+  {% case attributeType -%}
+    {% when 5 -%}
+      {%comment-%} ### Handle Dropdown Lists ###{%endcomment-%}
+        <div class="catProductAttributeGroup" id="attribute-{{attributeName | strip | replace: ' ', '-' | downcase}}">
+          <div class="catProdAttributeTitle">{{attributeName}}</div>
+          <div class="catProdAttributeItem">
+          <select mandatory="1" class="productAttribute">
+            <option value="">-- Please Select --</option>
+            {% for opt in attributeOptions -%}
+            <option value="{{opt.id}}"{% if opt.price > 0 -%} data-price="{{opt.price}}"{% endif -%}{% if attributeName == "Wearing Length" and opt.name contains "Average" -%} selected{% endif -%}>{{opt.name}}{% if opt.price > 0 -%} +${{opt.price}}{% endif -%}</option>
+            {% endfor -%}             
+          </select>
+          </div>
+        </div>   
+    {% when 6 -%}
+      {%comment-%}### Handle Checkbox Lists ###{%endcomment-%}
+      <div class="catProductAttributeGroup" id="attribute-{{attributeName | strip | replace: ' ', '-' | downcase}}">
+        <div class="catProdAttributeTitle">{{attributeName}}</div>
+        {% for opt in attributeOptions -%}
+        <div class="catProdAttributeItem"><input class="productAttribute" type="checkbox" id="{{opt.id}}" name="{{attributeName | strip | replace: ' ', '-' | downcase}}"{% if opt.price > 0 -%} data-price="{{opt.price}}"{% endif -%} mandatory="1" /><span>{{opt.name}}{% if opt.price > 0 -%} +${{opt.price}}{% endif -%}</span></div>
+        {% endfor -%}
+      </div>          
+    {% when 7 -%}
+      {%comment-%}### Handle Radio Lists ###{%endcomment-%}
+      <div class="catProductAttributeGroup" id="attribute-{{attributeName | strip | replace: ' ', '-' | downcase}}">
+        <div class="catProdAttributeTitle">{{attributeName}}</div>
+        {% for opt in attributeOptions -%}
+        <div class="catProdAttributeItem"><input class="productAttribute" type="radio" id="{{opt.id}}" name="{{attributeName | strip | replace: ' ', '-' | downcase}}"{% if opt.price > 0 -%} data-price="{{opt.price}}"{% endif -%} mandatory="1"{% if attributeName == "Wearing Style" and forloop.index == 1 -%} checked{% endif -%} /><span>{{opt.name}}{% if opt.price > 0 -%} +${{opt.price}}{% endif -%}</span></div>
+        {% endfor -%}
+      </div>                
+  {% endcase -%}   
+{% endfor -%}             
+      </div>
+    </div>
+    <div class="price-box">
+      <h4>Price {% if unitType != '' -%}<span>(Per {{unitType}})</span> {% endif -%}</h4>
+      <p class="min-order">Minimum Order: <span>{tag_minunits} {% if unitType != '' and minUnits &gt; 1 -%}{{unitType | append: 's' }}{% else -%}{{unitType}}{% endif -%}</span></p>
+      {% if this.globals.user.isLoggedIn -%}
+      <p class="price" id="product-price" data-base-price="{{salePrice}}">{tag_saleprice}</p>
+      {% endif -%}
+      <p class="qty" id="product-qty">Qty {tag_addtocartinputfield} {% if unitType != '' and minUnits &gt; 1 -%}<span>{{unitType | append: 's' }}</span><br>{% else -%}<span>{{unitType}}</span>{% endif -%}</p>
+      {% if this.globals.user.isLoggedIn -%}
+      {tag_buynow,<img alt="" src="/images/web/add_to_cart_button.png" />}
+      {% endif -%}
+      <p class="price-note">PLEASE <a href="/login">LOGIN</a> FOR PRICE</p>
+    </div>
+ 
+  <script type="text/javascript">
+	jQuery("#wrapper").addClass("product-page");
+	if (jQuery(".catProductAttributeGroup").length == 0) {
+		jQuery(".productLarge .options").addClass("options-hide");
+	} 
+
+  updateProductPrice(calculateTotalPrice());
+
+  jQuery(".productAttribute").change(function() {
+    updateProductPrice(calculateTotalPrice());
+  });
+
+  function updateProductPrice(totalPrice) {
+    if (jQuery("#product-price")) {
+      jQuery("#product-price").text("$" + totalPrice.toFixed(2));
+    }    
+  }
+
+  function calculateTotalPrice() {
+    var basePrice = parseFloat(jQuery("#product-price").data("base-price"));
+    if (isNaN(basePrice)) {
+      basePrice = 0;
+    }           
+    var priceOfSelectedAttributes = 0;
+
+    jQuery(".productAttributes select option:selected").each(function () {
+      var attributeOptionPrice = parseFloat(jQuery(this).data('price'));
+      if (!isNaN(attributeOptionPrice)) {
+        priceOfSelectedAttributes += attributeOptionPrice;
+      }       
+    });
+
+    jQuery(".productAttributes input:checked").each(function () {
+      var attributeOptionPrice = parseFloat(jQuery(this).data('price'));
+      if (!isNaN(attributeOptionPrice)) {
+        priceOfSelectedAttributes += attributeOptionPrice;
+      } 
+    });        
+    return basePrice + priceOfSelectedAttributes;
+  }     
+  </script>
+</div>

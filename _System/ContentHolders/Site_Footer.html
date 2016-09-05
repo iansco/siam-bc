@@ -1,0 +1,170 @@
+<!-- Site Footer -->
+        <footer class="footer">
+            <div class="footer-wrapper">
+                <div class="footer-widgets">
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-6">
+
+                                        <div class="widget">
+                                            <h3 class="widget-title">ABOUT <span class="siam-logo-type">Siam</span><span class="siam-logo-dot">.</span></h3>
+
+                                            <div class="widget-content">
+                                                <p>We are one of the world's leading producers of handmade organic body jewelry and have been wholesaling high-quality handcrafted organics since 1992.</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-6">
+
+                                        <div class="widget">
+                                            <h3 class="widget-title">HOW CAN WE HELP?</h3>
+
+                                            <div class="widget-content">
+                                                <p>Have a question for us? Please don't hesitate to email us at: <a class="green" title="Email Us" href="mailto:sales@siaminterhandicrafts.com">sales@siaminterhandicrafts.com</a> or use the form on the <a class="green" title="Contact Us" href="/contact">Contact Us</a> page.</p>
+                                            </div>
+                                        </div>
+                                        <!-- /.widget -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 col-sm-6">
+
+                                <div class="widget">
+                                    <h3 class="widget-title">Shopping</h3>
+
+                                    <ul>
+                                        <li><a href="{{globals.cart.cartUrl | default: '#'}}" title="Shopping Cart">Shopping Cart</a></li>
+                                        <li><a href="/quick-order" title="Quick Order">Quick Order</a></li>
+                                        <li><a href="/products/all" title="Products">Products</a></li>
+                                    </ul>
+                                </div>
+                                <!-- /.widget -->
+
+                            </div>
+
+                            <div class="col-md-2 col-sm-6">
+
+                                <div class="widget">
+                                    <h3 class="widget-title">More Links</h3>
+
+                                    <ul>
+                                        <li><a href="/" title="Home">Home</a></li> 
+                                        {% if globals.user.isLoggedIn == 'true' -%}                                       
+                                        <li><a href="/account" title="My Account">My Account</a></li>
+                                        {% else -%}    
+                                        {module_pageaddress collection="pageAddress" template=""}        
+                                        <li><a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login">Login</a></li>                    
+                                        {% endif -%}            
+                                        {% if globals.user.isLoggedIn == 'false' -%}                               
+                                        <li><a href="#" title="Apply for Account">Apply for Account</a></li>
+                                        {% endif -%}            
+                                        <li><a href="#" title="Payment Information">Payment Information</a></li>
+                                        <li><a href="#" title="Shipping Details">Shipping Details</a></li>
+                                    </ul>
+                                </div>
+                                <!-- /.widget -->
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div class="widget">
+                                    <h3 class="widget-title">Connect</h3>
+
+                                    <ul class="list-socials">
+                                        <li><a href="#" title=""><i class="icon icon-twitter"></i></a></li>
+                                        <li><a href="#" title=""><i class="icon icon-facebook"></i></a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- /.widget -->
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- /.footer-widgets -->
+
+                <div class="footer-copyright">
+                    <div class="container">
+                        <div class="copyright">
+                            <p>Copyright &copy; 1992 - 2016 Siam Intercontinental Handicrafts, Ltd - All Rights Reserved.</p>
+                        </div>
+
+                        <div class="footer-nav">
+                            <nav>
+                                <ul>
+                                    <li><a href="/" title="Home">Home</a></li>
+                                    <li><a href="#" title="About Us">About Us</a></li>
+                                    <li><a href="#" title="Contact Us">Contact Us</a></li>
+                                    <li><a href="#" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
+                                    <li><a href="#" title="Your Privacy">Your Privacy</a></li>
+                                    <li><a href="#" title="Site Map">Site Map</a></li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.footer-copyright -->
+            </div>
+            <!-- /.footer-wrapper -->
+
+            <a href="#" class="back-top" title="">
+                <span class="back-top-image">
+                    <img src="/img/site/back-top-green.png" alt="">
+                </span>
+
+                <small>Back to top</small>
+            </a>
+            <!-- /.back-top -->
+        </footer>
+        <!-- /footer -->
+
+        <!-- Update Shopping Cart Summary -->
+        <script>
+            function updateShippingOffer(data) {
+                var cartTotal = parseFloat($(data).find('#cartSummaryValue').data('value'));
+                if (!isNaN(cartTotal)) {
+                    if (cartTotal > 0) {
+                        var spendToQualifyAmount = 1000 - cartTotal;
+                        if($('#spendToQualify').length == 0) {
+                            $("#header-offer span").append("<span id='spendToQualify'></span>");
+                        }                
+                        if (spendToQualifyAmount < 0) {
+                            $("#spendToQualify").html("Your order of <strong>$" + cartTotal.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</strong> qualifies!");
+                        } else {
+                            $("#spendToQualify").html("Spend another <strong>$" + spendToQualifyAmount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</strong> to qualify!");
+                        }
+                    } else {
+                        $('#spendToQualify').remove();
+                    }
+                    showSiteNavBar();
+                }
+            }
+
+            function showSiteNavBar() {
+                var navBarElement = $('#header nav');
+                if ($(navBarElement).hasClass('headroom--unpinned')) {
+                    // toggle class to show nav bar.
+                    $(navBarElement).toggleClass("headroom--unpinned headroom--pinned");
+                }
+            }
+
+            $(function() {
+                // Ajax call to update Cart Summary
+                $("#cart-summary").load( "/cart-summary .menubar-cart", function(data) {
+                    updateShippingOffer(data);
+                });                
+            });
+        </script>

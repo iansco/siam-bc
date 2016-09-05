@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <!--
+SVN Revision Information
+Revision: $Rev: 362 $
+Date: $Date: 2011-05-31 10:19:35 +0700 (Tue, 31 May 2011) $
+Author: $Author: ian $
+-->
+    <head>
+        <!-- TemplateBeginEditable name="doctitle" --><title>Siam Intercontinental Handicrafts | {module_pagename}</title><!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name="description" content="Wholesale Organic Body Jewelry from Siam Intercontinental Handicrafts. We are your direct source for wholesale organic body jewelry." />
+        <meta name="robots" content="index, follow" />
+        <link rel="shortcut icon" />
+        <link media="all" rel="stylesheet" type="text/css" href="/css/all.css" />
+        <script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.tools.min.js"></script>
+        <script type="text/javascript" src="/js/cufon.js"></script>
+        <script type="text/javascript" src="/js/cufon-fonts.js"></script>
+        <script type="text/javascript" src="/js/cufon-settings.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+        <!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/><![endif]-->
+        <!--<link rel="stylesheet" href="/StyleSheets/base.css" media="screen,projection" type="text/css" />-->
+        <!--<link rel="stylesheet" href="/StyleSheets/screen.css" media="screen,projection" type="text/css" />-->
+        <script type="text/javascript" language="javascript">
+  var home = "http://www.siaminterhandicrafts.com/";
+  if (window.location.href != home) {
+    window.location.replace(home);
+  }
+         </script>
+    </head>
+    <body>
+        <div id="wrapper">
+        <div class="wrap">
+        <div class="wrap-holder">
+        <div class="wrap-frame">
+        <div id="header">
+        <div class="header-holder">
+        <strong class="logo-1"><a href="/">Siam Intercontinental Handicrafts</a></strong>
+        <div class="login-box">
+        <p><strong>{module_whosloggedin,/login}</strong></p>
+        </div>
+        <div class="cart-box">
+        <p><strong>Your Cart -&nbsp;</strong></p>
+        {module_shoppingcartsummary}
+        </div>
+        </div>
+        {module_contentholder,16573}
+        </div>
+        <div id="main">
+        <div id="sidebar">
+        <h2 class="follow-us-on">FOLLOW US ON</h2>
+        <div id="social-icons">
+        <ul>
+            <li><a href="http://www.facebook.com/pages/Wholesale-Organic-Body-Jewelry-and-Handicrafts/116246488476358"><img alt="Follow Us on Facebook!" src="/images/web/icon_facebook.png" /></a></li>
+            <li><a href="http://www.twitter.com/#%21/BareBonesOrg"><img alt="Follow Us on Twitter!" src="/images/web/icon_twitter.png" /></a></li>
+            <li><a href="#"><img alt="Follow Us on Flickr!" src="/images/web/icon_flickr.png" /></a></li>
+            <li><a href="#"><img alt="Follow Us on YouTube!" src="/images/web/icon_you_tube.png" /></a></li>
+            <li><a href="http://th.linkedin.com/pub/barry-raven/30/b87/958"><img alt="Follow Us on LinkedIn!" src="/images/web/icon_linked_in.png" /></a></li>
+        </ul>
+        </div>
+        <h2 class="our-shop">BROWSE OUR SHOP</h2>
+        {module_menu,1017578}
+        <h2 class="pay-with-paypal">MAKE A PAYMENT</h2>
+        <p id="paypal-button"><a href="https://secure.paypal.com/xclick/business=sales@SiamInterHandicrafts.com&amp;return=http%3A//siaminterhandicrafts.com" title="Make a PayPal payment to Siam Intercontinental Handicrafts"><img src="/images/web/paypal_small.gif" alt="Make a PayPal payment to Siam Intercontinental Handicrafts" /></a></p>
+        <h2 class="special-offers" style="float: left;">SPECIAL OFFERS!</h2>
+        <p style="float: left;">Sign up to our newsletter for great info about fresh new products and great special offers!</p>
+        {module_contentholder,16759}
+        </div>
+        <div id="content" class="lg_{module_isloggedin}">
+        <!-- TemplateBeginEditable name="ContentArea" -->{tag_pagecontent}<!-- TemplateEndEditable -->
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="footer">
+        {module_contentholder,16574}
+        </div>
+        </div>
+    </body>
+</html>

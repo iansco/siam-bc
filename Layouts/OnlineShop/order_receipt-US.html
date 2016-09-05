@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+<head>      
+    <title>Order Details | Siam Wholesale Organic Body Jewelry</title>
+    <meta name="description" content="Siam Wholesale Organic Body Jewelry | Checkout">
+</head>
+<body>
+{% comment -%}
+		Set any BC install specific 'hardcoded' variable values here.
+{% endcomment %}
+{% assign freeShippingQualifyingTotal = 1000 -%}     
+  <div class="order-receipt-page">
+    <div class="container">
+      {% if errorMessage == "" -%}
+      <div class="row body-content">        
+        <h1>Thank You for your Order</h1>
+        <h4>Your Order Number is: #{tag_invoicenumber}</h4>
+        <p>You will receive confirmation of your order at {{globals.user.email}}.</p>        
+        <p>In the meantime, we'll be processing your order and will shortly be contacting you with further details on Lead Times{% if amount < freeShippingQualifyingTotal -%}, Shipping Costs{% endif %} and Payment Methods.</p>
+        <p>If you have any questions regarding your order, please <a href="/contact" title="Contact Us">contact us</a> quoting your order number (#{tag_invoicenumber}).</p>       
+      </div>
+      <div class="row margin-bottom-50">
+        <a href="/" title="Back to Home" role="button" class="btn btn-green margin-top-15">
+          <span>Back to Homepage</span>
+        </a>
+      </div>
+      {% else %}
+      <div class="row body-content">                                               
+        <h1>Error</h1>
+        <h4>We're sorry but there was a problem placing your order.</h4>
+        <p>Error: {module_error}</p>
+        <p>Please <a href="/contact" title="Contact Us">contact us</a> with details of this error and we will work hard to resolve the issue as soon as possible.</p>
+      </div>                 
+      <div class="row margin-bottom-50">
+        <a href="/contact" title="Contact Us" role="button" class="btn btn-green margin-top-15">
+            <span>Contact Us</span>
+        </a>        
+      </div>
+      {% endif %}          
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html class="no-js" lang=""><!-- InstanceBegin template="/Templates/New Main Template.dwt" codeOutsideHTMLIsLocked="false" -->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- InstanceBeginEditable name="doctitle" --><title data-bc-test="Main_Template.dwt">Search Results | Siam Wholesale Organic Body Jewelry</title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+        
+        <meta name="description" content="Search Results on Siam Wholesale Organic Body Jewelry." />
+    <!-- InstanceEndEditable -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,700,400italic,700italic&amp;subset=latin,vietnamese">
+
+    <!-- build:css css/bootstrap.css -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- endbuild -->
+
+    <!-- build:css css/plugins.css -->
+    <link rel="stylesheet" href="/css/awe-icon.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/awemenu.css">
+    <link rel="stylesheet" href="/css/swiper.css">
+    <link rel="stylesheet" href="/css/easyzoom.css">
+    <!-- endbuild -->
+
+    <!-- build:css css/styles.css -->
+    <link rel="stylesheet" href="/css/awe-background.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- endbuild -->
+
+    <!-- Custom Siam Styles -->
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <!-- build:js js/vendor.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- endbuild -->
+
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="//browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->    
+        
+    <div id="wrapper" class="main-wrapper">
+       
+        {module_contentholder, name="Site_Header"}
+       
+        <!-- InstanceBeginEditable name="ContentArea" -->
+        <!-- Main Content -->
+        <div id="main">
+        {% comment -%}
+        Set any BC install specific 'hardcoded' variable values here.
+        {% endcomment %}
+        {% assign catalogAllProductsId = "457923" -%}
+        {module_pageaddress collection="pageAddress" template=""}
+        {% comment -%}
+        Set variable to store the search text if supplied via querystring parameter.
+        {% endcomment %}
+        {% if globals.get.search -%}
+        {% assign searchText = globals.get.search -%}
+        {% else %}
+        {% assign searchText = '' -%}
+        {% endif %}
+        {% comment %}
+        Set variable to store the 'sort' and 'order' parameter values if they are contained in a session cookie.
+        {% endcomment %}
+        {% if globals.cookie.srcSortByName -%}
+        {% if globals.cookie.srcSortByName == "price" -%}
+        {% if globals.cookie.srcSortByOrder == "desc" -%}
+        {% assign sort = "-salePrice" -%}
+        {% else -%}
+        {% assign sort = "salePrice" -%}
+        {% endif -%}
+        {% endif -%}
+        {% if globals.cookie.srcSortByName == "name" -%}
+        {% if globals.cookie.srcSortByOrder == "desc" -%}
+        {% assign sort = "-product.name" -%}
+        {% else -%}
+        {% assign sort = "product.name" -%}
+        {% endif -%}
+        {% endif -%}
+        {% else -%}
+        {% assign sort = "-product.releaseDate" -%}
+        {% endif -%}
+        {% comment %}
+        Now overwrite with the URL parameter 'sort' value if it is set.
+        {% endcomment %}
+        {% if globals.get.sort == "price" -%}
+        {% if globals.get.order == "desc" -%}
+        {% assign sort = "-salePrice" -%}
+        {% else -%}
+        {% assign sort = "salePrice" -%}
+        {% endif -%}
+        {% endif -%}
+        {% if globals.get.sort == "name" -%}
+        {% if globals.get.order == "desc" -%}
+        {% assign sort = "-product.name" -%}
+        {% else -%}
+        {% assign sort = "product.name" -%}
+        {% endif -%}
+        {% endif -%}
+        {% comment %}
+        Set variable to store the 'limit' parameter value if it is contained in a session cookie.
+        or set a default of 12.
+        {% endcomment %}
+        {% if globals.cookie.srcShowItemsPerPage -%}
+        {% case globals.cookie.srcShowItemsPerPage -%}
+        {% when '12' -%}
+        {% assign limit = "12" -%}
+        {% when '24' -%}
+        {% assign limit = "24" -%}
+        {% when '36' -%}
+        {% assign limit = "36" -%}
+        {% when '48' -%}
+        {% assign limit = "48" -%}
+        {% endcase -%}
+        {% else -%}
+        {% assign limit = "12" -%}
+        {% endif -%}
+        {% comment %}
+        Now overwrite with the URL 'limit' parameter if it is set.
+        {% endcomment %}
+        {% case globals.get.limit -%}
+        {% when '12' -%}
+        {% assign limit = "12" -%}
+        {% when '24' -%}
+        {% assign limit = "24" -%}
+        {% when '36' -%}
+        {% assign limit = "36" -%}
+        {% when '48' -%}
+        {% assign limit = "48" -%}
+        {% endcase -%}
+        {% comment %}
+        Set variable which stores the 'skip' parameter value obtained from the URL (or set to default of 0).
+        {% endcomment %}
+        {% if globals.get.skip %}
+        {% assign skip = globals.get.skip | convert: "number" %}
+        {% else %}
+        {% assign skip = 0 %}
+        {% endif %}
+        <!-- Category Header -->
+        <div class="main-header background background-image-heading-login">
+        <div class="container">
+        <h1>Search Results</h1>
+        </div>
+        </div>
+        <!-- / Category Header -->
+        <!-- Breadcrumb Navigation -->
+        <div id="breadcrumb">
+        <div class="container">
+        <ol class="breadcrumb page">
+            <li><a href="\">Home</a></li>
+            <li class="active"><span>Search Results</span></li>
+        </ol>
+        </div>
+        </div>
+        <!-- / Breadcrumb Navigation -->
+        {% comment %}
+        Make a call to module_data to retrieve products which match the 'searchText' criteria.
+        {% endcomment %}
+        {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'$or':\[\{'product.name':\{'$contains':'{{searchText}}'\}\},\{'product.productCode':\{'$contains':'{{searchText}}'\}\}\]\}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}
+        {% comment -%}
+        Calculate pagination.
+        {% endcomment %}
+        {% assign moduloCheck =  ProductPrices.totalItemsCount | modulo : limit -%}
+        {% if moduloCheck == 0 -%}
+        {% assign totalPages = ProductPrices.totalItemsCount | divided_by: limit -%}
+        {% else %}
+        {% assign totalPages = ProductPrices.totalItemsCount | divided_by: limit | plus: 1 -%}
+        {% endif %}
+        {% comment -%}
+        Calculate product results counts.
+        {% endcomment %}
+        {% assign currentPage =  skip | divided_by: limit | plus: 1 -%}
+        {% assign firstItemNumber = currentPage | minus: 1 | times: limit | plus: 1 -%}
+        {% assign maxPageItems = currentPage | times: limit -%}
+        {% if maxPageItems &gt; ProductPrices.totalItemsCount -%}
+        {% assign lastItemNumber = ProductPrices.totalItemsCount -%}
+        {% else %}
+        {% assign lastItemNumber = currentPage | times: limit -%}
+        {% endif %}
+        <!-- Search Results -->
+        <div class="container">
+        <div class="row">
+        <!-- Products Column -->
+        <div class="col-md-12">
+        <!-- Product List Catalog Title and Product Count Header -->
+        <div class="margin-bottom-30">
+        <h4 style="margin: 0px; text-transform: uppercase; font-weight: bold;">Search Results for '{{searchText}}'
+        <span style="font-weight: normal; text-transform: none;"> - {{ProductPrices.totalItemsCount | default: 0}} Products found.</span>
+        </h4>
+        </div>
+        <!-- Product List Actions Header Form -->
+        {% if ProductPrices.totalItemsCount &gt; 0 or inSubCatalog -%}
+        <div class="product-header-actions">
+        <form action="#" method="POST" class="form-inline">
+            <div class="row">
+            <div class="col-md-12">
+            <div class="form-show-sort">
+            <!-- Sort By - id: #actionSortBy -->
+            <div class="form-group pull-left">
+            <label for="actionSortBy">Sort:</label>
+            <select name="actionSortBy" id="actionSortBy" class="form-control input-sm">
+            <option value="newest-first" sort="=">Newest First</option>
+            {% if globals.user.isLoggedIn == 'true' -%}
+            <option value="price" sort="=">Price: Low to High</option>
+            <option value="price-desc" sort="=">Price: High to Low</option>
+            {% endif -%}
+            <option value="name" sort="=">Name: A to Z</option>
+            <option value="name-desc" sort="=">Name: Z to A</option>
+            </select>
+            </div>
+            <!-- /.form-group -->
+            <!-- Show Items Per Page - id: #actionShowItemsPerPage -->
+            <div class="form-group pull-left">
+            <label for="actionShowItemsPerPage">Show</label>
+            <select name="actionShowItemsPerPage" id="actionShowItemsPerPage" class="form-control input-sm">
+            <option value="12" limit="=">12</option>
+            <option value="24" limit="=">24</option>
+            <option value="36" limit="=">36</option>
+            <option value="48" limit="=">48</option>
+            </select>
+            <strong>Per Page</strong>
+            </div>
+            <!-- /.form-group -->
+            <!-- Pagination -->
+            <!-- Jump to Page - id: #actionJumpToPage -->
+            {% if ProductPrices.totalItemsCount &gt; limit -%}
+            <div class="form-group pull-right text-right">
+            <label for="actionJumpToPage">Page</label>
+            <select name="actionJumpToPage" id="actionJumpToPage" class="form-control input-sm" title="Jump to Page">
+            {% for pageNum in (1..totalPages) -%}
+            {% if pageNum == currentPage -%}
+            <option value="{{pageNum}}">{{pageNum}}</option>
+            {% else -%}
+            <option value="{{pageNum}}" data-skip="{{pageNum | minus: 1 | times: limit}}">{{pageNum}}</option>
+            {% endif -%}
+            {% endfor -%}
+            </select>
+            <strong>of {{totalPages}}</strong>
+            <ul class="pagination">
+                {% if currentPage &gt; 1 -%}
+                <li class="pagination-prev"><a href="{{globals.get.ID}}?search={{globals.get.search | url_param_escape}}&amp;skip={{ currentPage | minus: 2 | times: limit }}&amp;limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif -%}" data-toggle="tooltip" data-original-title="Page {{currentPage | minus: 1}}" title="Page {{currentPage | minus: 1}}"><em class="icon icon-arrow-prev"></em></a></li>
+                {% else -%}
+                <li class="pagination-prev"><span><em class="icon icon-arrow-prev"></em></span></li>
+                {% endif -%}
+                {% if currentPage != totalPages -%}
+                <li class="pagination-next"><a href="{{globals.get.ID}}?search={{globals.get.search | url_param_escape}}&amp;skip={{ currentPage | times: limit }}&amp;limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif -%}" data-toggle="tooltip" data-original-title="Page {{currentPage | plus: 1}}" title="Page {{currentPage | plus: 1}}"><em class="icon icon-arrow-next"></em></a></li>
+                {% else -%}
+                <li class="pagination-next"><span><em class="icon icon-arrow-next"></em></span></li>
+                {% endif -%}
+            </ul>
+            </div>
+            <!-- /.form-group -->
+            {% endif -%}
+            </div>
+            </div>
+            </div>
+            <!-- /.row -->
+        </form>
+        </div>
+        <!-- /.product-header-actions -->
+        {% endif -%}
+        <!-- Product List -->
+        <div class="products products-grid-wrapper">
+        <div class="row">
+        <!-- Product Results Count -->
+        <div class="col-md-12">
+        <div class="result-count">
+        {% if ProductPrices.totalItemsCount &gt;= 1 -%}
+        <p>Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
+        {% else -%}
+        <p>Sorry, no products matching your search criteria were found. Please try searching again.</p>
+        {% endif -%}
+        </div>
+        </div>
+        {% for item in ProductPrices.items -%}
+        <!-- Product Item -->
+        <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="product product-grid">
+        <a href="{{item.product.slug}}" title="{{item.product.name}}">
+        <!-- Product Small Image plus Label -->
+        <div class="product-media">
+        <div class="product-thumbnail">
+        <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current" />
+        </div>
+        <!-- /.product-thumbnail -->
+        {% comment -%}
+        Set product label based current catalog and on keywords.
+        {% endcomment -%}
+        {% if item.product.keywords contains 'new' -%}
+        {% assign productLabel = 'New' -%}
+        {% assign productLabelCss = 'new' -%}
+        {% elsif item.product.keywords contains 'best' -%}
+        {% assign productLabel = 'Best Seller' -%}
+        {% assign productLabelCss = 'hot' -%}
+        {% elsif item.product.keywords contains 'sale' -%}
+        {% assign productLabel = 'On Sale' -%}
+        {% assign productLabelCss = 'sale' -%}
+        {% else -%}
+        {% assign productLabel = '' -%}
+        {% assign productLabelCss = '' -%}
+        {% endif -%}
+        {% if productLabel !='' -%}
+        <span class="product-label {{productLabelCss}}">
+        {{productLabel}}
+        </span>
+        {% endif -%}
+        </div>
+        <!-- /.product-media -->
+        <div class="product-body">
+        <h2 class="product-name">{{item.product.name}}</h2>
+        <!-- /.product-product -->
+        <div class="product-sku">
+        <span>{{item.product.productCode}}</span>
+        </div>
+        <div class="product-category">
+        <span>{{item.product.custom1}}</span>
+        </div>
+        <!-- /.product-category -->
+        {% if globals.user.isLoggedIn == 'true' -%}
+        <div class="product-price">
+        <span class="amount">${{item.salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>
+        </div>
+        <!-- /.product-price -->
+        <div class="product-price-msrp">
+        <span>MSRP ${{item.retailPrice}}</span>
+        </div>
+        {% endif -%}
+        </div>
+        <!-- /.product-body -->
+        </a>
+        {% if globals.user.isLoggedIn != 'true' -%}
+        <div class="product-price-login">
+        <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
+        </div>
+        <!-- /.product-price-login -->
+        {% endif -%}
+        </div>
+        <!-- /.product -->
+        </div>
+        <!-- / Product Item -->
+        {% endfor -%}
+        <!-- Product Results Count -->
+        <div class="col-md-12">
+        <div class="result-count">
+        {% if ProductPrices.totalItemsCount &gt;= 1 -%}
+        <p>Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
+        {% endif -%}
+        </div>
+        </div>
+        </div>
+        <!-- /.row -->
+        </div>
+        <!-- /.products -->
+        <!-- Product List Actions Footer Form -->
+        {% if ProductPrices.totalItemsCount &gt; limit -%}
+        <div class="product-footer-actions">
+        <form action="#" method="POST" class="form-inline">
+            <div class="row">
+            <div class="col-md-12">
+            <div class="form-show-sort">
+            <!-- Sort By - id: #actionSortBy2 -->
+            <div class="form-group pull-left">
+            <label for="actionSortBy">Sort:</label>
+            <select name="actionSortBy" id="actionSortBy2" class="form-control input-sm">
+            <option value="newest-first" sort="=">Newest First</option>
+            {% if globals.user.isLoggedIn == 'true' -%}
+            <option value="price" sort="=">Price: Low to High</option>
+            <option value="price-desc" sort="=">Price: High to Low</option>
+            {% endif -%}
+            <option value="name" sort="=">Name: A to Z</option>
+            <option value="name-desc" sort="=">Name: Z to A</option>
+            </select>
+            </div>
+            <!-- /.form-group -->
+            <!-- Show Items Per Page - id: #actionShowItemsPerPage2 -->
+            <div class="form-group pull-left">
+            <label for="actionShowItemsPerPage">Show</label>
+            <select name="actionShowItemsPerPage" id="actionShowItemsPerPage2" class="form-control input-sm">
+            <option value="12" limit="=">12</option>
+            <option value="24" limit="=">24</option>
+            <option value="36" limit="=">36</option>
+            <option value="48" limit="=">48</option>
+            </select>
+            <strong>Per Page</strong>
+            </div>
+            <!-- /.form-group -->
+            <!-- Pagination -->
+            <!-- Jump to Page - id: #actionJumpToPage2 -->
+            {% if ProductPrices.totalItemsCount &gt; limit -%}
+            <div class="form-group pull-right text-right">
+            <label for="actionJumpToPage2">Page</label>
+            <select name="actionJumpToPage2" id="actionJumpToPage2" class="form-control input-sm" title="Jump to Page">
+            {% for pageNum in (1..totalPages) -%}
+            {% if pageNum == currentPage -%}
+            <option value="{{pageNum}}">{{pageNum}}</option>
+            {% else -%}
+            <option value="{{pageNum}}" data-skip="{{pageNum | minus: 1 | times: limit}}">{{pageNum}}</option>
+            {% endif -%}
+            {% endfor -%}
+            </select>
+            <strong>of {{totalPages}}</strong>
+            <ul class="pagination">
+                {% if currentPage &gt; 1 -%}
+                <li class="pagination-prev"><a href="{{globals.get.ID}}?search={{globals.get.search | url_param_escape}}&amp;skip={{ currentPage | minus: 2 | times: limit }}&amp;limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif -%}" data-toggle="tooltip" data-original-title="Page {{currentPage | minus: 1}}" title="Page {{currentPage | minus: 1}}"><em class="icon icon-arrow-prev"></em></a></li>
+                {% else -%}
+                <li class="pagination-prev"><span><em class="icon icon-arrow-prev"></em></span></li>
+                {% endif -%}
+                {% if currentPage != totalPages -%}
+                <li class="pagination-next"><a href="{{globals.get.ID}}?search={{globals.get.search | url_param_escape}}&amp;skip={{ currentPage | times: limit }}&amp;limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif -%}" data-toggle="tooltip" data-original-title="Page {{currentPage | plus: 1}}" title="Page {{currentPage | plus: 1}}"><em class="icon icon-arrow-next"></em></a></li>
+                {% else -%}
+                <li class="pagination-next"><span><em class="icon icon-arrow-next"></em></span></li>
+                {% endif -%}
+            </ul>
+            </div>
+            <!-- /.form-group -->
+            {% endif -%}
+            </div>
+            </div>
+            </div>
+            <!-- /.row -->
+        </form>
+        </div>
+        <!-- /.product-footer-actions -->
+        {% endif -%}
+        </div>
+        <!-- /.col-* -->
+        </div>
+        </div>
+        <!-- ./Search Results -->
+        </div>
+        <!-- /main content -->
+        <script>
+        $(function(){
+
+            aweProductSidebar();
+
+            console.log({{this|json}});
+
+            // Update 'sort' and 'order' URL parameters when 'Sort By' selection is made.
+            // Also thinking that when the sort order is changed, the User should probably be taken
+            // back to page 1 in the set, so also going to set 'skip' parameter as well...
+            $('#actionSortBy,#actionSortBy2').on('change', function () {
+                var sortValue = $(this).val();                          
+                switch(sortValue) {
+                    case "price":
+                        // set the 'sort' parameter to 'price' and delete the 'order' parameter if present.   
+                        $(document).jurlp("query", {"sort":"price"});
+                        $(document).jurlp("query", {"order":null});    
+                        Cookies.set('srcSortByName', 'price'); 
+                        Cookies.remove('srcSortByOrder');                                                
+                        break;
+                    case "price-desc":
+                        // set the 'sort' parameter to 'price' and the 'order' to 'desc' (descending).
+                        $(document).jurlp("query", {"sort":"price"});
+                        $(document).jurlp("query", {"order":"desc"});   
+                        Cookies.set('srcSortByName', 'price'); 
+                        Cookies.set('srcSortByOrder', 'desc');                                              
+                        break;
+                    case "name":
+                        // set the 'sort' parameter to 'name' and delete the 'order' parameter if present.
+                        $(document).jurlp("query", {"sort":"name"});
+                        $(document).jurlp("query", {"order":null});   
+                        Cookies.set('srcSortByName', 'name'); 
+                        Cookies.remove('srcSortByOrder');                                                                                             
+                        break;
+                    case "name-desc":
+                        // set the 'sort' parameter to 'name' and the 'order' to 'desc' (descending).
+                        $(document).jurlp("query", {"sort":"name"});
+                        $(document).jurlp("query", {"order":"desc"});   
+                        Cookies.set('srcSortByName', 'name'); 
+                        Cookies.set('srcSortByOrder', 'desc');                                                    
+                        break;                        
+                    default:
+                        // delete 'sort' and 'order' parameters if present, which means the "default" sort order of 
+                        // "Newest First" should be set by Liquid in the template.
+                        $(document).jurlp("query", {"sort":null});
+                        $(document).jurlp("query", {"order":null}); 
+                        Cookies.remove('srcSortByOrder');       
+                        Cookies.remove('srcSortByName');                                            
+                        break;
+                }
+
+                // reset 'skip' (delete it?) in order to go back to the first page in the set (usability).
+                $(document).jurlp("query", {"skip":null});
+
+                // reload page   
+                $(document).jurlp("goto");                 
+
+            });               
+
+            // Update (Base) URL when 'Filter By Style' selection is made.
+            $('#actionFilterByStyle,#actionFilterByStyle2').on('change', function () {
+                $(document).jurlp("path", $(this).val());
+                $(document).jurlp("goto");
+            });
+
+            // Update 'limit' URL parameter when 'Show x Items Per Page' selection is made.
+            // Also set cookie value to persist this selection during site visit.
+            $('#actionShowItemsPerPage,#actionShowItemsPerPage2').on('change', function () {
+                Cookies.set('srcShowItemsPerPage', $(this).val());
+                $(document).jurlp("query", {"limit":$(this).val()});
+                // reset 'skip' (delete it?) in order to go back to the first page in the set (usability).
+                $(document).jurlp("query", {"skip":null});
+                $(document).jurlp("goto");
+            });
+
+            // Update 'skip' URL parameter when 'Jump to Page' selection is made.
+            $('#actionJumpToPage,#actionJumpToPage2').on('change', function () {
+                var skip = $("option:selected", this).data('skip');
+                if (skip >= 0) {
+                    $(document).jurlp("query", {"skip":skip});
+                    $(document).jurlp("goto");
+                }
+            });            
+         
+        });
+    </script>
+        <script src="/js/plugins/js.cookie.min.js"></script>
+    <!-- InstanceEndEditable -->
+    
+        {module_contentholder, name="Site_Footer"}
+
+    </div>
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script>
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+
+    <!-- build:js js/plugins.js -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/js/plugins/awemenu.min.js"></script>
+    <script src="/js/plugins/headroom.min.js"></script>
+    <script src="/js/plugins/swiper.min.js"></script>
+    <script src="/js/plugins/owl.carousel.min.js"></script>
+    <script src="/js/plugins/easyzoom.js"></script>
+    <script src="/js/plugins/jurlp.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/main.js -->
+    <script src="/js/awe/awe-carousel-testimonial.js"></script>
+    <script src="/js/awe-hosoren.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- endbuild -->
+
+</body>
+
+<!-- InstanceEnd --></html>

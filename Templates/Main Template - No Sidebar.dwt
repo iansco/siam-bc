@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <!-- TemplateBeginEditable name="doctitle" --><title></title><!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+  
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <meta name="description" content="Wholesale Organic Body Jewelry and Thai Handicrafts from Siam Intercontinental Handicrafts. We are your direct source for organic body jewelry plus an incredible selection of Thai handicraft goods."
+  />
+  <meta name="robots" content="index, follow" />
+  <link rel="shortcut icon" />
+  <link media="all" rel="stylesheet" type="text/css" href="/css/all.css" />
+  <script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.tools.min.js"></script>
+  <script type="text/javascript" src="/js/cufon.js"></script>
+  <script type="text/javascript" src="/js/cufon-fonts.js"></script>
+  <script type="text/javascript" src="/js/cufon-settings.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
+  <!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/><![endif]-->
+  <!--<link rel="stylesheet" href="/StyleSheets/base.css" media="screen,projection" type="text/css" />-->
+  <!--<link rel="stylesheet" href="/StyleSheets/screen.css" media="screen,projection" type="text/css" />-->
+  <script type="text/javascript" language="javascript">
+  var home = "http://www.siaminterhandicrafts.com/";
+  if (window.location.href != home) {
+    window.location.replace(home);
+  }
+  </script>
+  <style>
+    #content {
+      width: 100%;
+    }
+    table.productTable td.productItemNotFound {
+      display: inline;
+    }
+    table.productTable td.productAttributes div {
+      display: inline;
+    }
+    table.productTable td {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="wrap">
+      <div class="wrap-holder">
+        <div class="wrap-frame">
+          <div id="header">
+            <div class="header-holder">
+              <strong class="logo-1"><a href="/">Siam Intercontinental Handicrafts</a></strong>
+              <div class="login-box">
+                <p><strong>{module_whosloggedin,/login}</strong></p>
+              </div>
+              <div class="cart-box">
+                <p><strong>Your Cart -&nbsp;</strong></p>
+                {module_shoppingcartsummary}
+              </div>
+            </div>
+            {module_contentholder,16573}
+          </div>
+          <div id="main">
+            <div id="content" class="lg_{module_isloggedin}">
+              <!-- TemplateBeginEditable name="ContentArea" -->{tag_pagecontent}<!-- TemplateEndEditable -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      {module_contentholder,16574}
+    </div>
+  </div>
+</body>
+
+</html>

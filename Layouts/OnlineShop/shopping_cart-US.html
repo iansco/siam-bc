@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+<head>      
+    <title>Shopping Cart | Siam Wholesale Organic Body Jewelry</title>
+    <meta name="description" content="Siam Wholesale Organic Body Jewelry | Shopping Cart">
+</head>
+<body>
+{% comment -%}
+		Set any BC install specific 'hardcoded' variable values here.
+{% endcomment %}
+{% assign minOrderTotal = 250 -%}
+{% assign freeShippingQualifyingTotal = 1000 -%}  
+{% assign freeShippingSpendToQualify = 1000 | minus: productGrandTotal -%}      
+
+	<!-- Cart Content -->
+	{% if items.size >= 1 -%}
+	<div id="cart-items" class="table-responsive">
+		<table class="table-bordered table table-cart">
+			<thead>
+			<tr>
+					<th style="text-align:left;padding-left:10px;">Item</th>
+					<th></th>
+					<th>Unit Price</th>
+					<th>Quantity</th>
+					<th>Subtotal</th>
+			</tr>
+			</thead>
+			<tbody>
+				{% for item in items -%}
+				{% assign quantityInputOnChangeFunctionCall = item.quantityInputOnChange | split: ',' -%}
+				{% assign productId = quantityInputOnChangeFunctionCall[3] -%}
+				{module_data resource="products" version="v3" fields="id,productCode,unitType,minUnits,custom1,popletImage2" skip="0" limit="1" where="\{'id':{{productId}}\}" order="id" collection="CartProduct"}
+				{module_data resource="productsattributes" version="v3" fields="groupName" where="\{'productId':'{{productId}}'\}" order="id" collection="ProductAttributes"}
+				{% assign productDetail = CartProduct.items[0] -%}
+				<tr data-product-id="{{productId | default: ''}}">
+					<td class="cart-product">
+							<a href="{{item.url}}" title="{{item.name}}" class="product-link">
+							<div class="product-image">                            
+									<img src="{{productDetail.popletImage2}}" alt="{{item.name}}">                                                                                   
+							</div> 
+							<div class="product-description">
+									<h3 class="product-title">{{item.name}}</h3><span class="product-sku">({{item.code}})</span>
+									{% if item.custom1 != '' -%}
+									<span class="product-cat">{{item.custom1}}</span>
+									{% endif %}
+									<!-- Attributes go here... -->
+									{% assign attributes = item.description | split: ';' -%}
+									{% for attribute in attributes -%}
+									<span class="product-attribute"><strong>{{ProductAttributes.items[forloop.index0].groupName}}: </strong>{{attribute}}</span>
+									{% endfor %}
+							</div>        
+					</a> 
+					</td>
+					<td class="remove-product"><span data-toggle="tooltip" data-original-title="Remove"><a href="#" onclick="{{item.removeOnClick}};return false;"><i class="glyphicon glyphicon-remove-circle"></i></a></span></td>
+					<td><span class="price">{{item.productAmountExceptTax | money}}</span></td>
+					{% assign unitTypePluralized = productDetail.unitType | append: 's' -%}											
+					<td><input type="text" value="{{item.quantity}}" class="qty" onchange="{{item.quantityInputOnChange}}; return false;" data-toggle="tooltip" title="Minimum Qty: {{productDetail.minUnits | default: '1'}} {{unitTypePluralized}}"><span class="product-units"> ({{unitTypePluralized}})</span></td>
+					<td><span class="price">{{item.productTotalExceptTax | money}}</span></td>														
+				</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+						<td colspan="5">
+						<div class="text-right">
+								<a href="#" onclick="{{clearCartOnClick}};return false;" role="button" title="Empty Cart" class="btn btn-red btn-outline margin-right-30">Empty Cart <i class="glyphicon glyphicon-remove-sign"></i></a>
+								{% if globals.get.CatalogueID -%}
+									{module_data resource="catalogs" version="v3" fields="id,useFriendlyUrl,url" skip="0" limit="1" where="\{'id':'{{globals.get.CatalogueID}}'\}" order="id" collection="LastCatalogVisited"}
+								{% endif %}
+								{% assign lastCartItem = items | last -%}
+								<button onclick="location.href='{{lastCartItem.url | default: '/products/all'}}';" type="button" class="btn btn-green" title="Continue Shopping"><i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping</button>
+						</div>
+						</td>
+				</tr>
+			</tfoot>									
+		</table>
+	</div>
+
+	<!-- Cart Totals -->
+	<div id="cart-totals" class="row margin-bottom-100">
+			<div class="col-md-4">
+			</div>
+
+			<div class="col-md-4">
+			</div>
+
+			<div class="col-md-4">
+					<div class="alert alert-warning {% if productGrandTotal >= minOrderTotal -%}collapse{% endif %}" id="minOrderAlert">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<i class="fa fa-exclamation-triangle"></i>
+							<strong>Please Note:</strong><span> our minimum order amount of {{minOrderTotal | money}} has not yet been reached.</span>
+					</div>                
+					<div class="alert alert-blue {% if productGrandTotal >= freeShippingQualifyingTotal -%}collapse{% endif %}" id="freeShippingAlert">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<i class="fa fa-info-circle"></i>
+							<strong>Info:</strong><span> if you spend another <strong id="spendToQualifyAlertAmount">{{freeShippingSpendToQualify | money}}</strong> your order qualifies for FREE International Shipping!</span>
+					</div>                					                                
+					<div class="cartbox">
+					<h2 class="uheading">Order Total</h2>
+					<table class="table-summary-cart">
+							<tbody>
+							<tr class="cart-subtotal">
+									<th>Subtotal</th>
+									<td><span class="price">{{productGrandTotal | money}}</span></td>
+							</tr>
+							<tr id="cart-shipping" class="cart-shipping">
+									<th>Shipping</th>
+									<td>
+									{% if productGrandTotal >= freeShippingQualifyingTotal -%}
+									<strong class="red">FREE</strong> <span data-toggle="modal" data-target="#helpModalCartShippingFree"><a class="help" data-toggle="tooltip" title="Help on Shipping"><i class="icon icon-help"></i></a></span>
+									{% else %}
+									<strong class="red">TBA</strong> <span data-toggle="modal" data-target="#helpModalCartShipping"><a class="help" data-toggle="tooltip" title="Help on Shipping"><i class="icon icon-help"></i></a></span>
+									{% endif %}
+									</td>
+							</tr>                        
+							<tr class="order-total">
+									<th>GRAND TOTAL</th>
+									<td><strong><span class="price">{{productGrandTotal | money}}</span></strong></td>
+							</tr>
+							<tr id="noteExcludesShipping" class="note">
+									{% if productGrandTotal >= freeShippingQualifyingTotal -%}
+									<th>Includes Free International Shipping</th>                            
+									{% else %}
+									<th>Excludes Shipping</th>
+									{% endif %}
+							</tr>                                                    
+							<tr class="note">
+									<th>All Prices in $US Dollars</th>                            
+							</tr>
+							<tr>
+									<td colspan="2">
+										{% if globals.user.isLoggedIn == 'true' -%}
+										<a href="{{buyUrl}}" onclick="return {{buyButtonOnClick}};" name="beginCheckout" id="btnBeginCheckout" name="btnBeginCheckout" title="Begin Checkout" href="#" role="button" class="btn btn-green margin-top-10 {% if productGrandTotal < minOrderTotal -%}disabled{% endif %}">
+												<span>Begin Checkout <i class="glyphicon glyphicon-chevron-right"></i></span>
+										</a>					
+										{% else %}
+										{module_pageaddress collection="pageAddress" template=""}  
+										<a href="/login?ref={{pageAddress.pageUrl | append: '#beginCheckout' | url_param_escape}}" name="btnLoginToBeginCheckout" title="Login to Begin Checkout" role="button" class="btn btn-red margin-top-10">
+												<span>Login to Begin Checkout <i class="glyphicon glyphicon-chevron-right"></i></span>
+										</a>										
+										{% endif %}                                    
+									</td>
+							</tr>
+							</tbody>
+					</table>
+					</div>
+			</div>
+	</div>
+	<!-- ./Cart Totals -->
+
+	<!-- Help Modal for Shipping Costs -->
+	<div id="helpModalCartShipping" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="gridSystemModalLabel">Shipping Costs</h4>
+					</div>
+					<div class="modal-body">
+							<div class="row">
+									<div class="col-md-12">We will calculate Shipping Costs once we receive your order and provide you with a formal Order Quotation which will include Shipping Costs.</div>
+							</div>
+					</div>
+					<div class="modal-footer">
+							<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+					</div>
+					</div>
+					<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->  
+
+	<!-- Help Modal for Free Shipping -->
+	<div id="helpModalCartShippingFree" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="gridSystemModalLabel">Free Shipping</h4>
+					</div>
+					<div class="modal-body">
+							<div class="row">
+									<div class="col-md-12">Congratulations, your current order total of <span id="helpModalCartShippingOrderTotal">{{productGrandTotal | money}}</span> qualifies for FREE International Shipping. We ship orders of $1,000+ for free!</div>
+							</div>
+					</div>
+					<div class="modal-footer">
+							<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+					</div>
+					</div>
+					<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->  
+
+	{% else %}
+	<p>Your shopping cart is empty.</p>
+	{% endif %}
+
+	<script type="text/javascript">	
+
+	var minOrderTotal = {{minOrderTotal}};
+	var freeShippingQualifyingTotal = {{freeShippingQualifyingTotal}};
+
+	function updateCartSummary() {
+		// Ajax call to update Cart Summary
+		$("#cart-summary").load( "cart-summary .menubar-cart", function(data) {
+				updateShippingOffer(data);
+				updateMinOrder();
+				updateShipping();
+				$('[data-toggle="tooltip"]').tooltip();
+		});  					
+	}
+
+	function updateShipping() {
+		// Show/Hide Cart Spend More to Qualify for Free Shipping Offer.
+		// Update Shipping Sub-Total
+		// Update Shipping Note
+
+		var cartTotal = $('#cartSummaryValue').data('value');
+		var spendToQualify = freeShippingQualifyingTotal - cartTotal;
+		if (cartTotal >= freeShippingQualifyingTotal) {
+			$('#cart-shipping td strong').text('FREE');
+			$('#cart-shipping td span').data('target','#helpModalCartShippingFree');
+			$('#noteExcludesShipping th').text('Includes Free International Shipping');
+			$('#freeShippingAlert').addClass('collapse');
+		} else {
+			$('#cart-shipping td strong').text('TBA');
+			$('#cart-shipping td span').data('target','#helpModalCartShipping');
+			$('#noteExcludesShipping th').text('Excludes Shipping');
+			$('#freeShippingAlert').removeClass('collapse');
+			$('#freeShippingAlert #spendToQualifyAlertAmount').text('$' + spendToQualify.toFixed(2));
+		}
+	}
+
+	function updateMinOrder() {
+		var cartTotal = $('#cartSummaryValue').data('value');
+		var minOrderAlert = $('#minOrderAlert');
+		var btnBeginCheckout = $('#btnBeginCheckout');
+		if (cartTotal >= minOrderTotal) {
+			$(minOrderAlert).addClass('collapse');
+			$(btnBeginCheckout).removeClass('disabled');
+		} else {
+			$(minOrderAlert).removeClass('collapse');
+			$(btnBeginCheckout).addClass('disabled');
+		}
+	}
+
+	function deleteCartContent() {
+		$('#cart-items,#cart-totals').remove();					
+	}
+
+	function setCartEmptiedMessage(returnUrl) {
+		$('#catCartDetails').prepend('<p>Your shopping cart is now empty. <a href="' + returnUrl + '" title="Continue Shopping">Click here to Continue Shopping</a>.</p>');
+	}
+
+	// Override ClearCart to perform a check and prevent destruction 
+	// of page content via unconfigurable BC AJAX update. 
+	function ClearCart(c, e) {
+		var clear = confirm('Are you sure you want to empty your shopping cart?');
+			if (clear) {
+				var b = CMS.OrderRetrievev2.ServerSideDrawCartEmpty(c, e);
+				if (!b.error) {
+					updateCartSummary();
+					deleteCartContent();
+					var bcReturnHtml = $.parseHTML(b.value);
+					var bcContinueShoppingLink = $(bcReturnHtml).attr('href'); 
+					var returnUrl = bcContinueShoppingLink ? bcContinueShoppingLink : "/products/all";							
+					setCartEmptiedMessage(returnUrl);								
+					alert(Oshoplang.CartUpdateSuccess);
+				} else {
+					alert("There was a problem emptying your shopping cart.")
+				}
+			}												
+	}				
+	
+	$(function(){          
+		
+			// Override UpdateItemQuantity to also update Cart Summary
+			// Handles Quantity Change and Item Removal.
+			window.originalUpdateItemQuantity = window.UpdateItemQuantity;
+			window.UpdateItemQuantity = function(a,b,c,d,e,f,g) {
+				originalUpdateItemQuantity(a,b,c,d,e,f,g);
+				updateCartSummary();
+			}
+
+			console.log({{this|JSON}});				
+
+	});
+	</script>			
+</body>
+
+</html>

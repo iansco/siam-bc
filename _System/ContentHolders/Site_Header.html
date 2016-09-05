@@ -1,0 +1,156 @@
+{% comment -%}
+    Set any BC install specific 'hardcoded' variable values here.
+{% endcomment %}
+{% assign catalogAllProductsId = "457923" -%}
+{% assign productSearchSortOrder = "Alphabetical" -%}
+{module_shoppingcartsummary template="" collection="CartSummary"}
+{module_pageaddress collection="pageAddress" template=""}
+        
+        <!-- Site Header - Navigation / Search / Cart Summary -->
+        <header id="header" class="awe-menubar-header">            
+
+            <nav class="awemenu-nav headroom" data-responsive-width="1200">                                                
+
+                <div id="header-offer">
+                    <span>
+						<a href="#" title="Shipping Details"><i class="fa fa-truck"></i>Free International Shipping on Orders $1000+</a>
+                        {% if CartSummary.itemCount >= 1 and CartSummary.totalAmount > 0 -%}
+                            {% assign qualifyingAmount = 1000 -%}
+                            {% assign spendToQualify = qualifyingAmount | minus: CartSummary.totalAmount -%}
+                            {% if spendToQualify < 0 -%}
+                                <span id="spendToQualify">Your order of <strong>${{CartSummary.totalAmount | number: "N2"}}</strong> qualifies!</span>
+                            {% else -%}
+						        <span id="spendToQualify">Spend another <strong>${{spendToQualify | number: "N2"}}</strong> to qualify!</span>
+                            {% endif -%}                                
+                        {% endif -%}
+                    </span>
+                </div>
+
+                <div class="container">                                        
+
+                    <div class="awemenu-container">                        
+
+                        <div class="navbar-header">
+
+                            <ul id="cart-summary" class="navbar-icons">
+                                <li class="menubar-cart">
+                                    <a href="{{CartSummary.cartUrl | default: '#'}}" title="Your Cart" class="awemenu-icon menu-shopping-cart">
+                                        <span class="cart-label">Cart</span>
+                                        <i class="icon icon-shopping-bag"></i>
+                                        <span class="{% if CartSummary.itemCount > 999 -%}cart-number-lg{% else %}cart-number{% endif %}">{{CartSummary.itemCount | default: 0}}</span>
+                                        <span class="cart-value">${{CartSummary.totalAmount | number: "N2" | default: '0.00'}}</span>                                        
+                                    </a>                                
+                                </li>
+                            </ul>                         
+
+                            <ul class="navbar-search">
+                                <li>
+                                    <a href="#" title="Search" class="awemenu-icon awe-menubar-search" id="open-search-form">
+                                        <span class="sr-only">Search</span>
+                                        <span class="icon icon-search"></span>
+                                    </a>
+
+                                    <div class="menubar-search-form" id="menubar-search-form">
+                                        <form action="/search-results" method="GET">
+                                            <input type="text" name="search" id="search" class="form-control" placeholder="Enter Product Name or Code to Search for..." {% if globals.get.search -%}value="{{globals.get.search}}"{% endif %} maxlength="255">
+                                            <div class="menubar-search-buttons">
+                                                <button type="submit" class="btn btn-sm btn-white">Search</button>
+                                                <button type="button" class="btn btn-sm btn-white" id="close-search-form">
+                                                <span class="icon icon-remove"></span>
+                                            </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.menubar-search-form -->
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="awe-logo">
+                            <a href="/" title="Home"><img src="/img/site/siam_logo.svg" alt="Siam Logo"></a>
+                        </div>
+                        <!-- /.awe-logo -->
+
+
+                        <ul class="awemenu awemenu-right">
+                            <li class="awemenu-item">
+                                <a href="/" title="Home">
+                                    <span>Home</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                <a href="/products/all" title="Products">
+                                    <span>Products</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                <a href="/quick-order" title="Quick Order">
+                                    <span>Quick Order</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                <a href="#" title="About Us">
+                                    <span>About</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                <a href="#" title="Contact Us">
+                                    <span>Contact</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                {% if globals.user.isLoggedIn == 'true' -%}
+                                <a href="/account" title="My Account">
+                                    <span><i class="glyphicon glyphicon-user padding-right-5"></i>My Account</span>
+                                </a>
+                                {% else -%}                                                             
+                                <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login">
+                                    <span>Login</span>
+                                </a>
+                                {% endif -%}        
+                            </li>
+                        </ul>
+                        <!-- /.awemenu -->
+                    </div>
+                </div>
+                <!-- /.container -->
+
+            </nav>
+            <!-- /.awe-menubar -->
+
+            <div class="policy-header">
+                <div class="container">                 
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-8 center">
+                            <div class="policy">
+                                <i class="fa fa-check-circle"></i>
+                                <span>$250 Minimum Order</span>
+                            </div><!-- /.policy -->
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-8 center">
+                            <div class="policy">
+                                <i class="fa fa-dollar"></i>
+                                <span>Wholesale Pricing</span>
+                            </div><!-- /.policy -->
+                        </div>                        
+
+                        <div class="col-md-3 col-sm-3 col-xs-8 center">
+                            <div class="policy">
+                                <i class="fa fa-plus-circle"></i>
+                                <span>Big Sizes, Huge Range</span>
+                            </div><!-- /.policy -->
+                        </div>
+                    
+                        <div class="col-md-3 col-sm-3 col-xs-8 center">
+                            <div class="policy">
+                                <i class="icon icon-box-2"></i>
+                                <span>Samples Available</span>
+                            </div><!-- /.policy -->
+                        </div>                                              
+
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- /.awe-menubar-header -->

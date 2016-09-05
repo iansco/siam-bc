@@ -1,0 +1,44 @@
+{% comment %}
+    Set any BC install specific 'hardcoded' variable values here.
+{% endcomment %}
+
+{% assign rootCatalogId = "457922" -%}
+
+{module_cataloguelistdump catalogId="{{rootCatalogId}}" rowCount="2" targetFrame="_blank" sortType="Alphabetical" collection="ProductCatalogs" template=""}
+                            
+                            <div id="shop-widgets-filters" class="shop-widgets-filters">
+                                
+                                <div id="widget-area" class="widget-area">
+
+                                    <!-- List of Section Navigation Links -->
+                                    <div class="widget woocommerce widget_product_categories">
+                                            <h3 class="widget-title">Sections</h3>
+                                            <ul>
+                                            {% for category in ProductCatalogs.items  -%}
+                                                {% if category.name contains '*' -%}
+                                                <li><a href="{{category.url}}" title="{{category.name | replace: '*',''}}">{{category.name | replace: '*',''}}</a></li>
+                                                {% endif -%}
+                                            {% endfor -%}                                                                                                                                                                                                                  
+                                            </ul>
+                                    </div><!-- /.widget -->                                                                         
+                                    
+                                    <!-- List of Category Navigation Links -->
+                                    <div class="widget woocommerce widget_product_categories">
+                                            <h3 class="widget-title">Categories</h3>
+                                            <ul>      
+                                            {% for category in ProductCatalogs.items -%}
+                                                {% unless category.name contains '*' -%}
+                                                <li><a href="{{category.url}}" title="{{category.name}}">{{category.name}}</a></li>
+                                                {% endunless -%}
+                                            {% endfor -%}                                                  
+                                            </ul>
+                                    </div><!-- /.widget -->                          
+
+                                </div>
+
+                            </div>
+
+                            <div id="open-filters">
+                                <i class="fa fa-filter"></i>
+                                <span>Filter</span>
+                            </div>

@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+<head>      
+    <meta name="description" content="{{this.description}}">
+</head>
+<body>
+    <!-- Main Content -->
+    <div id="main">
+
+        {% comment %}
+            Set any BC install specific 'hardcoded' variable values here.
+        {% endcomment %}
+
+        {% assign catalogAllProductsId = "457923" -%}
+        {% assign catalogAllProductsName = "All Products" -%}
+        {% assign catalogAllProductsUrl = "/products/all" -%}
+
+        {% assign rootCatalogId = "457922" -%}
+
+        {% comment %}
+            Pull in data from BC tags and modules so that they can be used via Liquid.
+                - CatalogBreadcrumbs, to build the breadcrumb navigation.
+                - ProductCatalogs, to build side bar catalog navigation.
+                - AllCatalogs to help determine whether a catalog has sub-catalogs.
+        {% endcomment %}
+
+        {tag_cataloguelist,, collection="CatalogList" template=""}
+        {tag_cataloguebreadcrumbs collection="CatalogBreadcrumbs" template=""}
+        {module_cataloguelistdump catalogId="{{rootCatalogId}}" rowCount="2" targetFrame="_blank" sortType="Alphabetical" collection="ProductCatalogs" template=""}
+        {module_cataloguelistdump catalogId="-2" rowCount="2" targetFrame="_blank" sortType="Alphabetical" collection="AllCatalogs" template=""}
+
+        {% if CatalogBreadcrumbs.items.size == 3 -%}
+            {% assign inSubCatalog = true -%}
+        {% endif -%}
+
+        {% assign parentCatalogName = CatalogBreadcrumbs.items[1].name | replace '*','' -%}
+        {% assign parentCatalogUrl = CatalogBreadcrumbs.items[1].url -%}
+
+        {% for catalog in AllCatalogs.items -%}
+            {% if catalog.url == parentCatalogUrl -%}
+                {% continue -%}
+            {% endif -%}
+            {% if catalog.url contains parentCatalogUrl -%}
+                {% assign hasSubCatalogs = true -%}
+                {% break -%}
+            {% endif -%}
+        {% endfor -%}  
+
+        {% comment %}
+            Set variable to store the 'sort' and 'order' parameter valuse if they are contained in a session cookie. 
+        {% endcomment %}        
+
+        {% if globals.cookie.catSortByName -%}
+            {% if globals.cookie.catSortByName == "price" -%}
+                {% if globals.cookie.catSortByOrder == "desc" -%}
+                    {% assign sort = "-salePrice" -%}
+                {% else -%}
+                    {% assign sort = "salePrice" -%}
+                {% endif -%}
+            {% endif -%}
+
+            {% if globals.cookie.catSortByName == "name" -%}
+                {% if globals.cookie.catSortByOrder == "desc" -%}
+                    {% assign sort = "-product.name" -%}
+                {% else -%}
+                    {% assign sort = "product.name" -%}
+                {% endif -%}
+            {% endif -%}
+        {% else -%}
+            {% assign sort = "-product.releaseDate" -%}                
+        {% endif -%}              
+
+        {% comment %}
+            Now overwrite with the URL parameter value if they are set.
+        {% endcomment %}      
+
+        {% if globals.get.sort == "price" -%}
+            {% if globals.get.order == "desc" -%}
+                {% assign sort = "-salePrice" -%}
+            {% else -%}
+                {% assign sort = "salePrice" -%}
+            {% endif -%}
+        {% endif -%}
+
+        {% if globals.get.sort == "name" -%}
+            {% if globals.get.order == "desc" -%}
+                {% assign sort = "-product.name" -%}
+            {% else -%}
+                {% assign sort = "product.name" -%}
+            {% endif -%}
+        {% endif -%}
+
+        {% comment %}
+            Set variable to store the 'limit' parameter value if it is contained in a session cookie
+            or set a default of 9. 
+        {% endcomment %}        
+
+        {% if globals.cookie.catShowItemsPerPage -%}
+            {% case globals.cookie.catShowItemsPerPage -%}
+            {% when '9' -%}
+                {% assign limit = "9" -%}
+            {% when '18' -%}
+                {% assign limit = "18" -%}
+            {% when '36' -%}
+                {% assign limit = "36" -%}                        
+            {% endcase -%}           
+        {% else -%}
+            {% assign limit = "9" -%}            
+        {% endif -%}
+
+        {% comment %}
+            Now overwrite with the URL 'limit' parameter if it is set.
+        {% endcomment %} 
+
+        {% case globals.get.limit -%}
+            {% when '9' -%}
+                {% assign limit = "9" -%}        
+            {% when '18' -%}
+                {% assign limit = "18" -%}
+            {% when '36' -%}
+                {% assign limit = "36" -%}        
+        {% endcase -%}   
+
+        {% comment %}
+            Set variable which stores the 'skip' parameter value obtained from the URL (or set to default of 0).
+        {% endcomment %}          
+
+        {% if globals.get.skip %}
+            {% assign skip = globals.get.skip | convert: "number" %}
+        {% else %}
+            {% assign skip = 0 %}
+        {% endif %}                       
+
+        <!-- Category Header -->
+        <div class="main-header background background-image-heading-products">
+            <div class="container">
+                <h1>
+                    {% if inSubCatalog -%}
+                        {{parentCatalogName}} / {{name}}
+                    {% else -%}
+                        {{name | replace: '*',''}}
+                    {% endif -%}
+                </h1>
+            </div>
+        </div>
+        <!-- / Category Header -->        
+
+        <!-- Breadcrumb Navigation -->
+        <div id="breadcrumb">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li><a href="\" title="Home">Home</a></li>
+                    <li><a href="{{catalogAllProductsUrl}}" title="Products">Products</a></li>
+                    {% for catalog in CatalogBreadcrumbs.items offset:1 -%}
+                        {% assign catalogName = catalog.name | replace: '*','' -%}
+                        {% if forloop.last -%}
+                            {% assign currentCatalogUrl = catalog.url -%}
+                            {% assign currentCatalogName = catalogName -%}
+                            <li class="active"><span>{{catalogName}}</span></li>
+                        {% else -%}
+                            <li><a href="{{catalog.url}}" title="{{catalogName}}">{{catalogName}}</a></li>
+                        {% endif -%}                                
+                    {% endfor -%}
+                </ol>
+            </div>
+        </div>          
+        <!-- / Breadcrumb Navigation -->   
+
+        {% comment %}
+            Check to see whether we have a globals.get.ProductID set.
+            If we do, this indicates that we're at a Product URL page.
+        {% endcomment %}
+
+        {% if globals.get.ProductID -%}
+
+            {% assign currentCatalogId = globals.get.CatalogueID -%}
+
+            {% comment %}
+                Code for Product Detail Page.
+            {% endcomment %}
+
+            {% assign currentProductId = globals.get.ProductID -%}
+
+            {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'product.id':'{{currentProductId}}'\}" collection="ProductsAndPrices"}
+            {module_data resource="productsattributes" version="v3" fields="id,productId,groupName,fieldTypeId,mandatory" where="\{'productId':'{{currentProductId}}'\}" order="id" collection="ProductAttributes"}
+
+            {% if ProductsAndPrices.items.size == 1 -%}
+
+                {% assign productDetail = ProductsAndPrices.items[0] -%}
+                <!-- Product Details -->
+                <div class="container">
+                    <div class="row margin-bottom-100">
+                        <!-- Product Media -->
+                        <div class="col-md-6">
+                            <div class="product-media">
+                                <div class="easyzoom easyzoom--overlay is-ready">
+                                    <!-- Get largest image from poplets property using Liquid -->
+                                    <a href="{{productDetail.product.popletImage1}}" title="{{productDetail.product.name}}">
+                                        <img src="{{productDetail.product.largeImage}}" alt="{{productDetail.product.name}}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="col-md-6">
+                            <nav class="pnav">
+                                <a href="{{currentCatalogUrl}}" class="back-to-pcate" title="{{currentCatalogName}}"><i class="fa fa-chevron-left"></i><span>Back to {{currentCatalogName}}</span></a>
+                            </nav><!-- /header -->
+
+                            <div id="{{ 'catProdTd_' | append: currentProductId }}" class="product-details-wrapper">
+                                <h2 class="product-name">{{productDetail.product.name}}</h2><!-- /.product-name -->
+
+                                <div class="product-status">
+                                    <span>Product Code: </span><strong>{{productDetail.product.productCode}}</strong>
+                                </div><!-- /.product-status -->
+
+                                <div class="product-description">
+                                    <p>{{productDetail.product.description}}</p>
+                                </div><!-- /.product-description -->
+
+                                <div id="{{'catProdAttributes2_' | append: currentProductId }}" class="product-actions-wrapper">
+                                    <form action="#" method="POST">
+                                        <!-- Product Attributes -->
+                                        {% if ProductAttributes.items.size >= 1 -%}                                        
+
+                                            <h4 class="margin-bottom-25">Select Options:</h4>
+                                    
+                                            {% for productAttribute in ProductAttributes.items -%}
+
+                                                {% comment -%}
+                                                    Get list of attribute Options with Prices for current Attribute.
+                                                    Unfortunately, we can't just call 'productsattributeoptionsprices' because some Options have no price.
+                                                {% endcomment %}                             
+                                                
+                                                {module_data resource="productsattributeoptions" version="v3" fields="id,siteId,groupId,optionName,imagePath,attribute" limit="50" where="\{'groupId':'{{productAttribute.id}}'\}" order="id" collection="ProductAttributeOptions"}
+                                                {module_data resource="productsattributeoptionsprices" version="v3" fields="id,price,options" limit="50" where="\{'options.groupId':'{{productAttribute.id}}'\}" order="id" collection="ProductAttributeOptionsPrices"}
+
+                                                {% assign attrName = productAttribute.groupName | replace: ' ', '' | replace: '/', '' -%}
+                                                {% assign attrDomID = attrName | prepend: 'dom' -%}
+                                                {% assign helpModalID = attrName | prepend: 'helpModal' -%}
+
+                                                <div class="form-group">
+                                                    <label for="{{attrDomID}}">{{productAttribute.groupName}} <span data-toggle="modal" data-target="#{{helpModalID}}"><a class="help" data-toggle="tooltip" title="Help on {{productAttribute.groupName}}"><i class="icon icon-help"></i></a></span></label>
+                                                    <select tabindex="{{forloop.index}}" {% if productAttribute.mandatory -%}mandatory="1" {% endif -%}name="{{attrDomID}}" id="{{attrDomID}}" class="form-control product-attribute" onchange="updatePrices({{currentProductId}});">
+                                                        <option data-price="0" value>-- Please Select --</option>
+                                                        {% for option in ProductAttributeOptions.items -%}
+                                                            {% if globals.user.isLoggedIn == 'true' -%}
+                                                                {% assign optionPrice = 0 -%}
+                                                                {% for optionPrice in ProductAttributeOptionsPrices.items %}
+                                                                    {% if optionPrice.id == option.id -%}
+                                                                        {% assign optionPrice = optionPrice.price -%}
+                                                                        {% break -%}
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                            {% assign defaultOption = false -%}
+                                                            {% case attrName -%}
+                                                                {% when 'WearableSurface' -%}
+                                                                    {% if option.optionName contains 'Average Ears' -%}
+                                                                        {% assign defaultOption = true -%}
+                                                                    {% endif %}                                                                    
+                                                                {% when 'WearingStyle' -%}
+                                                                    {% if option.optionName contains 'Double Flare' -%}
+                                                                        {% assign defaultOption = true -%}
+                                                                    {% endif %}
+                                                            {% endcase %}
+                                                            <option data-price="{{optionPrice}}" value="{{option.id}}"{% if defaultOption -%}selected{% endif %}>{{option.optionName}}{% if optionPrice > 0 -%} {{ optionPrice | number: 'N2' | prepend: '+ $'}}{% endif -%}</option>  
+                                                        {% endfor %}                                                    
+                                                    </select>
+                                                </div>                                               
+
+                                            {% endfor %}
+
+                                        {% endif %}
+                                        
+                                        <!-- Price -->
+                                        <h4 class="margin-top-25">Price</h4>
+                                        {% if globals.user.isLoggedIn == 'true' -%}
+                                        <span class="product-price">
+                                            <span id="unitPrice_{{currentProductId}}" data-base-price="{{productDetail.salePrice}}" class="amount">${{productDetail.salePrice}}</span><span class="unit">(Per {{productDetail.product.unitType}})</span>
+                                        </span> 
+                                        <div class="product-price-msrp">
+                                            <span>MSRP ${{productDetail.retailPrice}}</span>
+                                        </div>        
+                                        <!-- Quantity -->                                                                                                                                      
+                                        <div class="form-group margin-top-15">
+                                            {% if productDetail.product.minUnits > 1 -%}
+                                                {% assign unitTypePluralized = productDetail.product.unitType | append: 's' -%}
+                                            {% else %}
+                                                {% assign unitTypePluralized = productDetail.product.unitType -%}
+                                            {% endif %}
+                                            <label for="p_qty">Quantity <span>({{unitTypePluralized}})</span></label>
+                                            <input tabindex="{{ProductAttributes.items.size | default: 0 | plus: 1 }}" id="{{'Units_' | append: currentProductId }}" min="{{productDetail.product.minUnits | default: '1'}}" data-min-qty="{{productDetail.product.minUnits | default: '1'}}" data-toggle="tooltip" data-placement="right" title="Minimum Order: {{productDetail.product.minUnits | default: '1'}} {{unitTypePluralized}}" class="form-control qty" name="p_qty" type="text" value="{{productDetail.product.minUnits | default: '1'}}" onchange="updatePrices({{currentProductId}});">   
+                                            <div class="min-order"><strong>Minimum Order:</strong> {{productDetail.product.minUnits}} {{unitTypePluralized}}</div>                               
+                                        </div>
+
+                                        <!-- Add to Cart --->
+                                        <a tabindex="{{ProductAttributes.items.size | default: 0 | plus: 2 }}" class="btn btn-lg btn-green" href="javascript:void(0)" id="btnAddToCart" title="Add to Cart">Add to cart</a>
+
+                                        <!-- View Cart -->
+                                        <a tabindex="{{ProductAttributes.items.size | default: 0 | plus: 3 }}" class="margin-left-20 btn btn-lg btn-primary" href="{{globals.cart.cartUrl | default: '#'}}" title="View Cart">View Cart <i class="glyphicon glyphicon-chevron-right"></i></a>
+
+                                        {% else %}
+
+                                        {module_pageaddress collection="pageAddress" template=""}                            
+                                        <div class="product-price-login">
+                                            <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Price">Login for Price</a>
+                                        </div><!-- /.product-price-login -->                                                                                                                                  
+                                        {% endif %}                                              
+                                    </form><!-- /.form -->
+                                </div>
+
+                            </div><!-- /.product-details-wrapper -->
+                        </div>
+                    </div>
+
+                    <!-- Help Modal for Size -->
+                    <div id="helpModalSize" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-original-title="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">Size</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">Left Column</div>
+                                    <div class="col-md-6">Right Column</div>
+                                </div>
+                                <div class="row margin-top-20">
+                                    <div class="col-md-12">
+                                        <p>Footer content can go in here...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->              
+
+                    <!-- Help Modal for Wearing Length -->
+                    <div id="helpModalWearingLength" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-original-title="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">Wearing Length</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">Left Column</div>
+                                    <div class="col-md-6">Right Column</div>
+                                </div>
+                                <div class="row margin-top-20">
+                                    <div class="col-md-12">
+                                        <p>Footer content can go in here...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->     
+
+                    <!-- Help Modal for Wearing Style -->
+                    <div id="helpModalWearingStyle" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-original-title="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">Wearing Style</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">Left Column</div>
+                                    <div class="col-md-6">Right Column</div>
+                                </div>
+                                <div class="row margin-top-20">
+                                    <div class="col-md-12">
+                                        <p>Footer content can go in here...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->                     
+
+                    <script type="text/javascript">
+
+                        function AddToCart(n) {
+                            var d = arguments[0];
+                            var g = arguments[1];
+                            var A = arguments[2];
+                            var F = arguments[3];
+                            var b = "";
+                            var r = "";
+                            var E = false;
+                            var s = undefined;
+                            if (arguments.length > 6) {
+                                b = arguments[4];
+                                r = arguments[5];
+                                E = arguments[6];
+                                s = arguments.length == 8 ? arguments[7] : undefined
+                            } else {
+                                E = arguments[4];
+                                s = arguments.length == 6 ? arguments[5] : undefined
+                            }
+                            var q = g;
+                            var L = "";
+                            var H = document.getElementById("Units_" + g);
+                            var w = readCookie("CartID");
+                            var x = document.getElementById("Grouping_" + g);
+                            var B = document.getElementById("Related_" + g);
+                            var c = document.getElementById("catProdTd_" + g);
+                            var j = document.getElementById("catProdAttributes_" + g);
+                            var D = document.getElementById("catProdAttributes2_" + g);
+                            var a = document.getElementById("catProdInstructions_" + g);
+                            var m = "";
+                            var y = new Array();
+                            var v = false;
+                            var u = false;
+                            var I;
+                            var z = 0;
+                            var t;
+                            var J = true;
+                            var o = null;
+                            var K = null;
+                            if (H) {
+                                I = H.value;
+                                if (I < 0) {
+                                    alert(Oshoplang.RemoveError);
+                                    return false
+                                }
+                            } else {
+                                I = 1
+                            }
+                            if (w == null || w == "") {
+                                w =- 1
+                            }
+                            t = document.getElementById("catCartSummary");
+                            if (x) {
+                                if (x.nodeName == "SELECT") {
+                                    q = x.value
+                                } else {
+                                    var f = x.getElementsByTagName("input");
+                                    for (var C = 0; C < f.length; C++) {
+                                        if (f[C].checked) {
+                                            q = f[C].value;
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+                            if (B) {
+                                L = GetCheckListValue(B);
+                                if (L.length > 0) {
+                                    z = L.split(",").length
+                                }
+                            }
+                            if (a) {
+                                m = a.value
+                            }
+                            if (j) {
+                                var k = j.getElementsByTagName("select");
+                                if (k) {
+                                    if (m.length > 0) {
+                                        m += ";"
+                                    }
+                                    for (var C = 0; C < k.length; C++) {
+                                        if (k[C].value.length > 0) {
+                                            m += k[C].value + ";"
+                                        }
+                                    }
+                                }
+                            }
+                            if (D) {
+                                var h = 0;
+                                var k = D.getElementsByTagName("select");
+                                var G;
+                                var l;
+                                var e = "";
+                                if (k) {
+                                    for (var C = 0; C < k.length; C++) {
+                                        if (k[C].value.length > 0) {
+                                            y[h] = k[C].value + "|1";
+                                            h++
+                                        } else {
+                                            if (k[C].getAttribute("mandatory")) {
+                                                alert(Oshoplang.ChooseAttribute);
+                                                return 
+                                            }
+                                        }
+                                    }
+                                }
+                                var k = D.getElementsByTagName("input");
+                                if (k) {
+                                    for (var C = 0; C < k.length; C++) {
+                                        if (k[C].type == "checkbox" || k[C].type == "radio") {
+                                            if (e != k[C].getAttribute("name")) {
+                                                if (C > 0&&!l && k[C - 1].getAttribute("mandatory")) {
+                                                    alert(Oshoplang.ChooseAttribute);
+                                                    return 
+                                                }
+                                                l = false
+                                            }
+                                            if (k[C].checked) {
+                                                y[h] = k[C].id + "|1";
+                                                h++;
+                                                l = true
+                                            }
+                                            e = k[C].getAttribute("name")
+                                        } else {
+                                            if (k[C].value.length > 0) {
+                                                y[h] = k[C].id + "|" + k[C].value;
+                                                h++;
+                                                l = true
+                                            } else {
+                                                if (k[C].getAttribute("mandatory")) {
+                                                    alert(Oshoplang.ChooseAttribute);
+                                                    return 
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (k.length > 0 && (k[k.length - 1].type == "checkbox" || k[k.length - 1].type == "radio")) {
+                                        if (!l && k[C - 1].getAttribute("mandatory")) {
+                                            alert(Oshoplang.ChooseAttribute);
+                                            return 
+                                        }
+                                    }
+                                }
+                            }
+                            if (s && s.selectedOptions) {
+                                for (var C = 0; C < s.selectedOptions.length; C++) {
+                                    y.push(s.selectedOptions[C] + "|1")
+                                }
+                            }
+                            if (t) {
+                                if (t.tagName.toLowerCase() == "span") {
+                                    if (t.getAttribute("Vertical") == "True") {
+                                        v = true
+                                    }
+                                    if (t.getAttribute("Quote") == "True") {
+                                        u = true
+                                    }
+                                    o = t.getAttribute("templateName");
+                                    K = t.getAttribute("templatehash")
+                                } else {
+                                    if (t.tagName.toLowerCase() == "div") {
+                                        if (t.getAttribute("data-vertical") == "True") {
+                                            v = true
+                                        }
+                                        if (t.getAttribute("data-quote") == "True") {
+                                            u = true
+                                        }
+                                        o = t.getAttribute("data-templateName");
+                                        K = t.getAttribute("data-templatehash")
+                                    }
+                                }
+                            }
+                            var p = CMS.CatalogueRetrieve.ServerSideAddItemToOrder(w, d, q, I, L, y, m, v, F, u, A, J, b, r, o, K);
+                            if (p.value[4]) {
+                                z = p.value[4]
+                            }
+                            if (s && s.skipRefreshAfter) {
+                                return p
+                            }
+                            if (t) {
+                                t.innerHTML = p.value[2]
+                            }
+                            switch (p.value[1]) {
+                            case 0:
+                                if (!E) {
+                                    if (c) {
+                                        c.innerHTML = p.value[3];
+                                        ProcessJS(c)
+                                    }
+                                    alert(z + Oshoplang.Added)
+                                } else {
+                                    document.location = "/OrderRetrievev2.aspx?CatalogueID=" + d
+                                }
+                                break;
+                            case 1:
+                                alert(Oshoplang.OutOfStock);
+                                break;
+                            case 2:
+                                if (!E) {
+                                    if (c) {
+                                        c.innerHTML = p.value[3];
+                                        ProcessJS(c)
+                                    }
+                                    alert(z + Oshoplang.PreOrder)
+                                } else {
+                                    document.location = "/OrderRetrievev2.aspx?CatalogueID=" + d
+                                }
+                                break;
+                            case 3:
+                                alert(Oshoplang.MinLimit);
+                                break;
+                            case 4:
+                                alert(Oshoplang.MaxLimit);
+                                break;
+                            case 6:
+                                alert(Oshoplang.ChooseAttribute);
+                                break
+                            }
+                            initSocialMediaModules();
+                            if (typeof AddProductExtras == "function") {
+                                AddProductExtras(d, q, p.value[1])
+                            }
+                        }
+
+                        addToCart = function(a, b) {
+                            b = b || {};
+                            b.frame = b.frame || "";
+                            b.buynow = b.buynow || false;
+                            b.selectedOptions = b.selectedOptions || [];
+                            b.quantity = b.quantity || 1;
+                            b.skipRefreshAfter = b.skipRefreshAfter || false;
+                            context = a.context || {};
+                            context.templateTypeId = context.templateTypeId || 3;
+                            var result = AddToCart(a.catalogueId, a.productId, b.frame, context.templateTypeId, b.buynow, b);
+                            return result;
+                        };
+                    
+                        function updatePrices(productId) {
+                            // Get the base price.
+                            var basePrice = parseFloat($("#unitPrice_" + productId).data("base-price"));
+                            // Need to get the sum of all selected Attributes.
+                            var sumSelectedAttributePrices = 0;
+                            $(".product-attribute option:selected").each(function() {
+                                sumSelectedAttributePrices += parseFloat($(this).data('price')) || 0;
+                            });
+                            // Update the Unit Price.                        
+                            if (!isNaN(basePrice) && !isNaN(sumSelectedAttributePrices)) {                                
+                                var newUnitPrice = basePrice + sumSelectedAttributePrices;
+                                if (!isNaN(newUnitPrice)) {
+                                    $("#unitPrice_" + productId).text("$" + newUnitPrice.toFixed(2));
+                                }                                
+                            }
+                        }
+
+                    </script>                     
+
+                    <script>
+                        $(function() { 
+                            aweProductRender(true); 
+
+                            var product = JSON.parse('{"productId":{{currentProductId}},"catalogueId":{{currentCatalogId}},"context":{"templateTypeId":4}}');
+                            
+                            $("#btnAddToCart").click(function (){
+                                    var quantity = $('#{{'Units_' | append: currentProductId }}');
+                                    if ($(quantity).val() < $(quantity).data('min-qty')) {
+                                        alert(Oshoplang.MinLimit);
+                                    } else {
+                                    var result = addToCart(product, {"selectedOptions": [], "skipRefreshAfter" : true });
+                                        if (result && !result.error) {
+                                            // Need to evaluate BC response.
+                                            switch (result.value[1]) {
+                                                case 0:
+                                                    // Ajax call to update Cart Summary
+                                                    $("#cart-summary").load( "/cart-summary .menubar-cart", function(data) {
+                                                        updateShippingOffer(data);
+                                                    });                                                                                      
+                                                    alert(result.value[4] + Oshoplang.Added);                                                
+                                                    break;
+                                                case 1:
+                                                    alert(Oshoplang.OutOfStock);
+                                                    break;
+                                                case 2:
+                                                    alert(result.value[4] + Oshoplang.PreOrder);
+                                                    break;
+                                                case 3:
+                                                    alert(Oshoplang.MinLimit);
+                                                    break;
+                                                case 4:
+                                                    alert(Oshoplang.MaxLimit);
+                                                    break;
+                                                case 6:
+                                                    alert(Oshoplang.ChooseAttribute);
+                                                    break;                                                                                                
+                                            }
+                                        } else if (result && result.error) {
+                                            alert("Sorry, there was a problem adding your selection to the Shopping Cart. Please reselect the Product Options, re-enter the Quantity and try again.");
+                                        }
+                                    }                                                                     
+                            });                                                                               
+
+                        });
+                    </script>                      
+
+                </div>                
+            {% else -%}
+                <p>Error: product details not found.</p>
+            {% endif -%}
+
+        {% else %}
+
+            {% comment %}
+                Code for Product List (Catalog) Page.
+            {% endcomment %}        
+
+            {% comment %}
+                Retrieve ALL the Products in the currently selected (navigated to) Catalog.
+                Needed because the Prices API resource doesn't contain details of which
+                Catalog a Product belongs to.
+            {% endcomment %}           
+                            
+            {module_data resource="catalogproducts" version="v3" fields="productId" where="\{'catalogue.id':'{{this.id}}'\}" skip="0" limit="500" order="catalogueId" collection="CatalogProducts"}    
+
+            {% comment %}
+                Now construct an array of Product ID's for all Products in the current Catalog.
+                This array can then be used to filter the request to the Prices API resource to
+                retrieve only those Products from the Current Catalog. This call to the Prices API 
+                is neccessary because it is the only API call which contains Product prices, which 
+                of course we need to be able to Sort on Price (*daft* BC API doesn't include
+                price data where it would be sensible to have it...like...with Product data!!!).
+            {% endcomment %}                 
+
+            {% assign CurrentCatalogProductIDs = CatalogProducts.items | map: 'productId' -%}
+
+            {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'product.id':\{'$in':{{CurrentCatalogProductIDs | JSON}}\}\}" order="{{sort}}" collection="ProductPrices" limit="{{limit}}" skip="{{skip}}"}
+
+            {% comment %}
+                Calculate pagination.
+            {% endcomment %}                 
+
+            {% assign moduloCheck =  ProductPrices.totalItemsCount | modulo : limit -%}
+            {% if moduloCheck == 0 -%}
+                {% assign totalPages = ProductPrices.totalItemsCount | divided_by: limit -%}
+            {% else -%}
+                {% assign totalPages = ProductPrices.totalItemsCount | divided_by: limit | plus: 1 -%}
+            {% endif -%}
+
+            {% comment %}
+                Calculate product results counts.
+            {% endcomment %}                         
+
+            {% assign currentPage =  skip | divided_by: limit | plus: 1 -%}        
+
+            {% assign firstItemNumber = currentPage | minus: 1 | times: limit | plus: 1 -%}
+            {% assign maxPageItems = currentPage | times: limit -%}
+            {% if maxPageItems > ProductPrices.totalItemsCount -%}
+                {% assign lastItemNumber = ProductPrices.totalItemsCount -%}                                            
+            {% else -%}                
+                {% assign lastItemNumber = currentPage | times: limit -%}
+            {% endif -%}                            
+
+            {% if globals.get.sort -%}
+                {% if globals.get.order -%}                                    
+                    {% assign urlSortFilters = '&sort=' | append: globals.get.sort | append: '&order=' | append: globals.get.order -%}
+                {% else -%}
+                    {% assign urlSortFilters = '&sort=' | append: globals.get.sort -%}
+                {% endif -%}                                                            
+            {% endif -%} 
+
+            <!-- Category Sidebar Navigation / Category Product List -->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <!-- Products Column -->
+                        <div class="col-md-9 col-md-push-3">
+
+                            <!-- Product List Catalog Title and Product Count Header -->
+                            <div class="margin-bottom-30">
+                                <h4 style="margin:0; text-transform:uppercase;font-weight:bold;">
+                                {% if inSubCatalog -%}
+                                    {{parentCatalogName}} / {{name}}
+                                {% else -%}
+                                    {{name | replace: '*',''}}
+                                {% endif -%}
+                                <span style="font-weight:normal;text-transform:none;">({{ProductPrices.totalItemsCount | default: 0}} Products)</span>
+                                </h4>
+                            </div>
+
+                            <!-- Product List Actions Header Form -->
+                            {% if ProductPrices.totalItemsCount > 0 or inSubCatalog -%}
+                            <div class="product-header-actions">
+                                <form action="#" method="POST" class="form-inline" >
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-show-sort"> 
+
+                                                <!-- Sort By - id: #actionSortBy -->
+                                                <div class="form-group pull-left">
+                                                    <label for="actionSortBy">Sort:</label>
+                                                    <select name="actionSortBy" id="actionSortBy" class="form-control input-sm">
+                                                        <option value="newest-first"{% if sort == "-product.releaseDate" or sort == null -%} selected{% endif-%}>Newest First</option>
+                                                        {% if globals.user.isLoggedIn == 'true' -%}    
+                                                        <option value="price"{% if sort == "salePrice" -%} selected{% endif-%}>Price: Low to High</option>
+                                                        <option value="price-desc"{% if sort == "-salePrice" -%} selected{% endif-%}>Price: High to Low</option>
+                                                        {% endif -%}                                                    
+                                                        <option value="name"{% if sort == "product.name" -%} selected{% endif-%}>Name: A to Z</option>
+                                                        <option value="name-desc"{% if sort == "-product.name" -%} selected{% endif-%}>Name: Z to A</option>
+                                                    </select>
+                                                </div><!-- /.form-group -->
+
+                                                {% if hasSubCatalogs or inSubCatalog -%}
+                                                <!-- Filter By Style - id: #actionFilterByStyle -->
+                                                <div class="form-group pull-left">
+                                                    <label for="actionFilterByStyle">Style:</label>
+                                                    <select name="actionFilterByStyle" id="actionFilterByStyle" class="form-control input-sm">
+                                                        {% comment -%}
+                                                            Create a select option for any Sub Catalogs of the Parent Catalog, as well as the Parent Catalog.
+                                                        {% endcomment -%}
+                                                        <option value="{{parentCatalogUrl}}"{% if parentCatalogUrl == currentCatalogUrl -%} selected{% endif -%}>All</option>
+                                                        {% for catalog in AllCatalogs.items -%}
+                                                            {% if catalog.url contains parentCatalogUrl and catalog.url != parentCatalogUrl -%}   
+                                                                <option value="{{catalog.url}}"{% if catalog.url == currentCatalogUrl -%} selected{% endif -%}>{{catalog.name | replace:'*',''}}</option>
+                                                            {% endif -%}
+                                                        {% endfor -%}                                                                                            
+                                                    </select>
+                                                </div><!-- /.form-group -->
+                                                {% endif -%}   
+
+                                                <!-- Show Items Per Page - id: #actionShowItemsPerPage -->
+                                                <div class="form-group pull-left">
+                                                    <label for="actionShowItemsPerPage">Show</label>
+                                                    <select name="actionShowItemsPerPage" id="actionShowItemsPerPage" class="form-control input-sm">
+                                                        <option value="9" {% if limit == 9 -%}selected{% endif -%}>9</option>
+                                                        <option value="18" {% if limit == 18 -%}selected{% endif -%}>18</option>
+                                                        <option value="36" {% if limit == 36 -%}selected{% endif -%}>36</option>
+                                                    </select>
+                                                    <strong>Per Page</strong>
+                                                </div><!-- /.form-group -->    
+
+                                                <!-- Pagination -->
+                                                <!-- Jump to Page - id: #actionJumpToPage -->
+                                                {% if ProductPrices.totalItemsCount > limit -%}
+                                                <div class="form-group pull-right text-right">
+                                                    <label for="actionJumpToPage">Page</label>
+                                                    <select name="actionJumpToPage" id="actionJumpToPage" class="form-control input-sm" title="Jump to Page">
+                                                    {% for pageNum in (1..totalPages) -%}
+                                                        {% if pageNum == currentPage -%}
+                                                        <option value="{{pageNum}}" selected>{{pageNum}}</option>
+                                                        {% else -%}
+                                                        <option value="{{pageNum}}" data-skip="{{pageNum | minus: 1 | times: limit}}">{{pageNum}}</option>
+                                                        {% endif -%}
+                                                    {% endfor -%}
+                                                    </select>
+                                                    <strong>of {{totalPages}}</strong>
+                                                    <ul class="pagination">
+                                                        {% if currentPage > 1 -%}
+                                                        <li class="pagination-prev"><a href="{{currentCatalogUrl}}?skip={{ currentPage | minus: 2 | times: limit }}&limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif -%}" data-toggle="tooltip" data-original-title="Page {{currentPage | minus: 1}}" title="Page {{currentPage | minus: 1}}"><i class="icon icon-arrow-prev"></i></a></li>                                                    
+                                                        {% else -%}
+                                                        <li class="pagination-prev"><span><i class="icon icon-arrow-prev"></i></span></li>
+                                                        {% endif -%}
+
+                                                        {% if currentPage != totalPages -%}
+                                                        <li class="pagination-next"><a href="{{currentCatalogUrl}}?skip={{ currentPage | times: limit }}&limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif -%}" data-toggle="tooltip" data-original-title="Page {{currentPage | plus: 1}}" title="Page {{currentPage | plus: 1}}"><i class="icon icon-arrow-next"></i></a></li>
+                                                        {% else -%}
+                                                        <li class="pagination-next"><span><i class="icon icon-arrow-next"></i></span></li>
+                                                        {% endif -%}
+                                                    </ul>      
+                                                </div><!-- /.form-group -->                                                                                           
+                                                {% endif -%}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row -->
+                                </form>
+                            </div><!-- /.product-header-actions -->
+                            {% endif -%}
+
+                            <!-- Product List -->
+                            <div class="products products-grid-wrapper">
+                                <div class="row"> 
+
+                                    <!-- Product Results Count -->
+                                    <div class="col-md-12">
+                                        <div class="result-count">   
+                                        {% if ProductPrices.totalItemsCount >= 1 -%}         
+                                            <p>Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
+                                        {% else -%}
+                                            <p>Sorry, there are no products in this catalog yet. Go to <a href="{{catalogAllProductsUrl}}" title="All Products">{{catalogAllProductsName}}</a>.</p>
+                                        {% endif -%}  
+                                        </div>
+                                    </div>                                                               
+
+                                    {% for item in ProductPrices.items -%}                             
+                                    <!-- Product Item -->
+                                    <div class="col-md-4 col-sm-4 col-xs-12">                                    
+                                            <div class="product product-grid">                                                                                         
+                                                <a href="{{currentCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">
+
+                                                    <!-- Product Small Image plus Label -->                                                    
+                                                    <div class="product-media">
+                                                        <div class="product-thumbnail">                                            
+                                                            <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current">                                            
+                                                        </div><!-- /.product-thumbnail -->   
+
+                                                        {% comment -%}
+                                                            Set product label based current catalog and on keywords. 
+                                                            TODO: Likely also need to override if the current catalog is also any of the "key"
+                                                            catalogs; "What's New", "Best Seller", or "On Sale"
+                                                        {% endcomment -%}
+
+                                                        {% if item.product.keywords contains 'new' or catalogName == 'New Arrivals'  -%}
+                                                            {% assign productLabel = 'New' -%}
+                                                            {% assign productLabelCss = 'new' -%}
+                                                        {% elsif item.product.keywords contains 'best' or catalogName == 'Best Sellers' -%}
+                                                            {% assign productLabel = 'Best Seller' -%}
+                                                            {% assign productLabelCss = 'hot' -%}
+                                                        {% elsif item.product.keywords contains 'sale' or catalogName == 'On Sale' -%}
+                                                            {% assign productLabel = 'On Sale' -%}
+                                                            {% assign productLabelCss = 'sale' -%}
+                                                        {% else -%}
+                                                            {% assign productLabel = '' -%}
+                                                            {% assign productLabelCss = '' -%}
+                                                        {% endif -%}                                              
+
+                                                        {% if productLabel !='' -%}
+                                                        <span class="product-label {{productLabelCss}}">
+                                                            <!-- catalogName: {{catalogName}}-->
+                                                            <span>{{productLabel}}</span>
+                                                        </span>                                                    
+                                                        {% endif -%}
+
+                                                    </div><!-- /.product-media -->
+                                                    <div class="product-body">
+                                                        <h2 class="product-name">{{item.product.name}}</h2><!-- /.product-product -->
+
+                                                        <div class="product-sku">
+                                                            <span>{{item.product.productCode}}</span>
+                                                        </div>
+
+                                                        <div class="product-category">
+                                                            <span>{{item.product.custom1}}</span>
+                                                        </div><!-- /.product-category -->                                                    
+
+                                                        {% if globals.user.isLoggedIn == 'true' -%}                                                    
+                                                        <div class="product-price">                                                        
+                                                            <span class="amount">${{item.salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                        
+                                                        </div><!-- /.product-price -->
+                                                        <div class="product-price-msrp">
+                                                            <span>MSRP ${{item.retailPrice}}</span>
+                                                        </div>                                                                               
+                                                        {% endif -%}                  
+
+                                                    </div><!-- /.product-body -->
+                                                </a>         
+
+                                                {% if globals.user.isLoggedIn != 'true' -%}
+                                                {module_pageaddress collection="pageAddress" template=""}                            
+                                                <div class="product-price-login">
+                                                    <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
+                                                </div><!-- /.product-price-login -->                                                    
+                                                {% endif -%}
+
+                                            </div><!-- /.product -->
+                                    </div>
+                                    <!-- / Product Item -->    
+                                    {% endfor -%}  
+
+                                    <!-- Product Results Count -->
+                                    <div class="col-md-12">
+                                        <div class="result-count">   
+                                        {% if ProductPrices.totalItemsCount >= 1 -%}         
+                                            <p>Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
+                                        {% endif -%}  
+                                        </div>
+                                    </div>                                                                                              
+
+                                </div><!-- /.row -->
+                            </div><!-- /.products -->
+
+                            <!-- Product List Actions Footer Form -->
+                            {% if ProductPrices.totalItemsCount > limit -%}
+                            <div class="product-footer-actions">
+                                <form action="#" method="POST" class="form-inline" >
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-show-sort"> 
+
+                                                <!-- Sort By - id: #actionSortBy2 -->
+                                                <div class="form-group pull-left">
+                                                    <label for="actionSortBy">Sort:</label>
+                                                    <select name="actionSortBy" id="actionSortBy2" class="form-control input-sm">
+                                                        <option value="newest-first"{% if sort == "-product.releaseDate" or sort == null -%} selected{% endif-%}>Newest First</option>
+                                                        {% if globals.user.isLoggedIn == 'true' -%}    
+                                                        <option value="price"{% if sort == "salePrice" -%} selected{% endif-%}>Price: Low to High</option>
+                                                        <option value="price-desc"{% if sort == "-salePrice" -%} selected{% endif-%}>Price: High to Low</option>
+                                                        {% endif -%}                                                    
+                                                        <option value="name"{% if sort == "product.name" -%} selected{% endif-%}>Name: A to Z</option>
+                                                        <option value="name-desc"{% if sort == "-product.name" -%} selected{% endif-%}>Name: Z to A</option>
+                                                    </select>
+                                                </div><!-- /.form-group -->
+
+                                                {% if hasSubCatalogs or inSubCatalog -%}
+                                                <!-- Filter By Style - id: #actionFilterByStyle2 -->
+                                                <div class="form-group pull-left">
+                                                    <label for="actionFilterByStyle">Style:</label>
+                                                    <select name="actionFilterByStyle" id="actionFilterByStyle2" class="form-control input-sm">
+                                                        {% comment -%}
+                                                            Create a select option for any Sub Catalogs of the Parent Catalog, as well as the Parent Catalog.
+                                                        {% endcomment -%}
+                                                        <option value="{{parentCatalogUrl}}"{% if parentCatalogUrl == currentCatalogUrl -%} selected{% endif -%}>All</option>
+                                                        {% for catalog in AllCatalogs.items -%}
+                                                            {% if catalog.url contains parentCatalogUrl and catalog.url != parentCatalogUrl -%}   
+                                                                <option value="{{catalog.url}}"{% if catalog.url == currentCatalogUrl -%} selected{% endif -%}>{{catalog.name}}</option>
+                                                            {% endif -%}
+                                                        {% endfor -%}                                                                                            
+                                                    </select>
+                                                </div><!-- /.form-group -->
+                                                {% endif -%}   
+
+                                                <!-- Show Items Per Page - id: #actionShowItemsPerPage2 -->
+                                                <div class="form-group pull-left">
+                                                    <label for="actionShowItemsPerPage">Show</label>
+                                                    <select name="actionShowItemsPerPage" id="actionShowItemsPerPage2" class="form-control input-sm">
+                                                        <option value="9" {% if limit == 9 -%}selected{% endif -%}>9</option>
+                                                        <option value="18" {% if limit == 18 -%}selected{% endif -%}>18</option>
+                                                        <option value="36" {% if limit == 36 -%}selected{% endif -%}>36</option>
+                                                    </select>
+                                                    <strong>Per Page</strong>
+                                                </div><!-- /.form-group -->  
+
+                                                <!-- Pagination -->
+                                                <!-- Jump to Page - id: #actionJumpToPage2 -->
+                                                {% if ProductPrices.totalItemsCount > limit -%}
+                                                <div class="form-group pull-right text-right">
+                                                    <label for="actionJumpToPage2">Page</label>
+                                                    <select name="actionJumpToPage2" id="actionJumpToPage2" class="form-control input-sm" title="Jump to Page">
+                                                    {% for pageNum in (1..totalPages) -%}
+                                                        {% if pageNum == currentPage -%}
+                                                        <option value="{{pageNum}}" selected>{{pageNum}}</option>
+                                                        {% else -%}
+                                                        <option value="{{pageNum}}" data-skip="{{pageNum | minus: 1 | times: limit}}">{{pageNum}}</option>
+                                                        {% endif -%}
+                                                    {% endfor -%}
+                                                    </select>
+                                                    <strong>of {{totalPages}}</strong>
+                                                    <ul class="pagination">
+                                                        {% if currentPage > 1 -%}
+                                                        <li class="pagination-prev"><a href="{{currentCatalogUrl}}?skip={{ currentPage | minus: 2 | times: limit }}&limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif -%}" data-toggle="tooltip" data-original-title="Page {{currentPage | minus: 1}}" title="Page {{currentPage | minus: 1}}"><i class="icon icon-arrow-prev"></i></a></li>                                                    
+                                                        {% else -%}
+                                                        <li class="pagination-prev"><span><i class="icon icon-arrow-prev"></i></span></li>
+                                                        {% endif -%}
+
+                                                        {% if currentPage != totalPages -%}
+                                                        <li class="pagination-next"><a href="{{currentCatalogUrl}}?skip={{ currentPage | times: limit }}&limit={{limit}}{% if urlSortFilters -%}{{urlSortFilters}}{% endif -%}" data-toggle="tooltip" data-original-title="Page {{currentPage | plus: 1}}" title="Page {{currentPage | plus: 1}}"><i class="icon icon-arrow-next"></i></a></li>
+                                                        {% else -%}
+                                                        <li class="pagination-next"><span><i class="icon icon-arrow-next"></i></span></li>
+                                                        {% endif -%}
+                                                    </ul>      
+                                                </div><!-- /.form-group -->                                                                                           
+                                                {% endif -%}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row -->
+                                </form>
+                            </div><!-- /.product-footer-actions -->   
+                            {% endif -%}                                    
+
+                        </div><!-- /.col-* -->
+
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3 col-md-pull-9">
+                                <div id="shop-widgets-filters" class="shop-widgets-filters">
+                                    
+                                    <div id="widget-area" class="widget-area">
+
+                                        <!-- List of Section Navigation Links -->
+                                        <div class="widget woocommerce widget_product_categories">
+                                                <h3 class="widget-title">Sections</h3>
+                                                <ul>
+                                                    {% for category in ProductCatalogs.items  -%}
+                                                        {% if category.url == currentCatalogUrl or category.url == parentCatalogUrl -%}
+                                                            {% assign cssClass = "active" -%}
+                                                        {% else -%}
+                                                            {% assign cssClass = "" -%}
+                                                        {% endif -%}
+
+                                                        {% if category.name contains '*' -%}
+                                                        <li class="{{cssClass}}"><a href="{{category.url}}" title="{{category.name | replace: '*',''}}">{{category.name | replace: '*',''}}</a></li>
+                                                        {% endif -%}
+                                                    {% endfor -%}                                                                                                                                                              
+                                                </ul>
+                                        </div><!-- /.widget -->                                                                         
+                                        
+                                        <!-- List of Category Navigation Links -->
+                                        <div class="widget woocommerce widget_product_categories">
+                                                <h3 class="widget-title">Categories</h3>
+                                                <ul>
+                                                    {% for category in ProductCatalogs.items  -%}
+                                                        {% if category.url == currentCatalogUrl or category.url == parentCatalogUrl -%}
+                                                            {% assign cssClass = "active" -%}
+                                                        {% else -%}
+                                                            {% assign cssClass = "" -%}
+                                                        {% endif -%}
+
+                                                        {% unless category.name contains '*' -%}
+                                                        <li class="{{cssClass}}"><a href="{{category.url}}" title="{{category.name}}">{{category.name}}</a></li>
+                                                        {% endunless -%}
+                                                    {% endfor -%}                                                                                                          
+                                                </ul>
+                                        </div><!-- /.widget -->                          
+
+                                    </div>
+
+                                </div>
+
+                                <div id="open-filters">
+                                    <i class="fa fa-filter"></i>
+                                    <span>Filter</span>
+                                </div>                    
+                        </div><!-- /.col-* -->
+                        
+                    </div><!-- /.row -->
+                </div>
+            </section>
+            <!-- /section -->              
+
+        {% endif %}
+
+    </div>
+    <!-- /main content -->
+
+    {% unless globals.get.ProductID -%}
+    <script>
+        $(function(){
+
+            aweProductSidebar();
+
+            // Update 'sort' and 'order' URL parameters when 'Sort By' selection is made.
+            // Also thinking that when the sort order is changed, the User should probably be taken
+            // back to page 1 in the set, so also going to set 'skip' parameter as well...
+            $('#actionSortBy,#actionSortBy2').on('change', function () {
+                var sortValue = $(this).val();                          
+                switch(sortValue) {
+                    case "price":
+                        // set the 'sort' parameter to 'price' and delete the 'order' parameter if present.   
+                        $(document).jurlp("query", {"sort":"price"});
+                        $(document).jurlp("query", {"order":null});    
+                        Cookies.set('catSortByName', 'price'); 
+                        Cookies.remove('catSortByOrder');                                                
+                        break;
+                    case "price-desc":
+                        // set the 'sort' parameter to 'price' and the 'order' to 'desc' (descending).
+                        $(document).jurlp("query", {"sort":"price"});
+                        $(document).jurlp("query", {"order":"desc"});   
+                        Cookies.set('catSortByName', 'price'); 
+                        Cookies.set('catSortByOrder', 'desc');                                              
+                        break;
+                    case "name":
+                        // set the 'sort' parameter to 'name' and delete the 'order' parameter if present.
+                        $(document).jurlp("query", {"sort":"name"});
+                        $(document).jurlp("query", {"order":null});   
+                        Cookies.set('catSortByName', 'name'); 
+                        Cookies.remove('catSortByOrder');                                                                                             
+                        break;
+                    case "name-desc":
+                        // set the 'sort' parameter to 'name' and the 'order' to 'desc' (descending).
+                        $(document).jurlp("query", {"sort":"name"});
+                        $(document).jurlp("query", {"order":"desc"});   
+                        Cookies.set('catSortByName', 'name'); 
+                        Cookies.set('catSortByOrder', 'desc');                                                    
+                        break;                        
+                    default:
+                        // delete 'sort' and 'order' parameters if present, which means the "default" sort order of 
+                        // "Newest First" should be set by Liquid in the template.
+                        $(document).jurlp("query", {"sort":null});
+                        $(document).jurlp("query", {"order":null}); 
+                        Cookies.remove('catSortByOrder');       
+                        Cookies.remove('catSortByName');                                            
+                        break;
+                }
+
+                // reset 'skip' (delete it?) in order to go back to the first page in the set (usability).
+                $(document).jurlp("query", {"skip":null});
+
+                // reload page   
+                $(document).jurlp("goto");                 
+
+            });               
+
+            // Update (Base) URL when 'Filter By Style' selection is made.
+            $('#actionFilterByStyle,#actionFilterByStyle2').on('change', function () {
+                $(document).jurlp("path", $(this).val());
+                $(document).jurlp("goto");
+            });
+
+            // Update 'limit' URL parameter when 'Show x Items Per Page' selection is made.
+            // Also set cookie value to persist this selection during site visit.
+            $('#actionShowItemsPerPage,#actionShowItemsPerPage2').on('change', function () {
+                Cookies.set('catShowItemsPerPage', $(this).val());
+                $(document).jurlp("query", {"limit":$(this).val()});
+                // reset 'skip' (delete it?) in order to go back to the first page in the set (usability).
+                $(document).jurlp("query", {"skip":null});
+                $(document).jurlp("goto");
+            });
+
+            // Update 'skip' URL parameter when 'Jump to Page' selection is made.
+            $('#actionJumpToPage,#actionJumpToPage2').on('change', function () {
+                var skip = $("option:selected", this).data('skip');
+                if (skip >= 0) {
+                    $(document).jurlp("query", {"skip":skip});
+                    $(document).jurlp("goto");
+                }
+            });            
+         
+        });
+    </script>
+    
+    <script src="/js/plugins/js.cookie.min.js"></script>
+    {% endunless %}
+</body>
+
+</html>      

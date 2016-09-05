@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- TemplateBeginEditable name="doctitle" --><title data-bc-test="Main_Template.dwt">{{module_pagetitle}}</title><!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,700,400italic,700italic&amp;subset=latin,vietnamese">
+
+    <!-- build:css css/bootstrap.css -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- endbuild -->
+
+    <!-- build:css css/plugins.css -->
+    <link rel="stylesheet" href="/css/awe-icon.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/awemenu.css">
+    <link rel="stylesheet" href="/css/swiper.css">
+    <link rel="stylesheet" href="/css/easyzoom.css">
+    <!-- endbuild -->
+
+    <!-- build:css css/styles.css -->
+    <link rel="stylesheet" href="/css/awe-background.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- endbuild -->
+
+    <!-- Custom Siam Styles -->
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <!-- build:js js/vendor.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- endbuild -->
+
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="//browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->    
+        
+    <div id="wrapper" class="main-wrapper">
+       
+        {module_contentholder, name="Site_Header"}
+       
+        <!-- TemplateBeginEditable name="ContentArea" -->{tag_pagecontent}<!-- TemplateEndEditable -->
+    
+        {module_contentholder, name="Site_Footer"}
+
+    </div>
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script>
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+
+    <!-- build:js js/plugins.js -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/js/plugins/awemenu.min.js"></script>
+    <script src="/js/plugins/headroom.min.js"></script>
+    <script src="/js/plugins/swiper.min.js"></script>
+    <script src="/js/plugins/owl.carousel.min.js"></script>
+    <script src="/js/plugins/easyzoom.js"></script>
+    <script src="/js/plugins/jurlp.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/main.js -->
+    <script src="/js/awe/awe-carousel-testimonial.js"></script>
+    <script src="/js/awe-hosoren.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- endbuild -->
+
+</body>
+
+</html>

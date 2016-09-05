@@ -1,0 +1,214 @@
+/*
+SVN Revision Information
+Revision: $Rev: 247 $
+Date: $Date: 2011-02-08 16:19:06 +0700 (Tue, 08 Feb 2011) $
+Author: $Author: ian $
+*/
+
+body {
+	color: #666;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #000;
+}
+
+div#placeholder-logo {
+	color: #fff;
+	font-size: 24px;
+	font-weight: bold;
+	padding-top: 20px;
+	padding-left: 30px;
+}
+
+div.whoslogged {
+	color: #000;
+	text-align: right;
+}
+
+div#placeholder-hero {
+	border: 1px solid #eee;
+}
+
+div#sub {
+	background: #E9F0F5;
+}
+
+div#placeholder-footer {
+	color: #888;
+}
+
+
+
+td.menu-item {
+	color: #000;	
+}
+
+td.menu-item-hover {
+	color: #1969bc;
+}
+
+td.menu-item-selected {
+	color: #000;
+	font-weight: bold;
+}
+
+td.submenu-item {
+	background: #f9f9f9;
+	color: #000;
+	font-size: 11px;
+	padding: 6px !important;
+}
+
+td.submenu-item-hover {
+	background: #666;
+	color: #fff;
+	font-size: 11px;
+	padding: 6px !important;
+}
+
+td.submenu-item-selected {
+	background: #000;
+	color: #fff;
+	font-size: 11px;
+	padding: 6px !important;
+}
+
+
+
+/* @group Forms */
+
+div#placeholder-box1 {
+	border-bottom: 1px solid #BED5E6;
+	padding-top: 18px;
+}
+
+.secure-login, .newsletter-form, .announcement-list {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #BED5E6;
+	margin: 0;
+	padding: 9px 0;
+}
+
+.announcement-list {
+	border: none;
+	padding: 0 18px;
+}
+
+.secure-login h3, .newsletter-form h3 {
+	background: transparent;
+	border: none;
+	color: #000;
+	font-size: 14px;
+	margin: 0;
+	padding: 6px 18px;
+}
+
+.secure-login div.form, .newsletter-form div.form {
+	padding-left: 9px;
+}
+
+div#sub input.cat_textbox_small,
+div#sub select.cat_dropdown_small {
+	width: 270px;
+}
+
+#placeholder-nav table td {cursor: pointer;cursor: hand; }    /* @end */
+
+/* @group Links */
+
+a:link, a:visited {
+	color: #1969bc;
+	text-decoration: none;	
+}
+
+a:hover, a:active {
+	color: #1969bc;
+	text-decoration: underline;
+}
+
+div#nav a:link, div#nav a:visited {
+	color: #1969c;
+	text-decoration: none;	
+}
+
+div#nav a:hover, div#nav a:active {
+	color: #1969bc;
+	text-decoration: underline;
+}
+
+#placeholder-nav table td {cursor: pointer;cursor: hand; }    /* @end */
+
+/* @group Template Settings */
+
+/* Don't touch these unless you know how CSS layouts work */
+
+body {
+	background: url(/images/cssimg/bg-6-1.png) repeat-x 0 0;
+}
+
+a#logo {
+	text-decoration: none;
+}
+
+div#header-left {
+	background: url(/images/cssimg/bg-logo-6-1.png) repeat-x 0 0;
+	height: 90px;
+}
+
+div#placeholder-search {
+	padding-top: 27px;
+	text-align: right;
+}
+
+div.whoslogged {
+	height: 72px;
+	line-height: 72px;
+}
+
+div#placeholder-nav {
+	height: 54px;
+	padding-top: 18px;
+}
+
+div#placeholder-nav td {
+	padding: 0;
+	vertical-align: middle;
+}
+
+div#placeholder-rss {
+	height: 16px;
+	margin-bottom: 9px;
+	text-align: right;
+}
+
+div#placeholder-rss img {
+	margin: 0 9px;
+	vertical-align: middle;
+}
+
+span.whoslogged {
+	margin-right: 36px;
+}
+
+div#sub {}
+
+div#fade {
+	background: url(/images/cssimg/bg-side-6-1.png) repeat-x 0 0;
+	height: 162px;
+}
+
+div#main div.inner {
+	padding: 0 0 36px 30px;
+}
+
+div#placeholder-hero {
+	background: #f9f9f9;
+	height: 216px;
+	margin-bottom: 18px;
+	width: 600px;
+}
+
+
+#placeholder-nav table td {cursor: pointer;cursor: hand; }    /* @end 

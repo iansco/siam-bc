@@ -1,0 +1,41 @@
+<div id="slideshow">
+<div id="flow-wrapper">
+<!-- tabs work as navigator for scrollable -->
+<ul id="flowtabs">
+    <li><a id="t1" href="#Slide1">1</a></li>
+    <li><a id="t2" href="#Slide2">2</a></li>
+    <li><a id="t3" href="#Slide3">3</a></li>
+    <li><a id="t4" href="#Slide4">4</a></li>
+    <li><a id="t5" href="#Slide5">5</a></li>
+</ul>
+</div>
+<div id="flowpanes">
+<!-- wrapper for scrollable items -->
+<div class="items">
+<!-- the items -->
+<div id="slide-item-1">
+<h3>ORGANIC BODY JEWELRY - Great Designs. Top Quality. Wholesale Pricing.</h3>
+<p><span>WHOLESALE ORGANIC BODY JEWELRY</span> - Exclusive unique designs handmade in house to the highest quality standards in both US and European gauge sizing.</p>
+<a href="/shop" class="shop-now" title="Shop Now!">Shop Now!</a>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+		jQuery(document).ready(function() { 
+		
+			// select #flowplanes and make it scrollable. use circular and navigator plugins 
+			jQuery("#flowpanes").scrollable({size: 1, clickable: false, loop: true}).autoscroll({interval: 10000, autopause: true}).navigator({ 
+		
+				// select #flowtabs to be used as navigator 
+				navi: "#flowtabs", 
+		
+				// select A tags inside the navigator to work as items (not direct children) 
+				naviItem: 'a', 
+		
+				// assign "current" class name for the active A tag inside navigator 
+				activeClass: 'current' 
+		
+			}); 
+		});
+		</script>
