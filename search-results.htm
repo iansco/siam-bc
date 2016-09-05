@@ -311,7 +311,7 @@
                                             </div>
 
                                             <div class="product-category">
-                                                <span>{{item.product.custom1}}</span>
+                                                <span>{{item.product.custom1 | default: 'Unassigned!'}}</span>
                                             </div><!-- /.product-category -->                                                    
 
                                             {% if globals.user.isLoggedIn == 'true' -%}                                                    
