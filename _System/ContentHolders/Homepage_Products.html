@@ -11,9 +11,9 @@
 {% assign onSaleCatalogId = "459865" -%}
 {% assign onSaleCatalogUrl = "/products/on-sale" -%}
 
-{module_data resource="catalogs" resourceId="{{newArrivalsCatalogId}}" subresource="products" fields="product" version="v3" collection="NewArrivals" limit="3" where="\{'product.keywords':\{'$contains':'homepage'\}\}" order="-product.createDate"}
-{module_data resource="catalogs" resourceId="{{bestSellersCatalogId}}" subresource="products" fields="product" version="v3" collection="BestSellers" limit="3" where="\{'product.keywords':\{'$contains':'homepage'\}\}" order="-product.createDate"}
-{module_data resource="catalogs" resourceId="{{onSaleCatalogId}}" subresource="products" fields="product" version="v3" collection="OnSale" limit="3" where="\{'product.keywords':\{'$contains':'homepage'\}\}" order="-product.createDate"}
+{module_data resource="catalogs" resourceId="{{newArrivalsCatalogId}}" subresource="products" fields="product" version="v3" collection="NewArrivals" limit="3" where="\{'$and':\[\{'product.keywords':\{'$contains':'homepage'\}\},\{'product.enabled':'true'\}\]\}" order="-product.createDate"}
+{module_data resource="catalogs" resourceId="{{bestSellersCatalogId}}" subresource="products" fields="product" version="v3" collection="BestSellers" limit="3" where="\{'$and':\[\{'product.keywords':\{'$contains':'homepage'\}\},\{'product.enabled':'true'\}\]\}" order="-product.createDate"}
+{module_data resource="catalogs" resourceId="{{onSaleCatalogId}}" subresource="products" fields="product" version="v3" collection="OnSale" limit="3" where="\{'$and':\[\{'product.keywords':\{'$contains':'homepage'\}\},\{'product.enabled':'true'\}\]\}" order="-product.createDate"}
                             <div class="section-header center">
                                 <h2>New Arrivals</h2>
                             </div>

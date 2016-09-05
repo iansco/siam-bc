@@ -83,7 +83,7 @@
         {% endcomment %}         
         {module_data resource="catalogs" version="v3" fields="id,parentId,name,title,url" limit="30" order="name" collection="CatalogList"}        
         {% if searchCatalogId %}
-            {module_data resource="catalogproducts" version="v3" fields="productId" where="\{'catalogue.id':'{{searchCatalogId}}'\}" skip="0" limit="500" order="catalogueId" collection="CatalogProducts"}
+            {module_data resource="catalogproducts" version="v3" fields="productId" where="\{'$and':\[\{'catalogue.id':'{{searchCatalogId}}'\},\{'product.enabled':'true'\}\]\}" skip="0" limit="500" order="catalogueId" collection="CatalogProducts"}
             {% assign searchCatalogProductIDs = CatalogProducts.items | map: 'productId' -%}
             {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'$or':\[\{'product.name':\{'$contains':'{{searchText}}'\}\},\{'product.productCode':\{'$contains':'{{searchText}}'\}\}\],'$and':\[\{'product.id':\{'$in':{{searchCatalogProductIDs | JSON}}\}\},\{\}\]\}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}
             {% comment -%}

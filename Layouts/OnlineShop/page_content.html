@@ -168,7 +168,7 @@
 
         {% comment %}
             Check to see whether we have a globals.get.ProductID set.
-            If we do, this indicates that we're at a Product URL page.
+            If we do, this indicates that we're at a Product Detail page.
         {% endcomment %}
 
         {% if globals.get.ProductID -%}
@@ -181,8 +181,8 @@
 
             {% assign currentProductId = globals.get.ProductID -%}
 
-            {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'product.id':'{{currentProductId}}'\}" collection="ProductsAndPrices"}
-            {module_data resource="productsattributes" version="v3" fields="id,productId,groupName,fieldTypeId,mandatory" where="\{'productId':'{{currentProductId}}'\}" order="id" collection="ProductAttributes"}
+            {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'$and':\[\{'product.enabled':'true'\},\{'product.id':'{{currentProductId}}'\}\]\}" collection="ProductsAndPrices"}
+            {module_data resource="productsattributes" version="v3" fields="id,productId,groupName,fieldTypeId,mandatory" where="\{'$and':\[\{'product.id':'{{currentProductId}}'\},\{'product.enabled':'true'\}\]\}" order="id" collection="ProductAttributes"}
 
             {% if ProductsAndPrices.items.size == 1 -%}
 
@@ -723,7 +723,7 @@
                 Catalog a Product belongs to.
             {% endcomment %}           
                             
-            {module_data resource="catalogproducts" version="v3" fields="productId" where="\{'catalogue.id':'{{this.id}}'\}" skip="0" limit="500" order="catalogueId" collection="CatalogProducts"}    
+            {module_data resource="catalogproducts" version="v3" fields="productId" where="\{'$and':\[\{'catalogue.id':'{{this.id}}'\},\{'product.enabled':'true'\}\]\}" skip="0" limit="500" order="catalogueId" collection="CatalogProducts"}    
 
             {% comment %}
                 Now construct an array of Product ID's for all Products in the current Catalog.

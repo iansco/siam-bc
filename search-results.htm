@@ -139,7 +139,7 @@
             Make a call to module_data to retrieve products which match the 'searchText' criteria.
         {% endcomment %}
 
-        {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'$or':\[\{'product.name':\{'$contains':'{{searchText}}'\}\},\{'product.productCode':\{'$contains':'{{searchText}}'\}\}\]\}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}        
+        {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'$or':\[\{'product.name':\{'$contains':'{{searchText}}'\}\},\{'product.productCode':\{'$contains':'{{searchText}}'\}\}\],'$and':\[\{'product.enabled':'true'\},\{\}\]\}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}        
 
         {% comment -%}
             Calculate pagination.
