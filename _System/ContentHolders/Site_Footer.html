@@ -168,7 +168,7 @@
                 }); 
                 // Check that the Site Search has a value before submitting it.
                 $("#menubar-search-form").submit(function(event) {
-                    alert("Handler for .submit() called.");
+                    alert(this);
                     event.preventDefault();
                 });               
             });
