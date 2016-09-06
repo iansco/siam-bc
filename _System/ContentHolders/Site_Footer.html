@@ -167,8 +167,9 @@
                     updateShippingOffer(data);
                 }); 
                 // Check that the Site Search has a value before submitting it.
-                $("#menubar-search-form").submit(function(event) {
+                $("#menubar-search").submit(function(event) {
                     alert(this);
+                    console.log(this);
                     event.preventDefault();
                 });               
             });
