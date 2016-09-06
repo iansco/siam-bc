@@ -192,13 +192,17 @@
                     <div class="row margin-bottom-100">
                         <!-- Product Media -->
                         <div class="col-md-6">
-                            <div class="product-media">
+                            <div class="product-media">                                
+                                <!-- Get largest image from poplets property using Liquid -->
+                                {% if productDetail.product.popletImage1 != '' -%}
                                 <div class="easyzoom easyzoom--overlay is-ready">
-                                    <!-- Get largest image from poplets property using Liquid -->
                                     <a href="{{productDetail.product.popletImage1}}" title="{{productDetail.product.name}}">
                                         <img src="{{productDetail.product.largeImage}}" alt="{{productDetail.product.name}}">
                                     </a>
                                 </div>
+                                {% else %}
+                                <img src="{{productDetail.product.largeImage}}" alt="{{productDetail.product.name}}">
+                                {% endif %}                                
                             </div>
                         </div>
 
