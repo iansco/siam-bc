@@ -41,7 +41,7 @@
                                                     </div>
 
                                                     <div class="product-category">
-                                                        <span>{{item.product.custom1 | default: 'Unassigned!'}}</span>
+                                                        <span>{% if item.product.custom1 != '' -%}{{item.product.custom1}}{% else %}Unassigned!{% endif %}</span>
                                                     </div><!-- /.product-category -->
                                                     
                                                     {% if globals.user.isLoggedIn == 'true' -%}
@@ -106,7 +106,7 @@
                                                     </div>
 
                                                     <div class="product-category">
-                                                        <span>{{item.product.custom1 | default: 'Unassigned!'}}</span>
+                                                        <span>{% if item.product.custom1 != '' -%}{{item.product.custom1}}{% else %}Unassigned!{% endif %}</span>
                                                     </div><!-- /.product-category -->
                                                     
                                                     {% if globals.user.isLoggedIn == 'true' -%}
@@ -171,7 +171,7 @@
                                                     </div>
 
                                                     <div class="product-category">
-                                                        <span>{{item.product.custom1 | default: 'Unassigned!'}}</span>
+                                                        <span>{% if item.product.custom1 != '' -%}{{item.product.custom1}}{% else %}Unassigned!{% endif %}</span>
                                                     </div><!-- /.product-category -->
 
                                                     {% if globals.user.isLoggedIn == 'true' -%}

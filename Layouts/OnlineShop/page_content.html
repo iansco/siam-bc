@@ -908,8 +908,6 @@
 
                                                         {% comment -%}
                                                             Set product label based current catalog and on keywords. 
-                                                            TODO: Likely also need to override if the current catalog is also any of the "key"
-                                                            catalogs; "What's New", "Best Seller", or "On Sale"
                                                         {% endcomment -%}
 
                                                         {% if item.product.keywords contains 'new' or catalogName == 'New Arrivals'  -%}
@@ -942,7 +940,7 @@
                                                         </div>
 
                                                         <div class="product-category">
-                                                            <span>{{item.product.custom1 | default: 'Unassigned!'}}</span>
+                                                            <span>{% if item.product.custom1 != '' -%}{{item.product.custom1}}{% else %}Unassigned!{% endif %}</span>
                                                         </div><!-- /.product-category -->                                                    
 
                                                         {% if globals.user.isLoggedIn == 'true' -%}                                                    
