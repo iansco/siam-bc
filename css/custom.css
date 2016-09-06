@@ -701,6 +701,10 @@ a:hover .product-body .product-name {
   white-space: normal;
 }
 
+.product-grid .product-body .product-name {
+  line-height: 1.5em;
+}
+
 .product-body .product-category {
   text-transform: uppercase;
   font-weight: bold;
