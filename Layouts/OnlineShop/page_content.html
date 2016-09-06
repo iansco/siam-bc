@@ -895,82 +895,79 @@
                                 </div><!-- /.row -->
 
                                 {% for item in ProductPrices.items -%}                                    
-                                    {% if forloop.first == true or forloop.index | modulo: 3 == 0 -%}
-                                    <div class="row is-table-row">
-                                    {% endif %} 
-                                        <!-- Product Item -->
-                                        <div class="col-md-4 col-sm-4 col-xs-12">                                    
-                                                <div class="product product-grid">                                                                                         
-                                                    <a href="{{currentCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">
+                                <!-- Product Item -->
+                                <!-- forloop.first = {{forloop.first}} -->
+                                <!-- forloop.index = {{forloop.index}} -->
+                                <!-- forloop.index | modulo: 3 = {{forloop.index | modulo: 3}} -->
+                                <div class="col-md-4 col-sm-4 col-xs-12">                                    
+                                        <div class="product product-grid">                                                                                         
+                                            <a href="{{currentCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">
 
-                                                        <!-- Product Small Image plus Label -->                                                    
-                                                        <div class="product-media">
-                                                            <div class="product-thumbnail">                                            
-                                                                <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current">                                            
-                                                            </div><!-- /.product-thumbnail -->   
+                                                <!-- Product Small Image plus Label -->                                                    
+                                                <div class="product-media">
+                                                    <div class="product-thumbnail">                                            
+                                                        <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current">                                            
+                                                    </div><!-- /.product-thumbnail -->   
 
-                                                            {% comment -%}
-                                                                Set product label based current catalog and on keywords. 
-                                                            {% endcomment -%}
+                                                    {% comment -%}
+                                                        Set product label based current catalog and on keywords. 
+                                                    {% endcomment -%}
 
-                                                            {% if item.product.keywords contains 'new' or catalogName == 'New Arrivals'  -%}
-                                                                {% assign productLabel = 'New' -%}
-                                                                {% assign productLabelCss = 'new' -%}
-                                                            {% elsif item.product.keywords contains 'best' or catalogName == 'Best Sellers' -%}
-                                                                {% assign productLabel = 'Best Seller' -%}
-                                                                {% assign productLabelCss = 'hot' -%}
-                                                            {% elsif item.product.keywords contains 'sale' or catalogName == 'On Sale' -%}
-                                                                {% assign productLabel = 'On Sale' -%}
-                                                                {% assign productLabelCss = 'sale' -%}
-                                                            {% else -%}
-                                                                {% assign productLabel = '' -%}
-                                                                {% assign productLabelCss = '' -%}
-                                                            {% endif -%}                                              
+                                                    {% if item.product.keywords contains 'new' or catalogName == 'New Arrivals'  -%}
+                                                        {% assign productLabel = 'New' -%}
+                                                        {% assign productLabelCss = 'new' -%}
+                                                    {% elsif item.product.keywords contains 'best' or catalogName == 'Best Sellers' -%}
+                                                        {% assign productLabel = 'Best Seller' -%}
+                                                        {% assign productLabelCss = 'hot' -%}
+                                                    {% elsif item.product.keywords contains 'sale' or catalogName == 'On Sale' -%}
+                                                        {% assign productLabel = 'On Sale' -%}
+                                                        {% assign productLabelCss = 'sale' -%}
+                                                    {% else -%}
+                                                        {% assign productLabel = '' -%}
+                                                        {% assign productLabelCss = '' -%}
+                                                    {% endif -%}                                              
 
-                                                            {% if productLabel !='' -%}
-                                                            <span class="product-label {{productLabelCss}}">
-                                                                <!-- catalogName: {{catalogName}}-->
-                                                                <span>{{productLabel}}</span>
-                                                            </span>                                                    
-                                                            {% endif -%}
-
-                                                        </div><!-- /.product-media -->
-                                                        <div class="product-body">
-                                                            <h2 class="product-name">{{item.product.name}}</h2><!-- /.product-product -->
-
-                                                            <div class="product-sku">
-                                                                <span>{{item.product.productCode}}</span>
-                                                            </div>
-
-                                                            <div class="product-category">
-                                                                <span>{% if item.product.custom1 != '' -%}{{item.product.custom1}}{% else %}Unassigned!{% endif %}</span>
-                                                            </div><!-- /.product-category -->                                                    
-
-                                                            {% if globals.user.isLoggedIn == 'true' -%}                                                    
-                                                            <div class="product-price">                                                        
-                                                                <span class="amount">${{item.salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                        
-                                                            </div><!-- /.product-price -->
-                                                            <div class="product-price-msrp">
-                                                                <span>MSRP ${{item.retailPrice}}</span>
-                                                            </div>                                                                               
-                                                            {% endif -%}                  
-
-                                                        </div><!-- /.product-body -->
-                                                    </a>         
-
-                                                    {% if globals.user.isLoggedIn != 'true' -%}
-                                                    {module_pageaddress collection="pageAddress" template=""}                            
-                                                    <div class="product-price-login">
-                                                        <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
-                                                    </div><!-- /.product-price-login -->                                                    
+                                                    {% if productLabel !='' -%}
+                                                    <span class="product-label {{productLabelCss}}">
+                                                        <!-- catalogName: {{catalogName}}-->
+                                                        <span>{{productLabel}}</span>
+                                                    </span>                                                    
                                                     {% endif -%}
 
-                                                </div><!-- /.product -->
-                                        </div>
-                                        <!-- / Product Item -->    
-                                    {% if forloop.first == true or forloop.index | modulo: 3 == 0 -%}
-                                    </div>
-                                    {% endif %}
+                                                </div><!-- /.product-media -->
+                                                <div class="product-body">
+                                                    <h2 class="product-name">{{item.product.name}}</h2><!-- /.product-product -->
+
+                                                    <div class="product-sku">
+                                                        <span>{{item.product.productCode}}</span>
+                                                    </div>
+
+                                                    <div class="product-category">
+                                                        <span>{% if item.product.custom1 != '' -%}{{item.product.custom1}}{% else %}Unassigned!{% endif %}</span>
+                                                    </div><!-- /.product-category -->                                                    
+
+                                                    {% if globals.user.isLoggedIn == 'true' -%}                                                    
+                                                    <div class="product-price">                                                        
+                                                        <span class="amount">${{item.salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                        
+                                                    </div><!-- /.product-price -->
+                                                    <div class="product-price-msrp">
+                                                        <span>MSRP ${{item.retailPrice}}</span>
+                                                    </div>                                                                               
+                                                    {% endif -%}                  
+
+                                                </div><!-- /.product-body -->
+                                            </a>         
+
+                                            {% if globals.user.isLoggedIn != 'true' -%}
+                                            {module_pageaddress collection="pageAddress" template=""}                            
+                                            <div class="product-price-login">
+                                                <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
+                                            </div><!-- /.product-price-login -->                                                    
+                                            {% endif -%}
+
+                                        </div><!-- /.product -->
+                                </div>
+                                <!-- / Product Item -->    
                                 {% endfor -%}  
 
                                 <div class="row">
