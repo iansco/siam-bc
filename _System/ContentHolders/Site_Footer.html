@@ -170,11 +170,11 @@
                 $("#menubar-search").submit(function(event) {
                     var searchText = $(this).find("input#search").val() || null;
                     if (searchText) {
-                        alert("Search was for: " + searchText);
+                        return true;
                     } else {
-                        alert("Nothing was searched for!");
-                    }                    
-                    event.preventDefault();
+                        alert("Please enter a Product Name or Code to search for...");
+                        event.preventDefault();
+                    }                                        
                 });               
             });
         </script>
