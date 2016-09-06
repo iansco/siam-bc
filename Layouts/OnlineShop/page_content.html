@@ -194,9 +194,7 @@
                         <div class="col-md-6">
                             <div class="product-media">                                
                                 <!-- Get largest image from poplets property using Liquid -->
-                                <!-- productDetail.product.popletImage1 = {{productDetail.product.popletImage1}} -->
-                                <!-- productDetail.product.popletImage1.size = {{productDetail.product.popletImage1.size}} -->
-                                {% if productDetail.product.popletImage1 != '' -%}
+                                {% if productDetail.product.popletImage1.size >= 1 -%}
                                 <div class="easyzoom easyzoom--overlay is-ready">
                                     <a href="{{productDetail.product.popletImage1}}" title="{{productDetail.product.name}}">
                                         <img src="{{productDetail.product.largeImage}}" alt="{{productDetail.product.name}}">
