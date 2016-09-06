@@ -894,13 +894,17 @@
                                     </div>        
                                 </div><!-- /.row -->
 
-                                {% for item in ProductPrices.items -%}                                    
-                                <!-- Product Item -->
+                                {% for item in ProductPrices.items -%}                                                                    
                                 <!-- forloop.first = {{forloop.first}} -->
                                 <!-- forloop.index = {{forloop.index}} -->
                                 <!-- forloop.index | modulo: 3 = {{forloop.index | modulo: 3}} -->
                                 <!-- 'forloop.first == true' = {{forloop.first == true}} -->
                                 <!-- 'forloop.index | modulo: 3 == 0' = {{forloop.index | modulo: 3 == 0}} -->
+                                {% assign modCheck = forloop.index | modulo: 3 -%}
+                                <!-- Product Item -->
+                                {% if forloop.first == true -%}
+                                <div class="row is-table-row">
+                                {% endif %}
                                 <div class="col-md-4 col-sm-4 col-xs-12">                                    
                                         <div class="product product-grid">                                                                                         
                                             <a href="{{currentCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">
@@ -969,7 +973,13 @@
 
                                         </div><!-- /.product -->
                                 </div>
-                                <!-- / Product Item -->    
+                                <!-- / Product Item -->
+                                {% if modCheck == 0 or forloop.last == true -%}
+                                </div>
+                                {% endif %}
+                                {% if modCheck == 0 and forloop.last != true -%}
+                                <div class="row is-table-row">
+                                {% endif %}
                                 {% endfor -%}  
 
                                 <div class="row">
