@@ -893,10 +893,9 @@
                                         </div>
                                     </div>        
                                 </div><!-- /.row -->
-                                {{ 6 | modulo: 2 }} is 0
-                                                                                       
-                                {% for item in ProductPrices.items -%}
-                                    {% if forloop.first or forloop.index | modulo: 3 == 0 -%}
+
+                                {% for item in ProductPrices.items -%}                                    
+                                    {% if forloop.first == true or forloop.index | modulo: 3 == 0 -%}
                                     <div class="row is-table-row">
                                     {% endif %} 
                                         <!-- Product Item -->
@@ -969,7 +968,7 @@
                                                 </div><!-- /.product -->
                                         </div>
                                         <!-- / Product Item -->    
-                                    {% if forloop.first or forloop.index | modulo: 3 == 0 -%}
+                                    {% if forloop.first == true or forloop.index | modulo: 3 == 0 -%}
                                     </div>
                                     {% endif %}
                                 {% endfor -%}  
