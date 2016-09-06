@@ -882,7 +882,6 @@
                             <!-- Product List -->
                             <div class="products products-grid-wrapper">
                                 <div class="row"> 
-
                                     <!-- Product Results Count -->
                                     <div class="col-md-12">
                                         <div class="result-count">   
@@ -892,9 +891,10 @@
                                             <p>Sorry, there are no products in this catalog yet. Go to <a href="{{catalogAllProductsUrl}}" title="All Products">{{catalogAllProductsName}}</a>.</p>
                                         {% endif -%}  
                                         </div>
-                                    </div>                                                               
-
-                                    {% for item in ProductPrices.items -%}                             
+                                    </div>        
+                                </div><!-- /.row -->
+                                <div class="row">                                                                                       
+                                    {% for item in ProductPrices.items -%} 
                                     <!-- Product Item -->
                                     <div class="col-md-4 col-sm-4 col-xs-12">                                    
                                             <div class="product product-grid">                                                                                         
@@ -966,7 +966,8 @@
                                     </div>
                                     <!-- / Product Item -->    
                                     {% endfor -%}  
-
+                                </div><!-- /.row -->
+                                <div class="row">
                                     <!-- Product Results Count -->
                                     <div class="col-md-12">
                                         <div class="result-count">   
@@ -974,9 +975,8 @@
                                             <p>Showing {{ firstItemNumber }} - {{ lastItemNumber }} of {{ ProductPrices.totalItemsCount }} products found.</p>
                                         {% endif -%}  
                                         </div>
-                                    </div>                                                                                              
-
-                                </div><!-- /.row -->
+                                    </div>          
+                                </div><!-- /.row -->                                                                                                                                                        
                             </div><!-- /.products -->
 
                             <!-- Product List Actions Footer Form -->
