@@ -254,7 +254,6 @@
                     <!-- Product List -->
                     <div class="products products-grid-wrapper">
                         <div class="row"> 
-
                             <!-- Product Results Count -->
                             <div class="col-md-12">
                                 <div class="result-count">   
@@ -264,79 +263,91 @@
                                     <p>Sorry, no products matching your search criteria were found. Please try searching again.</p>
                                 {% endif -%}  
                                 </div>
-                            </div>                                                               
+                            </div>  
+                        </div><!-- /.row -->                                                                                         
 
-                            {% for item in ProductPrices.items -%}                             
-                            <!-- Product Item -->
-                            <div class="col-md-3 col-sm-3 col-xs-12">                                    
-                                <div class="product product-grid">                                                                                         
-                                    <a href="{{item.product.slug}}" title="{{item.product.name}}">
+                        {% for item in ProductPrices.items -%}   
+                        {% assign modCheck = forloop.index | modulo: 4 -%}                          
+                        <!-- Product Item -->
+                        {% if forloop.first == true -%}
+                        <div class="row is-table-row">
+                        {% endif %}                            
+                        <div class="col-md-3 col-sm-3 col-xs-12">                                    
+                            <div class="product product-grid">                                                                                         
+                                <a href="{{item.product.slug}}" title="{{item.product.name}}">
 
-                                        <!-- Product Small Image plus Label -->                                                    
-                                        <div class="product-media">
-                                            <div class="product-thumbnail">                                            
-                                                <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current">                                            
-                                            </div><!-- /.product-thumbnail -->   
+                                    <!-- Product Small Image plus Label -->                                                    
+                                    <div class="product-media">
+                                        <div class="product-thumbnail">                                            
+                                            <img src="{{item.product.smallImage}}" alt="{{item.product.name}}" class="current">                                            
+                                        </div><!-- /.product-thumbnail -->   
 
-                                            {% comment -%}
-                                                Set product label based current catalog and on keywords. 
-                                            {% endcomment -%}
+                                        {% comment -%}
+                                            Set product label based current catalog and on keywords. 
+                                        {% endcomment -%}
 
-                                            {% if item.product.keywords contains 'new' -%}
-                                                {% assign productLabel = 'New' -%}
-                                                {% assign productLabelCss = 'new' -%}
-                                            {% elsif item.product.keywords contains 'best' -%}
-                                                {% assign productLabel = 'Best Seller' -%}
-                                                {% assign productLabelCss = 'hot' -%}
-                                            {% elsif item.product.keywords contains 'sale' -%}
-                                                {% assign productLabel = 'On Sale' -%}
-                                                {% assign productLabelCss = 'sale' -%}
-                                            {% else -%}
-                                                {% assign productLabel = '' -%}
-                                                {% assign productLabelCss = '' -%}
-                                            {% endif -%}                                              
+                                        {% if item.product.keywords contains 'new' -%}
+                                            {% assign productLabel = 'New' -%}
+                                            {% assign productLabelCss = 'new' -%}
+                                        {% elsif item.product.keywords contains 'best' -%}
+                                            {% assign productLabel = 'Best Seller' -%}
+                                            {% assign productLabelCss = 'hot' -%}
+                                        {% elsif item.product.keywords contains 'sale' -%}
+                                            {% assign productLabel = 'On Sale' -%}
+                                            {% assign productLabelCss = 'sale' -%}
+                                        {% else -%}
+                                            {% assign productLabel = '' -%}
+                                            {% assign productLabelCss = '' -%}
+                                        {% endif -%}                                              
 
-                                            {% if productLabel !='' -%}
-                                            <span class="product-label {{productLabelCss}}">
-                                                <span>{{productLabel}}</span>
-                                            </span>                                                    
-                                            {% endif -%}
+                                        {% if productLabel !='' -%}
+                                        <span class="product-label {{productLabelCss}}">
+                                            <span>{{productLabel}}</span>
+                                        </span>                                                    
+                                        {% endif -%}
 
-                                        </div><!-- /.product-media -->
-                                        <div class="product-body">
-                                            <h2 class="product-name">{{item.product.name}}</h2><!-- /.product-product -->
+                                    </div><!-- /.product-media -->
+                                    <div class="product-body">
+                                        <h2 class="product-name">{{item.product.name}}</h2><!-- /.product-product -->
 
-                                            <div class="product-sku">
-                                                <span>{{item.product.productCode}}</span>
-                                            </div>
+                                        <div class="product-sku">
+                                            <span>{{item.product.productCode}}</span>
+                                        </div>
 
-                                            <div class="product-category">
-                                                <span>{% if item.product.custom1 != '' -%}{{item.product.custom1}}{% else %}Unassigned!{% endif %}</span>
-                                            </div><!-- /.product-category -->                                                    
+                                        <div class="product-category">
+                                            <span>{% if item.product.custom1 != '' -%}{{item.product.custom1}}{% else %}Unassigned!{% endif %}</span>
+                                        </div><!-- /.product-category -->                                                    
 
-                                            {% if globals.user.isLoggedIn == 'true' -%}                                                    
-                                            <div class="product-price">                                                        
-                                                <span class="amount">${{item.salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                        
-                                            </div><!-- /.product-price -->
-                                            <div class="product-price-msrp">
-                                                <span>MSRP ${{item.retailPrice}}</span>
-                                            </div>                                                                               
-                                            {% endif -%}                  
+                                        {% if globals.user.isLoggedIn == 'true' -%}                                                    
+                                        <div class="product-price">                                                        
+                                            <span class="amount">${{item.salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                        
+                                        </div><!-- /.product-price -->
+                                        <div class="product-price-msrp">
+                                            <span>MSRP ${{item.retailPrice}}</span>
+                                        </div>                                                                               
+                                        {% endif -%}                  
 
-                                        </div><!-- /.product-body -->
-                                    </a>         
+                                    </div><!-- /.product-body -->
+                                </a>         
 
-                                    {% if globals.user.isLoggedIn != 'true' -%}                          
-                                    <div class="product-price-login">
-                                        <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
-                                    </div><!-- /.product-price-login -->                                                    
-                                    {% endif -%}
+                                {% if globals.user.isLoggedIn != 'true' -%}                          
+                                <div class="product-price-login">
+                                    <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Prices">Login for Prices</a>
+                                </div><!-- /.product-price-login -->                                                    
+                                {% endif -%}
 
-                                </div><!-- /.product -->
-                            </div>
-                            <!-- / Product Item -->    
-                            {% endfor -%}  
+                            </div><!-- /.product -->
+                        </div>
+                        <!-- / Product Item -->    
+                        {% if modCheck == 0 or forloop.last == true -%}
+                        </div>
+                        {% endif %}
+                        {% if modCheck == 0 and forloop.last != true -%}
+                        <div class="row is-table-row">
+                        {% endif %}                            
+                        {% endfor -%}  
 
+                        <div class="row">
                             <!-- Product Results Count -->
                             <div class="col-md-12">
                                 <div class="result-count">   
@@ -345,8 +356,8 @@
                                 {% endif -%}  
                                 </div>
                             </div>                                                                                              
+                        </div><!-- /.row -->  
 
-                        </div><!-- /.row -->
                     </div><!-- /.products -->
 
                     <!-- Product List Actions Footer Form -->
