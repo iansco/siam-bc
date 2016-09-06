@@ -168,8 +168,12 @@
                 }); 
                 // Check that the Site Search has a value before submitting it.
                 $("#menubar-search").submit(function(event) {
-                    alert(this);
-                    console.log(this);
+                    var searchText = $(this).find("input#search").val() || null;
+                    if (searchText) {
+                        alert("Search was for: " + searchText);
+                    } else {
+                        alert("Nothing was searched for!");
+                    }                    
                     event.preventDefault();
                 });               
             });
