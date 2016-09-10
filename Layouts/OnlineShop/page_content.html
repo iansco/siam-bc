@@ -284,9 +284,11 @@
                                         <span class="product-price">
                                             <span id="unitPrice_{{currentProductId}}" data-base-price="{{productDetail.salePrice}}" class="amount">${{productDetail.salePrice}}</span><span class="unit">(Per {{productDetail.product.unitType}})</span>
                                         </span> 
+                                        {% if productDetail.retailPrice > 0 -%}
                                         <div class="product-price-msrp">
-                                            <span>MSRP ${{productDetail.retailPrice}}</span>
+                                            <span>MSRP STARTING AT ${{productDetail.retailPrice}}</span>
                                         </div>        
+                                        {% endif %}
                                         <!-- Quantity -->                                                                                                                                      
                                         <div class="form-group margin-top-15">
                                             {% if productDetail.product.minUnits > 1 -%}
@@ -955,10 +957,12 @@
                                                     <div class="product-price">                                                        
                                                         <span class="amount">${{item.salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                        
                                                     </div><!-- /.product-price -->
+                                                    {% if item.retailPrice > 0 -%}
                                                     <div class="product-price-msrp">
                                                         <span>MSRP ${{item.retailPrice}}</span>
-                                                    </div>                                                                               
-                                                    {% endif -%}                  
+                                                    </div>                       
+                                                    {% endif %}                                                        
+                                                    {% endif %}                  
 
                                                 </div><!-- /.product-body -->
                                             </a>         
