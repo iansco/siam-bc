@@ -1462,3 +1462,29 @@ footer a:hover.green, footer a:active.green {
 .modal .modal-footer {
   border-top: none;
 }
+
+.modal .modal-body p a {
+  text-decoration: underline;
+}
+
+.modal .modal-body .list-inline > li {
+    width: 120px;   
+    font-size: 13px;      
+    margin-bottom: 10px;
+    vertical-align: top;
+}
+
+.modal .modal-body .list-inline > li.active a, .list-inline > li:hover a {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.modal .modal-body .list-inline > li.active a img, .modal .modal-body .list-inline > li:hover a img  {
+    -webkit-filter: drop-shadow(0px 0px 10px black);
+    filter: drop-shadow(0px 0px 10px black);  
+}
+
+.modal .modal-body .list-inline > li span {
+    display: block;
+    padding-top: 10px;
+}
