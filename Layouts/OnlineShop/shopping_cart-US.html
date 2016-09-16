@@ -253,7 +253,8 @@
 		} else {
 			$(minOrderAlert).removeClass('collapse');
 			$(btnBeginCheckout).addClass('disabled');
-			$(btnBeginCheckout).attr('title','Minimum Order is ' + minOrderTotalMoney);
+			$(btnBeginCheckout).prop('disabled',true);
+			$(btnBeginCheckout).attr('Minimum Order is ' + minOrderTotalMoney);
 			$(btnBeginCheckout).tooltip();
 		}
 	}
