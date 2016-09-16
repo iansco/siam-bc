@@ -1308,11 +1308,7 @@ footer a:hover.green, footer a:active.green {
   text-decoration: none;
 }
 
-.siam-logo-type {
-  text-transform: capitalize;
-}
-
-.siam-logo-dot,  {
+.siam-logo-dot  {
  color: #999933;
  font-size: 150%;
  padding-left: 1px;
