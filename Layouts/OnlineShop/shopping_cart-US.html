@@ -249,12 +249,12 @@
 			$(minOrderAlert).addClass('collapse');
 			$(btnBeginCheckout).removeClass('disabled');
 			$(btnBeginCheckout).prop('disabled',false);
-			$(btnBeginCheckout).title('Begin Checkout');
+			$(btnBeginCheckout).attr('title','Begin Checkout');
 		} else {
 			$(minOrderAlert).removeClass('collapse');
 			$(btnBeginCheckout).addClass('disabled');
 			$(btnBeginCheckout).prop('disabled',true);
-			$(btnBeginCheckout).title('Minimum Order is ' + minOrderTotalMoney);
+			$(btnBeginCheckout).attr('title','Minimum Order is ' + minOrderTotalMoney);
 			$(btnBeginCheckout).tooltip();
 		}
 	}
