@@ -130,9 +130,15 @@
 							<tr>
 									<td colspan="2">
 										{% if globals.user.isLoggedIn == 'true' -%}
-										<a href="{{buyUrl}}" onclick="return {{buyButtonOnClick}};" name="beginCheckout" id="btnBeginCheckout" name="btnBeginCheckout" title="Begin Checkout" href="#" role="button" class="btn btn-green margin-top-10 {% if productGrandTotal < minOrderTotal -%}disabled{% endif %}">
-												<span>Begin Checkout <i class="glyphicon glyphicon-chevron-right"></i></span>
-										</a>					
+											{% if productGrandTotal < minOrderTotal -%}
+											<a disabled href="{{buyUrl}}" onclick="return {{buyButtonOnClick}};" name="beginCheckout" id="btnBeginCheckout" name="btnBeginCheckout" data-toggle="tooltip" title="Minimum Order is {{ minOrderTotal | money}}" href="#" role="button" class="btn btn-green margin-top-10">
+													<span>Begin Checkout <i class="glyphicon glyphicon-chevron-right"></i></span>
+											</a>
+											{% else %}
+											<a href="{{buyUrl}}" onclick="return {{buyButtonOnClick}};" name="beginCheckout" id="btnBeginCheckout" name="btnBeginCheckout" title="Begin Checkout" href="#" role="button" class="btn btn-green margin-top-10">
+													<span>Begin Checkout <i class="glyphicon glyphicon-chevron-right"></i></span>
+											</a>
+											{% endif %}					
 										{% else %}
 										{module_pageaddress collection="pageAddress" template=""}  
 										<a href="/login?ref={{pageAddress.pageUrl | append: '#beginCheckout' | url_param_escape}}" name="btnLoginToBeginCheckout" title="Login to Begin Checkout" role="button" class="btn btn-red margin-top-10">
