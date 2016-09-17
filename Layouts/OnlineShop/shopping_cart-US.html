@@ -64,9 +64,6 @@
 						<td colspan="5">
 						<div class="text-right">
 								<a href="#" onclick="{{clearCartOnClick}};return false;" role="button" title="Empty Cart" class="btn btn-red btn-outline margin-right-30">Empty Cart <i class="glyphicon glyphicon-remove-sign"></i></a>
-								{% if globals.get.CatalogueID -%}
-									{module_data resource="catalogs" version="v3" fields="id,useFriendlyUrl,url" skip="0" limit="1" where="\{'id':'{{globals.get.CatalogueID}}'\}" order="id" collection="LastCatalogVisited"}
-								{% endif %}
 								{% assign lastCartItem = items | last -%}
 								<button onclick="location.href='{{ globals.visitor.referrer | default: lastCartItem.url}}';" type="button" class="btn btn-green" title="Continue Shopping"><i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping</button>
 						</div>
@@ -79,7 +76,6 @@
 	<!-- Cart Totals -->
 	<div id="cart-totals" class="row margin-bottom-100">
 			<div class="col-md-8">
-				<pre>{{this|JSON}}</pre>
 			</div>
 
 			<div class="col-md-4">
@@ -293,9 +289,7 @@
 			window.UpdateItemQuantity = function(a,b,c,d,e,f,g) {
 				originalUpdateItemQuantity(a,b,c,d,e,f,g);
 				updateCartSummary();
-			}
-
-			console.log({{this|JSON}});				
+			}		
 
 	});
 	</script>			
