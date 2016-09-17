@@ -12,12 +12,6 @@
 {% assign freeShippingQualifyingTotal = 1000 -%}  
 {% assign freeShippingSpendToQualify = 1000 | minus: productGrandTotal -%}      
 
-	<!-- Temp Debug Output -->
-	<div>
-		<p><strong>Referrer: </strong>{{globals.visitor.referrer}}</p>
-		<p>Link to Referrer: <a href="{{globals.visitor.referrer}}">Continue Shopping?</a></p>
-	</div>
-
 	<!-- Cart Content -->
 	{% if items.size >= 1 -%}
 	<div id="cart-items" class="table-responsive">
@@ -74,7 +68,7 @@
 									{module_data resource="catalogs" version="v3" fields="id,useFriendlyUrl,url" skip="0" limit="1" where="\{'id':'{{globals.get.CatalogueID}}'\}" order="id" collection="LastCatalogVisited"}
 								{% endif %}
 								{% assign lastCartItem = items | last -%}
-								<button onclick="location.href='{{lastCartItem.url | default: '/products/all'}}';" type="button" class="btn btn-green" title="Continue Shopping"><i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping</button>
+								<button onclick="location.href='{{ globals.visitor.referrer | default: lastCartItem.url}}';" type="button" class="btn btn-green" title="Continue Shopping"><i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping</button>
 						</div>
 						</td>
 				</tr>
