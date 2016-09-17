@@ -12,6 +12,12 @@
 {% assign freeShippingQualifyingTotal = 1000 -%}  
 {% assign freeShippingSpendToQualify = 1000 | minus: productGrandTotal -%}      
 
+	<!-- Temp Debug Output -->
+	<div>
+		<p><strong>Referrer: </strong>{{globals.cookie.visitor.referrer}}</p>
+		<p>Link to Referrer: <a href="{{globals.cookie.visitor.referrer}}">Continue Shopping?</a></p>
+	</div>
+
 	<!-- Cart Content -->
 	{% if items.size >= 1 -%}
 	<div id="cart-items" class="table-responsive">
