@@ -13,7 +13,7 @@
 
                 <div id="header-offer">
                     <span>
-						<a href="#" title="Shipping Details"><i class="fa fa-truck"></i>Free International Shipping on Orders $1000+</a>
+						<a href="/shipping" title="Shipping Details"><i class="fa fa-truck"></i>Free International Shipping on Orders $1000+</a>
                         {% if CartSummary.itemCount >= 1 and CartSummary.totalAmount > 0 -%}
                             {% assign qualifyingAmount = 1000 -%}
                             {% assign spendToQualify = qualifyingAmount | minus: CartSummary.totalAmount -%}

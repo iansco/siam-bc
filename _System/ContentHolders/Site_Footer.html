@@ -57,7 +57,6 @@
                                     <h3 class="widget-title">More Links</h3>
 
                                     <ul>
-                                        <li><a href="/home" title="Home">Home</a></li> 
                                         {% if globals.user.isLoggedIn == 'true' -%}                                       
                                         <li><a href="/account" title="My Account">My Account</a></li>
                                         {% else -%}    
@@ -67,6 +66,7 @@
                                         {% if globals.user.isLoggedIn == 'false' -%}                               
                                         <li><a href="#" title="Apply for Account">Apply for Account</a></li>
                                         {% endif -%}            
+                                        <li><a href="/shipping" title="Shipping Details">Shipping</a></li>
                                         <li><a href="/help" title="Help &amp; Support">Help &amp; Support</a></li>
                                     </ul>
                                 </div>
