@@ -446,101 +446,13 @@
             </div>
             {% endif %}
 
-            <!-- //TODO: Templatize the Help Modals -->
-
-            <!-- Help Modal for Size -->
-            <div id="helpModalSize" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">Size</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">Left Column</div>
-                            <div class="col-md-6">Right Column</div>
-                        </div>
-                        <div class="row margin-top-20">
-                            <div class="col-md-12">
-                                <p>Footer content can go in here...</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->              
-
-            <!-- Help Modal for Wearing Length -->
-            <div id="helpModalWearingLength" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">Wearing Length</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">Left Column</div>
-                            <div class="col-md-6">Right Column</div>
-                        </div>
-                        <div class="row margin-top-20">
-                            <div class="col-md-12">
-                                <p>Footer content can go in here...</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->     
-
-            <!-- Help Modal for Wearing Style -->
-            <div id="helpModalWearingStyle" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">Wearing Style</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">Left Column</div>
-                            <div class="col-md-6">Right Column</div>
-                        </div>
-                        <div class="row margin-top-20">
-                            <div class="col-md-12">
-                                <p>Footer content can go in here...</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->                              
-
-            <script>
-                $(function() { 
-
-                               
-                });
-            </script>
+            <!-- Help Modals -->
+            {module_contentholder, name="Help_Size"}              
+            {module_contentholder, name="Help_Wearable_Surface"}
+            {module_contentholder, name="Help_Wearing_Style"}
+            {module_contentholder, name="Help_Overall_Diameter"}
+            {module_contentholder, name="Help_Overall_Length"}
+            <!-- /.Help Modals-->                              
 
         </div>
            
