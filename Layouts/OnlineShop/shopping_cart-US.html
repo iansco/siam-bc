@@ -10,7 +10,8 @@
 {% endcomment %}
 {% assign minOrderTotal = 250 -%}
 {% assign freeShippingQualifyingTotal = 1000 -%}  
-{% assign freeShippingSpendToQualify = 1000 | minus: productGrandTotal -%}      
+{% assign freeShippingSpendToQualify = 1000 | minus: productGrandTotal -%}    
+{% assign catalogAllProductsUrl = "/products/all" -%}  
 
 	<!-- Cart Content -->
 	{% if items.size >= 1 -%}
@@ -64,8 +65,12 @@
 						<td colspan="5">
 						<div class="text-right">
 								<a href="#" onclick="{{clearCartOnClick}};return false;" role="button" title="Empty Cart" class="btn btn-red btn-outline margin-right-30">Empty Cart <i class="glyphicon glyphicon-remove-sign"></i></a>
-								{% assign lastCartItem = items | last -%}
-								<button onclick="location.href='{{ globals.visitor.referrer | default: lastCartItem.url}}';" type="button" class="btn btn-green" title="Continue Shopping"><i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping</button>
+								{% if globals.visitor.referrer contains '.aspx' or globals.visitor.referrer == "" -%}
+									{% assign continueShoppingUrl = catalogAllProductsUrl -%}
+								{% else %}
+									{% assign continueShoppingUrl = globals.visitor.referrer -%}
+								{% endif %}
+								<button onclick="location.href='{{continueShoppingUrl}}';" type="button" class="btn btn-green" title="Continue Shopping"><i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping</button>
 						</div>
 						</td>
 				</tr>
