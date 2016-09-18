@@ -1535,3 +1535,11 @@ footer a:hover.green, footer a:active.green {
   color: #333366;
   text-transform: none;
 }
+
+.contact-content .dl-horizontal dt {
+  color: #333366;
+}
+
+.contact-block h3 {
+  text-transform: uppercase;
+}
