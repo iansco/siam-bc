@@ -709,6 +709,7 @@ a:hover .product-body .product-name {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 12px;
+  margin-bottom: 5px;
 }
 
 .product-sku {
@@ -716,6 +717,10 @@ a:hover .product-body .product-name {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 11px;
+}
+
+.product-grid .product-body .product-sku {
+  margin-bottom: 5px;
 }
 
 .product-label {
@@ -743,7 +748,7 @@ a:hover .product-body .product-name {
 .product-body .product-price-msrp, .product-details-wrapper .product-price-msrp {
   font-size: 12px;
   font-style: italic;
-  color: lightgray;
+  color: silver;
   font-weight: bold;
 }
 
