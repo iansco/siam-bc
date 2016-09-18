@@ -15,6 +15,7 @@
   7. Layouts compoments
   8. Wordpress fixed
   9. Bootstrap components
+ 10. Page Components 
 
   Siam Custom Notes:
   Replace hover color orange #ffa200; with lighter blue #666699;.
@@ -1516,4 +1517,21 @@ footer a:hover.green, footer a:active.green {
 .modal .modal-body .list-inline > li span {
     display: block;
     padding-top: 10px;
+}
+
+/* -------------------------------------------------------------------------------
+    10. Page Components
+--------------------------------------------------------------------------------*/
+
+.contact-header {
+  margin-bottom: 30px;
+}
+
+.contact-content .contact-form-heading {
+  margin-bottom: 20px;
+}
+
+.contact-content h3, .contact-content h2 {
+  color: #333366;
+  text-transform: none;
 }
