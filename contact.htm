@@ -44,26 +44,14 @@
                             </div>
                             <!-- /.contact-header -->
                             <div class="contact-block">
-                                <h3>SHOP INFOMATION</h3>
+                                <h3>BUSINESS ADDRESS</h3>
                                 <dl class="dl-horizontal">
                                     <dt>Address</dt>
-                                    <dd>225 Richardson St, Australian</dd>
+                                    <dd>191/7 Sukhar Pi Baan, Soi 13, Chang Klan Road, T.Chang Phuak, A.Muang, Chiang Mai, 50300, Thailand</dd>
                                     <dt>Phone</dt>
-                                    <dd>+61 2 6854 8496</dd>
+                                    <dd>+66 (0) 81 595 5125</dd>
                                     <dt>Email</dt>
-                                    <dd>hosoren@gmail.com</dd>
-                                </dl>
-                            </div>
-                            <!-- /.contact-block -->
-                            <div class="contact-block">
-                                <h3>CUSTOMER SERVICE HOURS</h3>
-                                <dl class="dl-horizontal">
-                                    <dt>M-F</dt>
-                                    <dd>8 am to 10 pm</dd>
-                                    <dt>Sat</dt>
-                                    <dd>9 am to 10 pm</dd>
-                                    <dt>Sun</dt>
-                                    <dd>10 am to 10 pm</dd>
+                                    <dd><a href="mailto:sales@siaminterhandicrafts.com">sales@siaminterhandicrafts.com</a></dd>
                                 </dl>
                             </div>
                             <!-- /.contact-block -->
@@ -75,55 +63,111 @@
                     <div class="col-md-6">
                         <div class="contact-content">
                             <div class="contact-form-heading">
-                                <h2>EMAIL TO OUR</h2>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since</p>
+                                <h2>Contact Us</h2>
+                                <p>You can contact us via email at <a href="mailto:sales@siaminterhandicrafts.com">sales@siaminterhandicrafts.com</a> - alternatively you can complete the enquiry form below and we'll get back to shortly!</p>
                             </div>
                             <!-- /.contact-content -->
 
-                            <div id="ajax-message"></div>
-                            <form method="post" action="/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8"><input type="hidden" value="contact" name="form_type"><input type="hidden" name="utf8" value="✓">
-
-
-
-
-
-
+                            <form name="catwebformform64146" method="post" onsubmit="return checkWholeForm64146(this)" enctype="multipart/form-data" action="/FormProcessv2.aspx?WebFormID=10090&amp;OID={module_oid}&amp;OTYPE={module_otype}&amp;EID={module_eid}&amp;CID={module_cid}">
 
                                 <div class="form-group">
-                                    <label>Name:</label>
-                                    <input class="form-control dark" type="text" id="ContactFormName" name="contact[name]" placeholder="Name:" autocapitalize="words"
-                                        value="">
+                                    <label for="Title">Title</label>
+                                    <select name="Title" id="Title" class="form-control">
+                                        <option value="--- Please Select ---" selected>--- Please Select</option>
+                                        <option value="352051">DR</option>
+                                        <option value="352050">MISS</option>
+                                        <option value="352047" selected="selected">MR</option>
+                                        <option value="352048">MRS</option>
+                                        <option value="352049">MS</option>
+                                    </select>
+                                </div>                            
 
+                                <div class="form-group">
+                                    <label for="FirstName" class="login">First Name<sup>*</sup></label>
+                                    <input type="text" class="form-control dark" name="FirstName" placeholder="First Name" id="FirstName" size="30">
                                 </div>
                                 <!-- /.form-group -->
 
                                 <div class="form-group">
-                                    <label>Email:</label>
-                                    <input class="form-control dark" type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email:" autocorrect="off"
-                                        autocapitalize="off" value="">
+                                    <label for="LastName" class="login">Last Name<sup>*</sup></label>
+                                    <input type="text" name="LastName" placeholder="Last Name" id="LastName" class="form-control dark">
+                                </div>               
+                                <!-- /.form-group -->                                                 
+
+                                <div class="form-group">
+                                    <label for="EmailAddress" class="login">Email<sup>*</sup></label>
+                                    <input type="email" name="EmailAddress" placeholder="Email" id="EmailAddress" class="form-control dark">
                                 </div>
                                 <!-- /.form-group -->
 
                                 <div class="form-group">
-                                    <label>Phone:</label>
-                                    <input class="form-control dark" type="tel" id="ContactFormPhone" name="contact[name]" placeholder="Phone:" pattern="[0-9\-]*"
-                                        value="">
+                                    <label for="WorkPhone" class="login">Business Phone Number<sup>*</sup></label>
+                                    <input type="tel" name="WorkPhone" placeholder="Business Phone Number" id="WorkPhone" class="form-control dark">
+                                </div>
+                                <!-- /.form-group -->                                
+
+                                <div class="form-group">
+                                    <label for="PreferredContactMethod" class="login">Preferred Contact Method</label>
+                                    <div class="radio">
+                                    <label>
+                                        <input checked type="radio" name="CAT_Custom_868" id="CAT_Custom_868_0" value="Phone">Phone
+                                    </label>
+                                    </div>
+                                    <div class="radio">
+                                    <label>
+                                        <input type="radio" name="CAT_Custom_868" id="CAT_Custom_868_1" value="Email" />Email
+                                    </label>
+                                    </div>
+                                </div>
+                                <!-- /.form-group -->                                
+
+                                <div class="form-group">
+                                    <label class="login">Message<sup>*</sup></label>
+                                    <textarea placeholder="Enter your Message..." class="form-control dark" name="CAT_Custom_869" id="CAT_Custom_869" cols="10" rows="4" onkeydown="if(this.value.length>=4000)this.value=this.value.substring(0,3999);"></textarea>
                                 </div>
                                 <!-- /.form-group -->
 
                                 <div class="form-group">
-                                    <label>Message:</label>
-                                    <textarea class="form-control dark" rows="7" id="ContactFormMessage" name="contact[body]" placeholder="Message:"></textarea>
-
-
+                                    <label class="login">Enter Word Verification<sup>*</sup></label>
+                                    {module_captchav2}
                                 </div>
                                 <!-- /.form-group -->
 
                                 <div class="form-button">
-                                    <button type="submit" class="btn btn-lg btn-dark">Send</button>
+                                    <input type="submit" class="btn btn-lg btn-dark">Send</input>
                                 </div>
                                 <!-- /.form-button -->
+
+                                <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b2050.r494698-phase1"></script>                                
+
+                                <script type="text/javascript">
+                                //<![CDATA[
+                                    var submitcount3056 = 0;
+
+                                    function checkWholeForm3056(theForm) {
+                                        var why = "";
+                                        if (theForm.FirstName) why += isEmpty(theForm.FirstName.value, "First Name");
+                                        if (theForm.LastName) why += isEmpty(theForm.LastName.value, "Last Name");
+                                        if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value);
+                                        if (theForm.WorkPhone) why += isEmpty(theForm.WorkPhone.value, "Business Phone Number");
+                                        if (theForm.CAT_Custom_869) why += isEmpty(theForm.CAT_Custom_869.value, "Message");
+                                        
+                                        if (theForm.CaptchaV2) why += captchaIsInvalid(theForm, "Enter Word Verification in box below", "Please enter the correct Word Verification as seen in the image");
+                                        if (why != "") {
+                                            alert(why);
+                                            return false;
+                                        }
+                                        if (submitcount3056 == 0) {
+                                            submitcount3056++;
+                                            theForm.submit();
+                                            return false;
+                                        } else {
+                                            alert("Form submission is in progress.");
+                                            return false;
+                                        }
+                                    }                                
+                                //]]>
+                                </script>                                
 
                             </form>
                         </div>
