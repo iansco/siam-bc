@@ -669,6 +669,10 @@ ul.pagination li {
   background-image: url("../img/site/bg-siam-product-montage.jpg");
 }
 
+.main-header .content-header {
+  padding: 80px 0;
+}
+
 /* -------------------------------------------------------------------------------
     3. Awe compoments
 --------------------------------------------------------------------------------*/
