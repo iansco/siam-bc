@@ -289,9 +289,9 @@
                     <tbody>
                     {% for item in ProductPrices.items -%}
                         {% if item.product.minUnits > 1 -%}                                    
-                            {% assign unitTypePluralized = item.product.unitType | append: 's' -%}
+                            {% assign unitTypePluralized = item.product.unitType | append: 's' | default: 'Items' -%}
                         {% else %}
-                            {% assign unitTypePluralized = item.product.unitType -%}
+                            {% assign unitTypePluralized = item.product.unitType | default: 'Item' -%}
                         {% endif %}
                         {module_data resource="productsattributes" version="v3" fields="id,productId,groupName,fieldTypeId,mandatory" where="\{'productId':'{{item.productId}}'\}" order="id" collection="ProductAttributes"}
                         <tr id="catProdAttributes2_{{item.productId}}">
@@ -301,8 +301,7 @@
                                         <img src="{{item.product.popletImage3}}" alt="{{item.product.name}}">                                                                                   
                                     </div> 
                                     <div class="product-description">
-                                        <h3 class="product-title">{{item.product.name}}</h3>
-                                        <span class="product-units">({{unitTypePluralized}})</span>
+                                        <h3 class="product-title">{{item.product.name}} <span class="product-units">({{unitTypePluralized}})</span></h3>
                                         <span class="product-sku">{{item.product.productCode}}</span>
                                         <span class="min-order"><strong>Min Order:</strong> {{item.product.minUnits}} {{unitTypePluralized}}</span>
                                     </div>        
