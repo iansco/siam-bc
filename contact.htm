@@ -69,11 +69,10 @@
                             <!-- /.contact-content -->
 
                             <form name="catwebformform64146" method="post" onsubmit="return checkWholeForm64146(this)" enctype="multipart/form-data" action="/FormProcessv2.aspx?WebFormID=10090&amp;OID={module_oid}&amp;OTYPE={module_otype}&amp;EID={module_eid}&amp;CID={module_cid}">
-
                                 <div class="form-group">
                                     <label for="Title">Title</label>
                                     <select name="Title" id="Title" class="form-control">
-                                        <option value="--- Please Select ---" selected>--- Please Select</option>
+                                        <option value="--- Please Select ---" selected>--- Please Select ---</option>
                                         <option value="352051">DR</option>
                                         <option value="352050">MISS</option>
                                         <option value="352047" selected="selected">MR</option>
@@ -134,7 +133,7 @@
                                 <!-- /.form-group -->
 
                                 <div class="form-button">
-                                    <input type="submit" class="btn btn-lg btn-dark margin-top-30 margin-bottom-50" value="Send Message">
+                                    <input type="submit" class="btn btn-lg btn-dark margin-top-20 margin-bottom-30" value="Send Message">
                                 </div>
                                 <!-- /.form-button -->
 
@@ -142,9 +141,19 @@
 
                                 <script type="text/javascript">
                                 //<![CDATA[
-                                    var submitcount3056 = 0;
 
-                                    function checkWholeForm3056(theForm) {
+                                    $(function(){
+                                        if ($("#CaptchaV2")) {
+                                            $("#CaptchaV2")
+                                                .addClass("form-control dark margin-top-10")
+                                                .prop("placeholder","Enter letters displayed above...")
+                                                .css("width","100%");
+                                        }
+                                    });
+
+                                    var submitcount64146 = 0;
+
+                                    function checkWholeForm64146(theForm) {
                                         var why = "";
                                         if (theForm.FirstName) why += isEmpty(theForm.FirstName.value, "First Name");
                                         if (theForm.LastName) why += isEmpty(theForm.LastName.value, "Last Name");
@@ -157,8 +166,8 @@
                                             alert(why);
                                             return false;
                                         }
-                                        if (submitcount3056 == 0) {
-                                            submitcount3056++;
+                                        if (submitcount64146 == 0) {
+                                            submitcount64146++;
                                             theForm.submit();
                                             return false;
                                         } else {
