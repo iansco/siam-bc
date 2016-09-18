@@ -610,6 +610,14 @@ ul.pagination li {
   color: #333366;
 }
 
+.awe-box-content h2 {
+  margin: 30px 0;
+}
+
+awe-box-content h3 {
+  margin: 20px 0;
+}
+
 .single-icon {
   color: #333366;
 }
