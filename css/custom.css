@@ -712,10 +712,8 @@ a:hover .product-body .product-name {
 }
 
 .product-sku {
-  margin-bottom: 5px;
   color: #aaa;
   text-transform: uppercase;
-  /*font-style: italic;*/
   font-weight: bold;
   font-size: 11px;
 }
@@ -954,6 +952,7 @@ a.help {
 .quick-order .table td.product-options {
   text-align: center;
   vertical-align: middle;
+  width: 35%; 
 }
 
 .quick-order .table td.product-options .form-group {
@@ -1160,6 +1159,7 @@ a.help {
 
  .quick-order .table-cart .product-description span.product-units {
   display: inline-block;  
+  font-family: Roboto, Arial, sans-serif; 
 }
 
 .quick-order .table-cart {
@@ -1195,6 +1195,7 @@ a.help {
 
 .quick-order .table-cart .product-title {
   font-size: 14px;
+  line-height: 1.1em;
 }
 
 .table-cart td.remove-product {
