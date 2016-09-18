@@ -1299,6 +1299,11 @@ a.help {
   text-decoration: underline;
 }
 
+#main .body-content a.btn {
+  text-decoration: none;
+}
+
+
 .footer a {
   color: #898989;
 }
