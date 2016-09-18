@@ -11,7 +11,7 @@
     <div id="main">
 
         <!-- Category Header -->
-        <div class="main-header background background-image-heading-default">
+        <div class="main-header content-header background background-image-heading-default">
             <div class="container">
                 <h1>Contact Us</h1>
             </div>
@@ -32,9 +32,103 @@
         <div class="body-content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-centered">
-                        <h2>Contact Us</h2>
+                    <div class="col-md-6">
+                        <div class="contact-content">
+                            <div class="contact-header">
+                                <div class="contact-image" style="text-align: left;">
+                                    <img src="//cdn.shopify.com/s/files/1/1231/2222/t/2/assets/contact_content_img.jpg?10102564317518897860" alt="">
+                                </div>
+                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+                                    atque corrupti quos <strong>dolores et quas molestias excepturi sint occaecati</strong> cupiditate non
+                                    provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+                            </div>
+                            <!-- /.contact-header -->
+                            <div class="contact-block">
+                                <h3>SHOP INFOMATION</h3>
+                                <dl class="dl-horizontal">
+                                    <dt>Address</dt>
+                                    <dd>225 Richardson St, Australian</dd>
+                                    <dt>Phone</dt>
+                                    <dd>+61 2 6854 8496</dd>
+                                    <dt>Email</dt>
+                                    <dd>hosoren@gmail.com</dd>
+                                </dl>
+                            </div>
+                            <!-- /.contact-block -->
+                            <div class="contact-block">
+                                <h3>CUSTOMER SERVICE HOURS</h3>
+                                <dl class="dl-horizontal">
+                                    <dt>M-F</dt>
+                                    <dd>8 am to 10 pm</dd>
+                                    <dt>Sat</dt>
+                                    <dd>9 am to 10 pm</dd>
+                                    <dt>Sun</dt>
+                                    <dd>10 am to 10 pm</dd>
+                                </dl>
+                            </div>
+                            <!-- /.contact-block -->
+                        </div>
+                        <!-- /.contact-content -->
                     </div>
+                    <!-- /.col-md-6 -->
+
+                    <div class="col-md-6">
+                        <div class="contact-content">
+                            <div class="contact-form-heading">
+                                <h2>EMAIL TO OUR</h2>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                                    standard dummy text ever since</p>
+                            </div>
+                            <!-- /.contact-content -->
+
+                            <div id="ajax-message"></div>
+                            <form method="post" action="/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8"><input type="hidden" value="contact" name="form_type"><input type="hidden" name="utf8" value="✓">
+
+
+
+
+
+
+
+                                <div class="form-group">
+                                    <label>Name:</label>
+                                    <input class="form-control dark" type="text" id="ContactFormName" name="contact[name]" placeholder="Name:" autocapitalize="words"
+                                        value="">
+
+                                </div>
+                                <!-- /.form-group -->
+
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input class="form-control dark" type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email:" autocorrect="off"
+                                        autocapitalize="off" value="">
+                                </div>
+                                <!-- /.form-group -->
+
+                                <div class="form-group">
+                                    <label>Phone:</label>
+                                    <input class="form-control dark" type="tel" id="ContactFormPhone" name="contact[name]" placeholder="Phone:" pattern="[0-9\-]*"
+                                        value="">
+                                </div>
+                                <!-- /.form-group -->
+
+                                <div class="form-group">
+                                    <label>Message:</label>
+                                    <textarea class="form-control dark" rows="7" id="ContactFormMessage" name="contact[body]" placeholder="Message:"></textarea>
+
+
+                                </div>
+                                <!-- /.form-group -->
+
+                                <div class="form-button">
+                                    <button type="submit" class="btn btn-lg btn-dark">Send</button>
+                                </div>
+                                <!-- /.form-button -->
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.col-md-6 -->
                 </div>
 
             </div>
