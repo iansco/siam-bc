@@ -407,6 +407,7 @@
                                         </div> 
                                         <div class="product-description">
                                             <h3 class="product-title"><span class="times">{{item.quantity}} x</span> {{item.name}} <span class="product-units">({{unitTypePluralized}})</span></h3>
+                                            <span class="product-attribute"><strong>{{item.code}}</strong></span>
                                             <!-- Attributes go here... -->
                                             {% assign attributes = item.description | split: ';' -%}
                                             {% for attribute in attributes -%}
