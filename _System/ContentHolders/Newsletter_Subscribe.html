@@ -21,9 +21,9 @@
                                             <input class="btn btn-lg btn-green" type="submit" value="Subscribe" id="catlistbutton" />
                                         </div>
 
-                                        <script type="text/javascript">
-                                        //<![CDATA[
+                                        <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js"></script>
 
+                                        <script type="text/javascript">
                                         function checkWholeForm40779(theForm) {
                                             var why = "";
                                             if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value);
@@ -34,7 +34,6 @@
                                             theForm.submit();
                                             return false;
                                         }
-                                    //]]>
                                     </script>                                        
                                     </form>
                                 </div>
