@@ -1191,7 +1191,7 @@ a.help {
   font-family: Roboto, Arial, sans-serif;
 }
 
-.quick-order .table-cart .product-description span.product-units {
+.table-cart span.product-units, .quick-order .table-cart .product-description span.product-units {
   padding-left: 5px;
 }
 
