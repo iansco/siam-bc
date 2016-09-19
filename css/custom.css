@@ -1186,7 +1186,7 @@ a.help {
   text-transform: none;
 }
 
- .quick-order .table-cart .product-description span.product-units,  .checkout-page .table-cart .product-description span.product-units {
+ .table-cart span.product-units, .quick-order .table-cart .product-description span.product-units,  .checkout-page .table-cart .product-description span.product-units {
   display: inline-block;  
   font-family: Roboto, Arial, sans-serif;
 }
@@ -1202,10 +1202,6 @@ a.help {
 .table-cart td.cart-product span.product-attribute {
   margin: 0 0 0 10px;
   /*padding-left: 10px;*/
-}
-
-.table-cart span.product-units {
-  padding: 5px 0 0 0;
 }
 
 .table-cart td.cart-product div {  
