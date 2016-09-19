@@ -394,14 +394,19 @@
                                 {% for item in globals.cart.items -%}   
                                 {module_data resource="products" version="v3" fields="id,productCode,unitType,minUnits,custom1,popletImage3" skip="0" limit="1" where="\{'id':{{item.productId}}\}" order="id" collection="CartProduct"}
                                 {module_data resource="productsattributes" version="v3" fields="groupName" where="\{'productId':'{{item.productId}}'\}" order="id" collection="ProductAttributes"}
-                                {% assign productDetail = CartProduct.items[0] -%}                                                         
+                                {% assign productDetail = CartProduct.items[0] -%}    
+                                {% if productDetail.minUnits > 1 -%}                                    
+                                    {% assign unitTypePluralized = productDetail.unitType | append: 's' | default: 'Items' -%}
+                                {% else %}
+                                    {% assign unitTypePluralized = productDetail.unitType | default: 'Item' -%}
+                                {% endif %}                                                                                     
                                 <tr data-product-id="{{item.productId}}">
                                     <td class="cart-product">
                                         <div class="product-image">                            
                                             <img src="{{productDetail.popletImage3}}" alt="{{item.name}}">                                                                               
                                         </div> 
                                         <div class="product-description">
-                                            <h3 class="product-title"><span class="times">{{item.quantity}} x</span> {{item.name}} <span class="product-sku">({{productDetail.unitType}})</span></h3>
+                                            <h3 class="product-title"><span class="times">{{item.quantity}} x</span> {{item.name}} <span class="product-units">({{unitTypePluralized}})</span></h3>
                                             <!-- Attributes go here... -->
                                             {% assign attributes = item.description | split: ';' -%}
                                             {% for attribute in attributes -%}
