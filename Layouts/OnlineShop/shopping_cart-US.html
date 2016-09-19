@@ -33,6 +33,11 @@
 				{module_data resource="products" version="v3" fields="id,productCode,unitType,minUnits,custom1,popletImage2" skip="0" limit="1" where="\{'id':{{productId}}\}" order="id" collection="CartProduct"}
 				{module_data resource="productsattributes" version="v3" fields="groupName" where="\{'productId':'{{productId}}'\}" order="id" collection="ProductAttributes"}
 				{% assign productDetail = CartProduct.items[0] -%}
+				{% if productDetail.minUnits > 1 -%}                                    
+						{% assign unitTypePluralized = productDetail.unitType | append: 's' | default: 'Items' -%}
+				{% else %}
+						{% assign unitTypePluralized = productDetail.unitType | default: 'Item' -%}
+				{% endif %} 				
 				<tr data-product-id="{{productId | default: ''}}">
 					<td class="cart-product">
 							<a href="{{item.url}}" title="{{item.name}}" class="product-link">
@@ -40,7 +45,7 @@
 									<img src="{{productDetail.popletImage2}}" alt="{{item.name}}">                                                                                   
 							</div> 
 							<div class="product-description">
-									<h3 class="product-title">{{item.name}}</h3>
+									<h3 class="product-title">{{item.name}} <span class="product-units">({{unitTypePluralized}})</span></h3>
 									<span class="product-sku">{{item.code}}</span>
 									<!-- Attributes go here... -->
 									{% assign attributes = item.description | split: ';' -%}
@@ -51,8 +56,7 @@
 					</a> 
 					</td>
 					<td class="remove-product"><span data-toggle="tooltip" data-original-title="Remove"><a href="#" onclick="{{item.removeOnClick}};return false;"><i class="glyphicon glyphicon-remove-circle"></i></a></span></td>
-					<td><span class="price">{{item.productAmountExceptTax | money}}</span></td>
-					{% assign unitTypePluralized = productDetail.unitType | append: 's' -%}											
+					<td><span class="price">{{item.productAmountExceptTax | money}}</span></td>										
 					<td><input type="text" value="{{item.quantity}}" class="qty" onchange="{{item.quantityInputOnChange}}; return false;" data-toggle="tooltip" title="Minimum Qty: {{productDetail.minUnits | default: '1'}} {{unitTypePluralized}}"><span class="product-units"> ({{unitTypePluralized}})</span></td>
 					<td><span class="price">{{item.productTotalExceptTax | money}}</span></td>														
 				</tr>
