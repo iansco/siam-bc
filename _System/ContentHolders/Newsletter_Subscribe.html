@@ -11,15 +11,31 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <form method="GET" action="index.html" class="subscible-form">
+                                    <form class="subscible-form" name="catemaillistform40779" onsubmit="return checkWholeForm40779(this)" method="post" action="/CampaignProcess.aspx?ListID=10142">
                                         <div class="form-group">
-                                            <label class="sr-only" for="subscribe-email">Email</label>
-                                            <input type="email" placeholder="Enter your email address" class="form-control" id="subscribe-email">
+                                            <label class="sr-only" for="CLEmailAddress">Email</label>
+                                            <input type="email" placeholder="Enter your email address" class="form-control" name="EmailAddress" id="CLEmailAddress" maxlength="255" />
                                         </div>
 
                                         <div class="form-submit">
-                                            <button class="btn btn-lg btn-green" type="submit">Sign Up</button>
+                                            <input class="btn btn-lg btn-green" type="submit" value="Subscribe" id="catlistbutton" />
                                         </div>
+
+                                        <script type="text/javascript">
+                                        //<![CDATA[
+
+                                        function checkWholeForm40779(theForm) {
+                                            var why = "";
+                                            if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value);
+                                            if (why != "") {
+                                                alert(why);
+                                                return false;
+                                            }
+                                            theForm.submit();
+                                            return false;
+                                        }
+                                    //]]>
+                                    </script>                                        
                                     </form>
                                 </div>
                             </div>
