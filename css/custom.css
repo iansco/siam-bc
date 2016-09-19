@@ -1122,6 +1122,11 @@ a.help {
   text-align: right;
 }
 
+.checkout-page .table-cart tr > td.cart-product .product-title {
+  margin: 0 0 0 10px;
+  max-width: 300px;
+}
+
 .product-description span.product-sku {
   font-family: Roboto, Arial, sans-serif;
   padding-left: 10px;
