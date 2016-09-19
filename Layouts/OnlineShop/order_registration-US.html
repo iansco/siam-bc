@@ -450,7 +450,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        <a href="{{globals.cart.cartUrl}}" title="Go Back &amp; Edit Your Order" role="button" class="btn btn-red margin-top-15">
+                                        <a href="{{globals.visitor.referrer | default: globals.cart.cartUrl}}" title="Go Back &amp; Edit Your Order" role="button" class="btn btn-red margin-top-15">
                                             <span><i class="glyphicon glyphicon-chevron-left"></i> Go Back &amp; Edit Your Order</span>
                                         </a>                                                                       
                                     </th>
