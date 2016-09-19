@@ -42,9 +42,6 @@
 							<div class="product-description">
 									<h3 class="product-title">{{item.name}}</h3>
 									<span class="product-sku">{{item.code}}</span>
-									{% if item.custom1 != '' -%}
-									<span class="product-cat">{{item.custom1 | default: 'Unassigned!'}}</span>
-									{% endif %}
 									<!-- Attributes go here... -->
 									{% assign attributes = item.description | split: ';' -%}
 									{% for attribute in attributes -%}
