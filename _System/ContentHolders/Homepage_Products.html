@@ -2,13 +2,13 @@
     Set any BC install specific 'hardcoded' variable values here.
 {% endcomment %}
 
-{% assign newArrivalsCatalogId = "459863" -%}
+{% assign newArrivalsCatalogId = "175770" -%}
 {% assign newArrivalsCatalogUrl = "/products/new" -%}
 
-{% assign bestSellersCatalogId = "459864" -%}
+{% assign bestSellersCatalogId = "175769" -%}
 {% assign bestSellersCatalogUrl = "/products/best-sellers" -%}
 
-{% assign onSaleCatalogId = "459865" -%}
+{% assign onSaleCatalogId = "175770" -%}
 {% assign onSaleCatalogUrl = "/products/on-sale" -%}
 
 {module_data resource="catalogs" resourceId="{{newArrivalsCatalogId}}" subresource="products" fields="product" version="v3" collection="NewArrivals" limit="3" where="\{'$and':\[\{'product.keywords':\{'$contains':'homepage'\}\},\{'product.enabled':'true'\}\]\}" order="-product.createDate"}
