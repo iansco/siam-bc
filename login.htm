@@ -31,6 +31,7 @@
             <div class="login-register-wrapper body-content">
                 <div class="container">
                     <div class="row">
+                        {% if globals.user.isLoggedIn 1= 'true' -%}
                         <form name="catseczoneform16658" onsubmit="return checkWholeForm16658(this)" method="post" action="/ZoneProcess.aspx?ZoneID=51&amp;Referrer={module_siteUrl,true,true}&amp;OID={module_oid}&amp;OTYPE={module_otype}&PageID={{globals.get.ref | url_param_escape}}">
                             <div class="col-md-6 col-centered" id="customer">
                                 <h2>Login</h2>  
@@ -81,7 +82,14 @@
                                 }
                                 //]]>
                             </script>                            
-                        </form>                
+                        </form>    
+                        {% else %}
+                        <div class="col-md-6 col-centered" id="customer">
+                            <h2>Login</h2>  
+                            <p>You're already logged in. Would you like to logout?</p>
+                            <a href="/logoutprocess.aspx" class="btn btn-lg btn-red margin-top-30 margin-bottom-50">Logout</a>
+                        </div>                        
+                        {% endif %}            
                     </div>
                     <!-- / Login Content -->
 
