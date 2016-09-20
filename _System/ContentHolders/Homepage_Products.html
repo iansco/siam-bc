@@ -56,7 +56,7 @@
                                                     
                                                     {% if globals.user.isLoggedIn == 'true' -%}
                                                     <div class="product-price">
-                                                        <span class="amount">${{Price.items[0].wSalePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>
+                                                        <span class="amount">${{Price.items[0].salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>
                                                     </div><!-- /.product-price -->
                                                     <div class="product-price-msrp">
                                                         <span>MSRP ${{Price.items[0].retailPrice}}</span>
@@ -121,7 +121,7 @@
                                                     
                                                     {% if globals.user.isLoggedIn == 'true' -%}
                                                     <div class="product-price">
-                                                        <span class="amount">${{Price.items[0].wSalePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                    
+                                                        <span class="amount">${{Price.items[0].salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                    
                                                     </div><!-- /.product-price -->
                                                     <div class="product-price-msrp">
                                                         <span>MSRP ${{Price.items[0].retailPrice}}</span>
@@ -186,7 +186,7 @@
 
                                                     {% if globals.user.isLoggedIn == 'true' -%}
                                                     <div class="product-price">
-                                                        <span class="amount">${{Price.items[0].wSalePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                    
+                                                        <span class="amount">${{Price.items[0].salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                    
                                                     </div><!-- /.product-price -->
                                                     <div class="product-price-msrp">
                                                         <span>MSRP ${{Price.items[0].retailPrice}}</span>
