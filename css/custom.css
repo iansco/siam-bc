@@ -1195,6 +1195,11 @@ a.help {
   padding-left: 5px;
 }
 
+.quick-order .table-cart td.quantity span.product-units {
+  display: block;
+  padding: 5px 0 0 0;
+}
+
 .quick-order .table-cart {
   margin-bottom: 20px;
 }
