@@ -48,7 +48,7 @@
                 {% endif -%}
             {% endif -%}
         {% else -%}
-            {% assign sort = "-product.releaseDate" -%}                
+            {% assign sort = "-product.weight" -%}                
         {% endif -%}              
 
         {% comment %}
@@ -192,7 +192,7 @@
                                         <div class="form-group pull-left">
                                             <label for="actionSortBy">Sort:</label>
                                             <select name="actionSortBy" id="actionSortBy" class="form-control input-sm">
-                                                <option value="newest-first"{% if sort == "-product.releaseDate" or sort == null -%} selected{% endif-%}>Newest First</option>
+                                                <option value="newest-first"{% if sort == "-product.weight" or sort == null -%} selected{% endif-%}>Newest First</option>
                                                 {% if globals.user.isLoggedIn == 'true' -%}    
                                                 <option value="price"{% if sort == "salePrice" -%} selected{% endif-%}>Price: Low to High</option>
                                                 <option value="price-desc"{% if sort == "-salePrice" -%} selected{% endif-%}>Price: High to Low</option>
@@ -373,7 +373,7 @@
                                         <div class="form-group pull-left">
                                             <label for="actionSortBy">Sort:</label>
                                             <select name="actionSortBy" id="actionSortBy2" class="form-control input-sm">
-                                                <option value="newest-first"{% if sort == "-product.releaseDate" or sort == null -%} selected{% endif-%}>Newest First</option>
+                                                <option value="newest-first"{% if sort == "-product.weight" or sort == null -%} selected{% endif-%}>Newest First</option>
                                                 {% if globals.user.isLoggedIn == 'true' -%}    
                                                 <option value="price"{% if sort == "salePrice" -%} selected{% endif-%}>Price: Low to High</option>
                                                 <option value="price-desc"{% if sort == "-salePrice" -%} selected{% endif-%}>Price: High to Low</option>

@@ -47,7 +47,7 @@
                 {% endif %}
             {% endif %}
         {% else %}
-            {% assign sort = "-product.releaseDate" -%}                
+            {% assign sort = "-product.weight" -%}                
         {% endif %}              
         {% comment -%}
             Now overwrite with the URL parameter value if they are set.
@@ -195,7 +195,7 @@
                                         <div class="form-group pull-right text-right">
                                             <label for="p_sort_by">Sort:</label>
                                             <select name="p_sort_by" id="actionSortBy" class="form-control input-sm">
-                                                <option value="newest-first"{% if sort == "-product.releaseDate" or sort == null -%} selected{% endif-%}>Newest First</option>
+                                                <option value="newest-first"{% if sort == "-product.weight" or sort == null -%} selected{% endif-%}>Newest First</option>
                                                 {% if globals.user.isLoggedIn == 'true' -%}    
                                                 <option value="price"{% if sort == "salePrice" -%} selected{% endif-%}>Price: Low to High</option>
                                                 <option value="price-desc"{% if sort == "-salePrice" -%} selected{% endif-%}>Price: High to Low</option>
