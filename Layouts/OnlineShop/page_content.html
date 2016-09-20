@@ -47,7 +47,7 @@
         {% endfor -%}  
 
         {% comment %}
-            Set variable to store the 'sort' and 'order' parameter valuse if they are contained in a session cookie. 
+            Set variable to store the 'sort' and 'order' parameter values if they are contained in a session cookie. 
         {% endcomment %}        
 
         {% if globals.cookie.catSortByName -%}
@@ -1074,6 +1074,8 @@
     {% unless globals.get.ProductID -%}
     <script>
         $(function(){
+
+            console.log({{this|JSON}});
 
             aweProductSidebar();
 
