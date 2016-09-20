@@ -181,14 +181,20 @@
                         <pre>{{searchText | split: ' ' | JSON}}</pre>
                         <h5>API Where Filter</h5>
                         {% assign searchWords = searchText | split: ' ' -%}
-                        {% assign whereFilter = "'$and':\[" -%}
-                        {% for word in searchWords -%}
-                            {% whereFilter | append: "{'product.name':\{'$contains':'" | append: {{word}} | append: "'\}\}" -%}
-                            {% unless forloop.last -%}
-                            {% whereFilter | append: "," -%}
-                            {% endunless %}
-                        {% endfor %}                        
-                        {% whereFilter | append: "\]" -%}
+                        {% comment -%}
+                        '$and':\[\{'product.name':\{'$contains':'abc'\}\},\{'product.name':\{'$contains':'def'\}\}\]
+                        {% endcomment %}
+                    
+                        {% capture whereFilter -%}
+                            '$and':\[
+                            {% for word in searchWords -%}
+                                \{'product.name':\{'$contains':'{{word}}'\}\}
+                                {% unless forloop.last -%}
+                                ,
+                                {% endunless %}
+                            {% endfor %}
+                            \]                                                                                
+                        {% endcapture %}
                         <pre>{{whereFilter}}</pre>
                     </div>
 
