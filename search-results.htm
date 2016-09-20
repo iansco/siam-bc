@@ -139,7 +139,14 @@
             Make a call to module_data to retrieve products which match the 'searchText' criteria.
         {% endcomment %}
 
-        {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="\{'$or':\[\{'product.name':\{'$contains':'{{searchText}}'\}\},\{'product.productCode':\{'$contains':'{{searchText}}'\}\},\{'product.custom1':\{'$contains':'{{searchText}}'\}\}\],'$and':\[\{'product.enabled':'true'\},\{\}\]\}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}        
+        {% comment -%}
+        '$and':\[\{'product.name':\{'$contains':'abc'\}\},\{'product.name':\{'$contains':'def'\}\}\]
+        {% endcomment %}                            
+
+        {% assign searchWords = searchText | split: ' ' -%}
+        {% capture whereFilter -%}\{'$and':\[{% for word in searchWords -%}\{'product.name':\{'$contains':'{{word}}'\}\}{% unless forloop.last -%},{% endunless %}{% endfor %},\{'product.enabled':'true'\}\]\}{% endcapture %}
+
+        {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="{{whereFilter}}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}        
 
         {% comment -%}
             Calculate pagination.
@@ -179,12 +186,7 @@
                         </h4>
                         <h5>Search Text Split</h5>
                         <pre>{{searchText | split: ' ' | JSON}}</pre>
-                        <h5>API Where Filter</h5>
-                        {% assign searchWords = searchText | split: ' ' -%}
-                        {% comment -%}
-                        '$and':\[\{'product.name':\{'$contains':'abc'\}\},\{'product.name':\{'$contains':'def'\}\}\]
-                        {% endcomment %}                    
-                        {% capture whereFilter -%}'$and':\[{% for word in searchWords -%}\{'product.name':\{'$contains':'{{word}}'\}\}{% unless forloop.last -%},{% endunless %}{% endfor %}\]{% endcapture %}
+                        <h5>API Where Filter</h5>                                              
                         <pre>{{whereFilter}}</pre>
                     </div>
 
