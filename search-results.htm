@@ -183,18 +183,8 @@
                         {% assign searchWords = searchText | split: ' ' -%}
                         {% comment -%}
                         '$and':\[\{'product.name':\{'$contains':'abc'\}\},\{'product.name':\{'$contains':'def'\}\}\]
-                        {% endcomment %}
-                    
-                        {% capture whereFilter -%}
-                            '$and':\[
-                            {% for word in searchWords -%}
-                                \{'product.name':\{'$contains':'{{word}}'\}\}
-                                {% unless forloop.last -%}
-                                ,
-                                {% endunless %}
-                            {% endfor %}
-                            \]                                                                                
-                        {% endcapture %}
+                        {% endcomment %}                    
+                        {% capture whereFilter -%}'$and':\[{% for word in searchWords -%}\{'product.name':\{'$contains':'{{word}}'\}\}{% unless forloop.last -%},{% endunless %}{% endfor %}\]{% endcapture %}
                         <pre>{{whereFilter}}</pre>
                     </div>
 
