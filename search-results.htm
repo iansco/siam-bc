@@ -179,6 +179,21 @@
                         </h4>
                         <h5>Search Text Split</h5>
                         <pre>{{searchText | split: ' ' | JSON}}</pre>
+                        <h5>API Where Filter</h5>
+                        {% assign searchWords = searchText | split: ' ' -%}
+
+
+                        '$and':\[\{'product.name':\{'$contains':'abc'\}\},\{'product.name':\{'$contains':'def'\}\}\]
+
+                        {% assign whereFilter = "'$and':\[" -%}
+                        {% for word in searchWords -%}
+                            {% whereFilter | append: "{'product.name':\{'$contains':'" | append: word | append: "'\}\}" -%}
+                            {% unless forloop.last -%}
+                            {% whereFilter | append: "," -%}
+                            {% endunless %}
+                        {% endfor %}                        
+                        {% whereFilter | append: "\]" -%}
+                        <pre>{{whereFilter}}</pre>
                     </div>
 
                     <!-- Product List Actions Header Form -->
