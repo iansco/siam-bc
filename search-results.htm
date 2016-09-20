@@ -144,7 +144,7 @@
         {% endcomment %}                            
 
         {% assign searchWords = searchText | split: ' ' -%}
-        {% capture whereFilter -%}\{'$and':\[{% for word in searchWords -%}\{'product.name':\{'$contains':'{{word}}'\}\}{% unless forloop.last -%},{% endunless %}{% endfor %},\{'product.enabled':'true'\}\]\}{% endcapture %}
+        {% capture whereFilter -%}\{'$or':\[\{'$and':\[{% for word in searchWords -%}\{'product.name':\{'$contains':'{{word}}'\}\}{% unless forloop.last -%},{% endunless %}{% endfor %},\{'product.enabled':'true'\}\]\},\{'$or':\[\{'product.productCode':\{'$contains':'{{searchText}}'\}\},\{'product.custom1':\{'$contains':'{{searchText}}'\}\}\]\}\]\}{% endcapture %}
 
         {module_data resource="prices" version="v3" fields="productId,retailPrice,salePrice,wSalePrice,product" where="{{whereFilter}}" order="{{sort}}" skip="{{skip}}" collection="ProductPrices" limit="{{limit}}"}        
 
