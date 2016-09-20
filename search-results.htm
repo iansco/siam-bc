@@ -183,7 +183,7 @@
                         {% assign searchWords = searchText | split: ' ' -%}
                         {% assign whereFilter = "'$and':\[" -%}
                         {% for word in searchWords -%}
-                            {% whereFilter | append: "{'product.name':\{'$contains':'" | append: word | append: "'\}\}" -%}
+                            {% whereFilter | append: "{'product.name':\{'$contains':'" | append: {{word}} | append: "'\}\}" -%}
                             {% unless forloop.last -%}
                             {% whereFilter | append: "," -%}
                             {% endunless %}
