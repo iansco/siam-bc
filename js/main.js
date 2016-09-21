@@ -91,7 +91,7 @@ function aweMainSlider() {
         nav: true,
         dots: false,
         loop: true,
-        autoplay: false,
+        autoplay: true,
         autoplayTimeout: 6000,
         autoplayHoverPause: true,
         autoplaySpeed: 500,
