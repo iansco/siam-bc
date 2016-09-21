@@ -121,8 +121,8 @@ a:hover, a:focus {
 
 .btn-dark:hover, .search-submit:hover {
   color: #fff;
-  background-color: #4682B4;
-  border-color: #4682B4;
+  background-color: #536DFE;
+  border-color: #536DFE;
 }
 
 .btn-dark:active, .search-submit:active, .btn-dark.active, .active.search-submit,
