@@ -27,7 +27,7 @@
 
                                             <div class="widget-content">
                                                 <p>Have a question for us? Please don't hesitate to email us at <a class="white" title="Email Us" href="mailto:sales@siaminterhandicrafts.com">sales@siaminterhandicrafts.com</a> or use the form on the <a class="green" title="Contact Us" href="/contact">Contact Us</a> page.</p>
-                                                <p>You can also check out our <a class="green" href="/help" title="Help &amp; Support">Help &amp; Support</a> page for useful information.</p>
+                                                <p>You can also check out our <a class="green" href="http://www.siaminterhandicrafts.com/help" title="Help &amp; Support">Help &amp; Support</a> page for useful information.</p>
                                             </div>
                                         </div>
                                         <!-- /.widget -->
@@ -43,8 +43,8 @@
 
                                     <ul>
                                         <li><a href="{{globals.cart.cartUrl | default: '#'}}" title="Shopping Cart">Shopping Cart</a></li>
-                                        <li><a href="/quick-order" title="Quick Order">Quick Order</a></li>
-                                        <li><a href="/products/all" title="Products">Products</a></li>
+                                        <li><a href="http://www.siaminterhandicrafts.com/quick-order" title="Quick Order">Quick Order</a></li>
+                                        <li><a href="http://www.siaminterhandicrafts.com/products/all" title="Products">Products</a></li>
                                     </ul>
                                 </div>
                                 <!-- /.widget -->
@@ -58,16 +58,16 @@
 
                                     <ul>
                                         {% if globals.user.isLoggedIn == 'true' -%}                                       
-                                        <li><a href="/account" title="My Account">My Account</a></li>
+                                        <li><a href="http://www.siaminterhandicrafts.com/account" title="My Account">My Account</a></li>
                                         {% else -%}    
                                         {module_pageaddress collection="pageAddress" template=""}        
-                                        <li><a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login">Login</a></li>                    
+                                        <li><a href="http://www.siaminterhandicrafts.com/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login">Login</a></li>                    
                                         {% endif -%}            
                                         {% if globals.user.isLoggedIn == 'false' -%}                               
-                                        <li><a href="/apply-for-account" title="Apply for Account">Apply for Account</a></li>
+                                        <li><a href="http://www.siaminterhandicrafts.com/apply-for-account" title="Apply for Account">Apply for Account</a></li>
                                         {% endif -%}            
-                                        <li><a href="/shipping" title="Shipping Details">Shipping</a></li>
-                                        <li><a href="/help" title="Help &amp; Support">Help &amp; Support</a></li>
+                                        <li><a href="http://www.siaminterhandicrafts.com/shipping" title="Shipping Details">Shipping</a></li>
+                                        <li><a href="http://www.siaminterhandicrafts.com/help" title="Help &amp; Support">Help &amp; Support</a></li>
                                     </ul>
                                 </div>
                                 <!-- /.widget -->
@@ -104,11 +104,11 @@
                         <div class="footer-nav">
                             <nav>
                                 <ul>
-                                    <li><a href="/" title="Home">Home</a></li>
-                                    <li><a href="/about" title="About Us">About Us</a></li>
-                                    <li><a href="/contact" title="Contact Us">Contact Us</a></li>
-                                    <li><a href="/terms" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
-                                    <li><a href="/privacy" title="Your Privacy">Your Privacy</a></li>
+                                    <li><a href="http://www.siaminterhandicrafts.com" title="Home">Home</a></li>
+                                    <li><a href="http://www.siaminterhandicrafts.com/about" title="About Us">About Us</a></li>
+                                    <li><a href="http://www.siaminterhandicrafts.com/contact" title="Contact Us">Contact Us</a></li>
+                                    <li><a href="http://www.siaminterhandicrafts.com/terms" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
+                                    <li><a href="http://www.siaminterhandicrafts.com/privacy" title="Your Privacy">Your Privacy</a></li>
                                 </ul>
                             </nav>
 
