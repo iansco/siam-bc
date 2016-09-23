@@ -13,7 +13,7 @@
 
                 <div id="header-offer">
                     <span>
-						<a href="http://www.siaminterhandicrafts.com/shipping" title="Shipping Details"><i class="fa fa-truck"></i>Free International Shipping on Orders $1000+</a>
+						<a href="/shipping" title="Shipping Details"><i class="fa fa-truck"></i>Free International Shipping on Orders $1000+</a>
                         {% if CartSummary.itemCount >= 1 and CartSummary.totalAmount > 0 -%}
                             {% assign qualifyingAmount = 1000 -%}
                             {% assign spendToQualify = qualifyingAmount | minus: CartSummary.totalAmount -%}
@@ -67,44 +67,44 @@
                         </div>
 
                         <div class="awe-logo">
-                            <a href="http://www.siaminterhandicrafts.com" title="Home"><img src="/img/site/siam_logo.svg" alt="Siam Logo"></a>
+                            <a href="/" title="Home"><img src="/img/site/siam_logo.svg" alt="Siam Logo"></a>
                         </div>
                         <!-- /.awe-logo -->
 
 
                         <ul class="awemenu awemenu-right">
                             <li class="awemenu-item">
-                                <a href="http://www.siaminterhandicrafts.com/" title="Home">
+                                <a href="/" title="Home">
                                     <span>Home</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="http://www.siaminterhandicrafts.com/products/all" title="Products">
+                                <a href="/products/all" title="Products">
                                     <span>Products</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="http://www.siaminterhandicrafts.com/quick-order" title="Quick Order">
+                                <a href="/quick-order" title="Quick Order">
                                     <span>Quick Order</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="http://www.siaminterhandicrafts.com/about" title="About Us">
+                                <a href="/about" title="About Us">
                                     <span>About</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="http://www.siaminterhandicrafts.com/contact" title="Contact Us">
+                                <a href="/contact" title="Contact Us">
                                     <span>Contact</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
                                 {% if globals.user.isLoggedIn == 'true' -%}
-                                <a href="http://www.siaminterhandicrafts.com/account" title="My Account">
+                                <a href="/account" title="My Account">
                                     <span><i class="glyphicon glyphicon-user padding-right-5"></i>My Account</span>
                                 </a>
                                 {% else -%}                                                             
-                                <a href="http://www.siaminterhandicrafts.com/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login">
+                                <a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login">
                                     <span>Login</span>
                                 </a>
                                 {% endif -%}        
