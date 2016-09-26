@@ -4329,7 +4329,9 @@ h2.entry-title {
 }
 
 .product-thumbnail img {
-  width: 100% !important;
+  /*width: 100% !important;*/
+  max-width: 250px;
+  max-height: 250px;
 }
 
 .product-soldout {
