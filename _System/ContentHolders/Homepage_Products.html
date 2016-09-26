@@ -21,17 +21,7 @@
                             <div class="products products-grid-wrapper">
                                 <div class="row">
                                     {% for item in NewArrivals.items -%}
-                                    <!--
-                                        item to JSON:
-
-                                        {{item|JSON}}
-                                    -->
                                     {module_data resource="prices" version="v3" collection="Price" where="\{'productId':'{{item.product.id}}'\}" limit="1"}
-                                    <!--
-                                        Price (limit:1) to JSON:
-
-                                        {{Price|JSON˝}}
-                                    -->
                                     <div class="col-md-4 col-sm-4 col-xs-12">                                                                                                                        
                                         <div class="product product-grid">
                                             <a href="{{newArrivalsCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">
