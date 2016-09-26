@@ -32,8 +32,7 @@
     <!-- Custom Siam Styles -->
     <link rel="stylesheet" href="/css/custom.css">
 
-    <!-- build:js js/vendor.js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!-- build:js js/vendor.js -->    
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <!-- endbuild -->
 
@@ -73,6 +72,8 @@
     <script src="/js/awe-hosoren.js"></script>
     <script src="/js/main.js"></script>
     <!-- endbuild -->
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
 </body>
 
