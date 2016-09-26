@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/css/custom.css">
 
     <!-- build:js js/vendor.js -->    
-    <script async src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <!-- endbuild -->
 
 </head>
