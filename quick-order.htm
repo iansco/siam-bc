@@ -365,7 +365,7 @@
                                 <span class="login"><a href="/login?ref={{pageAddress.pageUrl | url_param_escape}}" title="Login for Price">Login</a></span>
                                 {% endif %}
                             </td>
-                            <td class="quantity"><input name="p_qty" type="text" id="Units_{{item.productId}}" min-qty="{{item.product.minUnits | default: '1'}}" value="{{item.product.minUnits | default: '1'}}" title="Order Quantity ({{unitTypePluralized}})" class="qty" onchange="updatePrices({{item.productId}});"><span class="product-units"> ({{unitTypePluralized}})</span></td>                                    
+                            <td class="quantity"><input name="p_qty" type="text" id="Units_{{item.productId}}" data-min-qty="{{item.product.minUnits | default: '1'}}" value="{{item.product.minUnits | default: '1'}}" title="Order Quantity ({{unitTypePluralized}})" class="qty" onchange="updatePrices({{item.productId}});"><span class="product-units"> ({{unitTypePluralized}})</span></td>                                    
                             <td class="sub-total">
                                 {% if globals.user.isLoggedIn == 'true' -%}                                            
                                 <span class="price" id="subTotal_{{item.productId}}">${{item.salePrice | times: item.product.minUnits}}</span>
