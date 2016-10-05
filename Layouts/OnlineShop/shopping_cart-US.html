@@ -57,7 +57,7 @@
 					</td>
 					<td class="remove-product"><span data-toggle="tooltip" data-original-title="Remove"><a href="#" onclick="{{item.removeOnClick}};return false;"><i class="glyphicon glyphicon-remove-circle"></i></a></span></td>
 					<td><span class="price">{{item.productAmountExceptTax | money}}</span></td>										
-					<td class="quantity"><input type="text" value="{{item.quantity}}" class="qty" onchange="{{item.quantityInputOnChange}}; return false;"><span class="product-units"> ({{unitTypePluralized}})</span></td>
+					<td class="quantity"><input type="text" value="{{item.quantity}}" class="qty" onchange="{{item.quantityInputOnChange}}; return false;" title="Order Quantity ({{unitTypePluralized}})"><span class="product-units"> ({{unitTypePluralized}})</span></td>
 					<td><span class="price">{{item.productTotalExceptTax | money}}</span></td>														
 				</tr>
 				{% endfor %}
