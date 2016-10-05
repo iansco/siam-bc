@@ -378,9 +378,14 @@
                             {% for item in globals.cart.items -%}   
                             {module_data resource="products" version="v3" fields="id,productCode,unitType,minUnits,custom1,popletImage3" skip="0" limit="1" where="\{'id':{{item.productId}}\}" order="id" collection="CartProduct"}
                             {module_data resource="productsattributes" version="v3" fields="groupName" where="\{'productId':'{{item.productId}}'\}" order="id" collection="ProductAttributes"}
-                            {% assign productDetail = CartProduct.items[0] -%}    
-                            {% if productDetail.minUnits > 1 -%}                                    
-                                {% assign unitTypePluralized = productDetail.unitType | append: 's' | default: 'Items' -%}
+                            {% assign productDetail = CartProduct.items[0] -%}   
+                            {% assign lastLetterUnitType = productDetail.minUnits | slice: -1, 1 -%} 
+                            {% if productDetail.minUnits > 1 -%}
+                                {% if lastLetterUnitType != 's' -%}                                       
+                                    {% assign unitTypePluralized = productDetail.unitType | append: 's' | default: 'Items' -%}
+                                {% else %}
+                                    {% assign unitTypePluralized = productDetail.unitType | default: 'Item' -%}
+                                {% endif %}        
                             {% else %}
                                 {% assign unitTypePluralized = productDetail.unitType | default: 'Item' -%}
                             {% endif %}                                                                                     
