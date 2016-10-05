@@ -298,7 +298,7 @@
                                                 {% assign unitTypePluralized = productDetail.product.unitType -%}
                                             {% endif %}
                                             <label for="p_qty">Quantity <span>({{unitTypePluralized}})</span></label>
-                                            <input tabindex="{{ProductAttributes.items.size | default: 0 | plus: 1 }}" id="{{'Units_' | append: currentProductId }}" min="{{productDetail.product.minUnits | default: '1'}}" title="Order Quantity ({{unitTypePluralized}})" class="form-control qty" name="p_qty" type="text" value="{{productDetail.product.minUnits | default: '1'}}" onchange="updatePrices({{currentProductId}});">                                  
+                                            <input tabindex="{{ProductAttributes.items.size | default: 0 | plus: 1 }}" id="{{'Units_' | append: currentProductId }}" min="{{productDetail.product.minUnits | default: '1'}}" data-min-qty="{{productDetail.product.minUnits | default: '1'}}" title="Order Quantity ({{unitTypePluralized}})" class="form-control qty" name="p_qty" type="text" value="{{productDetail.product.minUnits | default: '1'}}" onchange="updatePrices({{currentProductId}});">                                  
                                         </div>
 
                                         <!-- Add to Cart --->
