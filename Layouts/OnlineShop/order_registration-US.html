@@ -380,15 +380,11 @@
                             {module_data resource="productsattributes" version="v3" fields="groupName" where="\{'productId':'{{item.productId}}'\}" order="id" collection="ProductAttributes"}
                             {% assign productDetail = CartProduct.items[0] -%}   
                             {% assign lastLetterUnitType = productDetail.minUnits | slice: -1, 1 -%} 
-                            {% if item.quantity > 1 -%}
-                                {% if lastLetterUnitType != 's' -%}                                       
-                                    {% assign unitTypePluralized = productDetail.unitType | append: 's' | default: 'Items' -%}
-                                {% else %}
-                                    {% assign unitTypePluralized = productDetail.unitType | default: 'Item' -%}
-                                {% endif %}        
+                            {% if lastLetterUnitType != 's' -%}                                       
+                                {% assign unitTypePluralized = productDetail.unitType | append: 's' | default: 'Items' -%}
                             {% else %}
                                 {% assign unitTypePluralized = productDetail.unitType | default: 'Item' -%}
-                            {% endif %}                                                                                     
+                            {% endif %}        
                             <tr data-product-id="{{item.productId}}">
                                 <td class="cart-product">
                                     <div class="product-image">                            
