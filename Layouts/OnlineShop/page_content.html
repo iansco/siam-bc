@@ -291,7 +291,8 @@
                                         {% endif %}
                                         <!-- Quantity -->                                                                                                                                      
                                         <div class="form-group margin-top-15">
-                                            {% if productDetail.product.minUnits > 1 -%}
+                                            {% assign lastLetterUnitType = productDetail.product.minUnits | slice: -1, 1 -%}
+                                            {% if lastLetterUnitType != 's' -%}                                                                             
                                                 {% assign unitTypePluralized = productDetail.product.unitType | append: 's' -%}
                                             {% else %}
                                                 {% assign unitTypePluralized = productDetail.product.unitType -%}
