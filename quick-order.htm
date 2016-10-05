@@ -288,7 +288,8 @@
                     </thead>                    
                     <tbody>
                     {% for item in ProductPrices.items -%}
-                        {% if item.product.minUnits > 1 -%}                                    
+                        {% assign lastLetterUnitType = item.product.unitType | slice: -1, 1 -%}
+                        {% if lastLetterUnitType != 's' -%}                                    
                             {% assign unitTypePluralized = item.product.unitType | append: 's' | default: 'Items' -%}
                         {% else %}
                             {% assign unitTypePluralized = item.product.unitType | default: 'Item' -%}
@@ -301,7 +302,7 @@
                                         <img src="{{item.product.popletImage3}}" alt="{{item.product.name}}">                                                                                   
                                     </div> 
                                     <div class="product-description">
-                                        <h3 class="product-title">{{item.product.name}}<span class="product-units"> ({{unitTypePluralized}})</span></h3>
+                                        <h3 class="product-title">{{item.product.name}}<span class="product-units"> ({{item.product.unitType}})</span></h3>
                                         <span class="product-sku">{{item.product.productCode}}</span>
                                     </div>        
                                 </a> 
