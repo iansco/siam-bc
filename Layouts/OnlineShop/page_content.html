@@ -237,7 +237,7 @@
                                                     Unfortunately, we can't just call 'productsattributeoptionsprices' because some Options have no price.
                                                 {% endcomment %}                             
                                                 
-                                                {module_data resource="productsattributeoptions" version="v3" fields="id,siteId,groupId,optionName,imagePath,attribute" limit="50" where="\{'groupId':'{{productAttribute.id}}'\}" order="id" collection="ProductAttributeOptions"}
+                                                {module_data resource="productsattributeoptions" version="v3" fields="id,siteId,groupId,optionName,imagePath,attribute" limit="50" where="\{'groupId':'{{productAttribute.id}}'\}" order="optionName" collection="ProductAttributeOptions"}
                                                 {module_data resource="productsattributeoptionsprices" version="v3" fields="id,price,options" limit="50" where="\{'options.groupId':'{{productAttribute.id}}'\}" order="id" collection="ProductAttributeOptionsPrices"}
 
                                                 {% assign attrName = productAttribute.groupName | replace: ' ', '' | replace: '/', '' -%}
