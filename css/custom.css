@@ -538,6 +538,14 @@ ul.pagination li {
   background-color: #231F20;
 }
 
+#header-main-menu a {
+  color: #fff;
+}
+
+#header-main-menu a:active, #header-main-menu a:hover, #header-main-menu a:focus {
+  color: #fff;
+}
+
 .awemenu-nav #header-offer {
   text-align: center;
   text-transform: uppercase;
