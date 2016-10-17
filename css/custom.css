@@ -568,58 +568,57 @@ ul.pagination li {
 
 .awe-nav > li.current,
 .awe-nav > li.active > a {
-  color: #393F4D;
-  border-bottom-color: #393F4D;
+  color: #fff;
+  border-bottom-color: #fff;
 }
 
 .awemenu-left .awemenu,
 .awemenu-default .awemenu {
-  color: #393F4D;
+  color: #fff;
 }
 
 .awemenu-left .awemenu .awemenu-item > a,
 .awemenu-default .awemenu .awemenu-item > a {
-  color: #393F4D;
-  /*font-weight: normal;*/
+  color: #fff;
 }
 
 .awemenu-left .awemenu .awemenu-item:hover > a, .awemenu-left .awemenu .awemenu-item.awemenu-current-item > a, .awemenu-left .awemenu .awemenu-item.awemenu-active > a,
 .awemenu-default .awemenu .awemenu-item:hover > a,
 .awemenu-default .awemenu .awemenu-item.awemenu-current-item > a,
 .awemenu-default .awemenu .awemenu-item.awemenu-active > a {
-  color: #393F4D;
+  color: #fff;
   text-decoration: underline; 
 }
 
 .awemenu-left .awemenu .awemenu-item .awemenu-submenu .awemenu-item > a,
 .awemenu-default .awemenu .awemenu-item .awemenu-submenu .awemenu-item > a {
-  color: #393F4D;
+  color: #fff;
 }
 
 .awemenu-left .awemenu .awemenu-item .awemenu-submenu .awemenu-item:hover > a,
 .awemenu-left .awemenu .awemenu-item .awemenu-submenu .awemenu-item.awemenu-current-item > a,
 .awemenu-default .awemenu .awemenu-item .awemenu-submenu .awemenu-item:hover > a,
 .awemenu-default .awemenu .awemenu-item .awemenu-submenu .awemenu-item.awemenu-current-item > a {
-  color: #393F4D;
+  color: #fff;
 }
 
 .awemenu-mobile-default.awemenu-mobile-standard .awemenu-container .awemenu .awemenu-item > a, .awemenu-mobile-default.awemenu-mobile-top .awemenu-container .awemenu .awemenu-item > a, .awemenu-mobile-default.awemenu-mobile-bottom .awemenu-container .awemenu .awemenu-item > a, .awemenu-mobile-default.awemenu-mobile-outleft .awemenu-container .awemenu .awemenu-item > a, .awemenu-mobile-default.awemenu-mobile-outright .awemenu-container .awemenu .awemenu-item > a {
-  color: #393F4D;
+  color: #fff;
 }
 
 .awemenu-mobile-default.awemenu-mobile-standard .awemenu-container .awemenu .awemenu-item:hover > a, .awemenu-mobile-default.awemenu-mobile-top .awemenu-container .awemenu .awemenu-item:hover > a, .awemenu-mobile-default.awemenu-mobile-bottom .awemenu-container .awemenu .awemenu-item:hover > a, .awemenu-mobile-default.awemenu-mobile-outleft .awemenu-container .awemenu .awemenu-item:hover > a, .awemenu-mobile-default.awemenu-mobile-outright .awemenu-container .awemenu .awemenu-item:hover > a, .awemenu-mobile-default.awemenu-mobile-standard .awemenu-container .awemenu .awemenu-item.awemenu-active > a, .awemenu-mobile-default.awemenu-mobile-top .awemenu-container .awemenu .awemenu-item.awemenu-active > a, .awemenu-mobile-default.awemenu-mobile-bottom .awemenu-container .awemenu .awemenu-item.awemenu-active > a, .awemenu-mobile-default.awemenu-mobile-outleft .awemenu-container .awemenu .awemenu-item.awemenu-active > a, .awemenu-mobile-default.awemenu-mobile-outright .awemenu-container .awemenu .awemenu-item.awemenu-active > a {
-  color: #393F4D;
-  background-color: #393F4D;
+  color: #fff;
+  background-color: #fff;
 }
 
 .awemenu-bars {
-  background: #393F4D !important;
+  background: #fff !important;
 }
 
 .box-hover:hover .awe-box-icon,
 .box-hover:hover .awe-box-content h2,
 .box-hover:hover .awe-box-content h3 {
-  color: #393F4D;
+  color: #fff;
 }
 
 .awe-box-content h2 {
