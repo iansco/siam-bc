@@ -542,8 +542,17 @@ ul.pagination li {
   color: #fff;
 }
 
+.navbar-icons {
+  border-left: solid 1px #595e68;
+  border-right: solid 1px #595e68;
+}
+
 #header-main-menu a:active, #header-main-menu a:hover, #header-main-menu a:focus {
   color: #fff;
+}
+
+.awemenu-nav {
+  border-bottom: solid 1px #595e68;
 }
 
 .awemenu-nav #header-offer {
@@ -1435,6 +1444,10 @@ footer a:hover.green, footer a:active.green {
 /* -------------------------------------------------------------------------------
     7. Layouts compoments
 --------------------------------------------------------------------------------*/
+
+form#menubar-search {
+  background-color: #393F4D;
+}
 
 .menubar-search-form > form .form-control {
   border-color: #393F4D;
