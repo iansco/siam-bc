@@ -1010,7 +1010,7 @@ a.help {
 .widget_product_categories ul > li:hover,
 .widget_product_categories ul > li.current,
 .widget_product_categories ul > li.active {
-  background-image: url("../img/site/bullet_green.png");
+  background-image: url("../img/site/bullet_gold.png");
 }
 
 .widget_categories ul > li > a:hover,
@@ -1472,7 +1472,7 @@ footer a:hover.green, footer a:active.green {
 }
 
 .cart-number {
-  background: url("../img/site/bg-cart-number-green.png") no-repeat center center;
+  background: url("../img/site/bg-cart-number-gold.png") no-repeat center center;
   left: 69px;
   width: 20px;
   height: 20px;
@@ -1483,7 +1483,7 @@ footer a:hover.green, footer a:active.green {
   font-size: 10px;
   font-weight: 700;
   text-align: center;
-  background: url("../img/site/bg-cart-number-green_25.png") no-repeat center center;
+  background: url("../img/site/bg-cart-number-gold.png") no-repeat center center;
   width: 25px;
   height: 25px;
   line-height: 25px;
