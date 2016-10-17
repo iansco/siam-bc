@@ -1379,6 +1379,10 @@ footer a:hover.gold, footer a:active.gold {
   color: #fff;
 }
 
+.footer-wrapper .widget .widget-title {
+  margin-bottom: 20px;
+}
+
 .footer-copyright a:hover {
   color: #fff;
 }
