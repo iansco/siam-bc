@@ -25,6 +25,9 @@
   New Siam Organics Rebranding Notes:
   Replace Siam Blue #333366 with new Siam Organics Blue #393F4D.
 
+  Siam Organics Blue: #393F4D;
+  Siam Organics Gold: #D9B310
+  Siam Organics Charcoal: #231F20;
 
 -------------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------
@@ -532,7 +535,7 @@ ul.pagination li {
 --------------------------------------------------------------------------------*/
 
 #header-main-menu {
-  background-color: #393F4D;
+  background-color: #231F20;
 }
 
 .awemenu-nav #header-offer {
