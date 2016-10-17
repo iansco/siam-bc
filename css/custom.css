@@ -1343,6 +1343,14 @@ footer a:hover.green, footer a:active.green {
   color: #cccc00;
 }
 
+footer a.gold {
+ color: #D9B310;   
+}
+
+footer a:hover.gold, footer a:active.gold {
+  color: #D6BB53;
+}
+
 .footer a.back-top small {
   transition: all 0.25s ease-in-out;
   color: #acacac;
