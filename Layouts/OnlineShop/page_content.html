@@ -311,7 +311,7 @@
                                             {% if productDetail.retailPrice > 0 -%}
                                             <span>MSRP {{productDetail.retailPrice | money}}</span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% else %}
-                                            <span>MSRP <span id="product-msrp">{{productDetail.salePrice | times: 4 | round | minus: 0.01 | money}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
+                                            <span>MSRP $<span id="product-msrp">{{productDetail.salePrice | times: 4 | round | minus: 0.01}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% endif %}
                                         </div>                                                
                                         <!-- Quantity -->                                                                                                                                      
@@ -599,18 +599,26 @@
                             var basePrice = parseFloat($("#unitPrice_" + productId).data("base-price"));
                             // Need to get the sum of all selected Attributes.
                             var sumSelectedAttributePrices = 0;
+                            var f = 0;
                             $(".product-attribute option:selected").each(function() {
                                 sumSelectedAttributePrices += parseFloat($(this).data('price')) || 0;
+                                if ($(this).data('factor')) {
+                                    f = $(this).data('factor');
+                                }
                             });
                             // Update the Unit Price.                        
                             if (!isNaN(basePrice) && !isNaN(sumSelectedAttributePrices)) {                                
                                 var newUnitPrice = basePrice + sumSelectedAttributePrices;
                                 if (!isNaN(newUnitPrice)) {
                                     $("#unitPrice_" + productId).text("$" + newUnitPrice.toFixed(2));
-                                }                                
-                            }
+                                    if($("#product-msrp") && f > 0) {
+                                        $("#product-msrp").text(newUnitPrice * f);
+                                    } else {
+                                        $("#product-msrp").text('TBA');
+                                    } 
+                                }
+                            }                                
                         }
-
                     </script>                     
 
                     <script>
