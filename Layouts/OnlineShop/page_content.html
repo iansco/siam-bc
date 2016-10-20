@@ -268,8 +268,12 @@
                                                                     {% if option.optionName contains 'Double Flare' -%}
                                                                         {% assign defaultOption = true -%}
                                                                     {% endif %}
-                                                            {% endcase %}
-                                                            <option data-price="{{optionPrice}}" value="{{option.id}}"{% if defaultOption -%}selected{% endif %}>{{option.optionName}}{% if optionPrice > 0 -%} {{ optionPrice | number: 'N2' | prepend: '+ $'}}{% endif -%}</option>  
+                                                                {% when 'SizeGauge' -%}
+                                                                    {% if option.optionName contains 'mm' -%}
+                                                                    {% assign size = option.optionName | split: 'mm' | first -%}
+                                                                    {% endif %}
+                                                            {% endcase %}                                                            
+                                                            <option data-price="{{optionPrice}}" data-size="{{size}}" value="{{option.id}}"{% if defaultOption -%}selected{% endif %}>{{option.optionName}}{% if optionPrice > 0 -%} {{ optionPrice | number: 'N2' | prepend: '+ $'}}{% endif -%}</option>  
                                                         {% endfor %}                                                    
                                                     </select>
                                                 </div>                                               
@@ -283,12 +287,14 @@
                                         {% if globals.user.isLoggedIn == 'true' -%}
                                         <span class="product-price">
                                             <span id="unitPrice_{{currentProductId}}" data-base-price="{{productDetail.salePrice}}" class="amount">${{productDetail.salePrice}}</span><span class="unit">(Per {{productDetail.product.unitType}})</span>
-                                        </span> 
-                                        {% if productDetail.retailPrice > 0 -%}
+                                        </span>                                         
                                         <div class="product-price-msrp">
-                                            <span>MSRP STARTING AT ${{productDetail.retailPrice}}</span>
-                                        </div>        
-                                        {% endif %}
+                                            {% if productDetail.retailPrice > 0 -%}
+                                            <span>MSRP {{productDetail.retailPrice | money}}</span>
+                                            {% else %}
+                                            <span>MSRP <span id="product-msrp">{{productDetail.salePrice | times: 4 | money}}</span></span>
+                                            {% endif %}
+                                        </div>                                                
                                         <!-- Quantity -->                                                                                                                                      
                                         <div class="form-group margin-top-15">
                                             {% assign lastLetterUnitType = productDetail.product.minUnits | slice: -1, 1 -%}
