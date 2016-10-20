@@ -270,7 +270,7 @@
                                                                     {% endif %}
                                                                 {% when 'SizeGauge' -%}
                                                                     {% if option.optionName contains 'mm' -%}
-                                                                    {% assign size = option.optionName | split: 'mm' | first -%}
+                                                                    {% assign size = option.optionName | split: 'mm' | first | convert: "number" -%}
                                                                     {% endif %}
                                                                     {% case size -%}
                                                                         {% when <= 8 %}
