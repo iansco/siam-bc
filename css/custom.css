@@ -861,9 +861,13 @@ a.back-to-pcate:hover, a.back-to-pcate:active {
   vertical-align: middle;
 }
 
-.form-group label a.help:hover, .form-group label a.help:active  {
+.form-group label a.help:hover, .form-group label a.help:active, .product-price-msrp a.help:hover, .product-price-msrp a.help:active {
   color: #393F4D;
   cursor: pointer;
+}
+
+.product-price-msrp a.help {
+  padding-left: 5px;
 }
 
 a.help {
