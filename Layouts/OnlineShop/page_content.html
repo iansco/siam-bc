@@ -272,25 +272,22 @@
                                                                     {% if option.optionName contains 'mm' -%}
                                                                     {% assign size = option.optionName | split: 'mm' | first | convert: "number" -%}
                                                                     {% endif %}
-                                                            {% endcase %}    
-                                                            {% if attrName == 'SizeGauge' -%}
-                                                                {% case size -%}
-                                                                    {% when <= 8 %}
+                                                                    {% if size <= 8 -%}
                                                                         {% assign msrpMultiplier = 4 -%}
-                                                                    {% when <= 12.7 %}
+                                                                    {% elsif size <= 12.7 -%}
                                                                         {% assign msrpMultiplier = 3.8 -%}
-                                                                    {% when <= 19 %}
+                                                                    {% elsif size <= 19 -%}
                                                                         {% assign msrpMultiplier = 3.6 -%}
-                                                                    {% when <= 25.5 %}
+                                                                    {% elsif size <= 25.5 -%}
                                                                         {% assign msrpMultiplier = 3.4 -%}
-                                                                    {% when <= 38.5 %}
+                                                                    {% elsif size <= 38.5 -%}
                                                                         {% assign msrpMultiplier = 3.2 -%}
-                                                                    {% when > 38.5 %}
+                                                                    {% elsif size > 38.5 -%}
                                                                         {% assign msrpMultiplier = 3 -%}
-                                                                    {% else %}
+                                                                    {% else -%}
                                                                         {% assign msrpMultiplier = 0 -%}
-                                                                {% endcase %}
-                                                            {% endif %}                                                                                                                                                                                                   
+                                                                    {% endif -%}
+                                                            {% endcase %}    
                                                             {% if globals.user.isLoggedIn == 'true' -%}                                                        
                                                             <option data-price="{{optionPrice}}"{% if attrName == 'SizeGauge' -%} data-size="{{size}}" data-factor="{{msrpMultiplier}}" {% endif -%}value="{{option.id}}"{% if defaultOption -%}selected{% endif %}>{{option.optionName}}{% if optionPrice > 0 -%} {{ optionPrice | number: 'N2' | prepend: '+ $'}}{% endif -%}</option>
                                                             {% else %}
@@ -312,9 +309,9 @@
                                         </span>                                         
                                         <div class="product-price-msrp">
                                             {% if productDetail.retailPrice > 0 -%}
-                                            <span>MSRP {{productDetail.retailPrice | money}}</span>
+                                            <span>MSRP {{productDetail.retailPrice | money}}</span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% else %}
-                                            <span>MSRP <span id="product-msrp">{{productDetail.salePrice | times: 4 | money}}</span></span>
+                                            <span>MSRP <span id="product-msrp">{{productDetail.salePrice | times: 4 | round | minus: 0.01 | money}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% endif %}
                                         </div>                                                
                                         <!-- Quantity -->                                                                                                                                      
