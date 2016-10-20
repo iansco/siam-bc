@@ -612,7 +612,12 @@
                                 if (!isNaN(newUnitPrice)) {
                                     $("#unitPrice_" + productId).text("$" + newUnitPrice.toFixed(2));
                                     if($("#product-msrp") && f > 0) {
-                                        $("#product-msrp").text(newUnitPrice * f);
+                                        var m = Math.round(newUnitPrice * f).toFixed(2) - 0.01;
+                                        if(!isNaN(m)) {
+                                            $("#product-msrp").text(m);
+                                        } else {
+                                            $("#product-msrp").text('TBA');
+                                        }
                                     } else {
                                         $("#product-msrp").text('TBA');
                                     } 
