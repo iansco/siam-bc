@@ -854,7 +854,7 @@ a.back-to-pcate:hover, a.back-to-pcate:active {
   margin-top: 10px;
 }
 
-.form-group label a.help {
+.form-group label a.help, .product-price-msrp a.help {
   color: #999;
   font-size: 16px;
   padding: 2px;
