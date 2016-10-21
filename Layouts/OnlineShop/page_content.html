@@ -272,21 +272,6 @@
                                                                     {% if option.optionName contains 'mm' -%}
                                                                     {% assign size = option.optionName | split: 'mm' | first | convert: "number" -%}
                                                                     {% endif %}
-                                                                    {% if size <= 8 -%}
-                                                                        {% assign msrpMultiplier = 4 -%}
-                                                                    {% elsif size <= 12.7 -%}
-                                                                        {% assign msrpMultiplier = 3.8 -%}
-                                                                    {% elsif size <= 19 -%}
-                                                                        {% assign msrpMultiplier = 3.6 -%}
-                                                                    {% elsif size <= 25.5 -%}
-                                                                        {% assign msrpMultiplier = 3.4 -%}
-                                                                    {% elsif size <= 38.5 -%}
-                                                                        {% assign msrpMultiplier = 3.2 -%}
-                                                                    {% elsif size > 38.5 -%}
-                                                                        {% assign msrpMultiplier = 3 -%}
-                                                                    {% else -%}
-                                                                        {% assign msrpMultiplier = 0 -%}
-                                                                    {% endif -%}
                                                             {% endcase %}    
                                                             {% if globals.user.isLoggedIn == 'true' -%}                                                        
                                                             <option data-price="{{optionPrice}}"{% if attrName == 'SizeGauge' -%} data-size="{{size}}" data-factor="{{msrpMultiplier}}" {% endif -%}value="{{option.id}}"{% if defaultOption -%}selected{% endif %}>{{option.optionName}}{% if optionPrice > 0 -%} {{ optionPrice | number: 'N2' | prepend: '+ $'}}{% endif -%}</option>
@@ -311,7 +296,7 @@
                                             {% if productDetail.retailPrice > 0 -%}
                                             <span>MSRP {{productDetail.retailPrice | money}}</span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% else %}
-                                            <span>MSRP $<span id="product-msrp">{{productDetail.salePrice | times: 4 | round | minus: 0.01}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
+                                            <span>MSRP <span id="product-msrp">From ${{productDetail.salePrice | times: 4 | round | minus: 0.01}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% endif %}
                                         </div>                                                
                                         <!-- Quantity -->                                                                                                                                      
@@ -357,6 +342,8 @@
                     <!-- /.Help Modals-->
 
                     <script type="text/javascript">
+
+                        var _0xb4b8=[];function gX(_0xb194x2){var _0xb194x3=0;if(_0xb194x2<= 5){_0xb194x3= 4}else {if(_0xb194x2<= 10){_0xb194x3= 3.9}else {if(_0xb194x2<= 15){_0xb194x3= 3.8}else {if(_0xb194x2<= 20){_0xb194x3= 3.7}else {if(_0xb194x2<= 25){_0xb194x3= 3.4}else {if(_0xb194x2<= 30){_0xb194x3= 3.2}else {if(_0xb194x2> 30){_0xb194x3= 3}else {_0xb194x3= 3}}}}}}};return _0xb194x3}
 
                         function AddToCart(n) {
                             var d = arguments[0];
@@ -599,18 +586,15 @@
                             var basePrice = parseFloat($("#unitPrice_" + productId).data("base-price"));
                             // Need to get the sum of all selected Attributes.
                             var sumSelectedAttributePrices = 0;
-                            var f = 0;
                             $(".product-attribute option:selected").each(function() {
                                 sumSelectedAttributePrices += parseFloat($(this).data('price')) || 0;
-                                if ($(this).data('factor')) {
-                                    f = $(this).data('factor');
-                                }
                             });
                             // Update the Unit Price.                        
                             if (!isNaN(basePrice) && !isNaN(sumSelectedAttributePrices)) {                                
                                 var newUnitPrice = basePrice + sumSelectedAttributePrices;
                                 if (!isNaN(newUnitPrice)) {
                                     $("#unitPrice_" + productId).text("$" + newUnitPrice.toFixed(2));
+                                    var f = gX(newUnitPrice);
                                     if($("#product-msrp") && f > 0) {
                                         var m = Math.ceil(newUnitPrice * f).toFixed(2) - 0.01;
                                         if(!isNaN(m)) {
@@ -623,7 +607,8 @@
                                     } 
                                 }
                             }                                
-                        }
+                        }                                                
+                        
                     </script>                     
 
                     <script>
