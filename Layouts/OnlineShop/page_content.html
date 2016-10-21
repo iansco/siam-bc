@@ -187,6 +187,27 @@
             {% if ProductsAndPrices.items.size == 1 -%}
 
                 {% assign productDetail = ProductsAndPrices.items[0] -%}
+
+                {% if productDetail.salePrice <= 5 -%}
+                    {% assign msrpMultiplier = 4 -%}
+                {% elsif productDetail.salePrice <= 10 -%}
+                    {% assign msrpMultiplier = 3.9 -%}
+                {% elsif productDetail.salePrice <= 15 -%}
+                    {% assign msrpMultiplier = 3.8 -%}                
+                {% elsif productDetail.salePrice <= 20 -%}
+                    {% assign msrpMultiplier = 3.7 -%}                
+                {% elsif productDetail.salePrice <= 25 -%}
+                    {% assign msrpMultiplier = 3.4 -%}                
+                {% elsif productDetail.salePrice <= 30 -%}
+                    {% assign msrpMultiplier = 3.2 -%}                
+                {% elsif productDetail.salePrice > 30 -%}
+                    {% assign msrpMultiplier = 3 -%}                
+                {% else -%}
+                    {% assign msrpMultiplier = 3 -%}                
+                {% endif -%}
+
+                {% assign baseMSRP = productDetail.salePrice | times: msrpMultiplier | round | minus: 0.01 -%}
+
                 <!-- Product Details -->
                 <div class="container">
                     <div class="row margin-bottom-100">
@@ -296,7 +317,7 @@
                                             {% if productDetail.retailPrice > 0 -%}
                                             <span>MSRP {{productDetail.retailPrice | money}}</span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% else %}
-                                            <span>MSRP <span id="product-msrp">From ${{productDetail.salePrice | times: 4 | round | minus: 0.01}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
+                                            <span>MSRP <span id="product-msrp">From ${{baseMSRP}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% endif %}
                                         </div>                                                
                                         <!-- Quantity -->                                                                                                                                      
@@ -598,12 +619,12 @@
                                     if($("#product-msrp") && f > 0) {
                                         var m = Math.ceil(newUnitPrice * f).toFixed(2) - 0.01;
                                         if(!isNaN(m)) {
-                                            $("#product-msrp").text(m);
+                                            $("#product-msrp").text("$"+m);
                                         } else {
-                                            $("#product-msrp").text('TBA');
+                                            $("#product-msrp").text('$TBA');
                                         }
                                     } else {
-                                        $("#product-msrp").text('TBA');
+                                        $("#product-msrp").text('$TBA');
                                     } 
                                 }
                             }                                
