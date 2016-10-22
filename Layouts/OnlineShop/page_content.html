@@ -206,7 +206,7 @@
                     {% assign msrpMultiplier = 3 -%}                
                 {% endif -%}
 
-                {% assign baseMSRP = productDetail.salePrice | times: msrpMultiplier | round | minus: 0.01 -%}
+                {% assign baseMSRP = productDetail.salePrice | times: msrpMultiplier | ceil | minus: 0.01 -%}
 
                 <!-- Product Details -->
                 <div class="container">
@@ -888,7 +888,7 @@
                                     {% assign msrpMultiplier = 3 -%}                
                                 {% endif -%}
 
-                                {% assign baseMSRP = item.salePrice | times: msrpMultiplier | round | minus: 0.01 -%}
+                                {% assign baseMSRP = item.salePrice | times: msrpMultiplier | ceil | minus: 0.01 -%}
 
 
                                 <!-- Product Item -->
