@@ -22,6 +22,25 @@
                                 <div class="row">
                                     {% for item in NewArrivals.items -%}
                                     {module_data resource="prices" version="v3" collection="Price" where="\{'productId':'{{item.product.id}}'\}" limit="1"}
+                                    {% assign msrpMultiplier = 0 -%}
+                                    {% if Price.items[0].salePrice <= 5 -%}
+                                        {% assign msrpMultiplier = 4 -%}
+                                    {% elsif Price.items[0].salePrice <= 10 -%}
+                                        {% assign msrpMultiplier = 3.9 -%}
+                                    {% elsif Price.items[0].salePrice <= 15 -%}
+                                        {% assign msrpMultiplier = 3.8 -%}                
+                                    {% elsif Price.items[0].salePrice <= 20 -%}
+                                        {% assign msrpMultiplier = 3.7 -%}                
+                                    {% elsif Price.items[0].salePrice <= 25 -%}
+                                        {% assign msrpMultiplier = 3.4 -%}                
+                                    {% elsif Price.items[0].salePrice <= 30 -%}
+                                        {% assign msrpMultiplier = 3.2 -%}                
+                                    {% elsif Price.items[0].salePrice > 30 -%}
+                                        {% assign msrpMultiplier = 3 -%}                
+                                    {% else -%}
+                                        {% assign msrpMultiplier = 3 -%}                
+                                    {% endif -%}
+                                    {% assign baseMSRP = Price.items[0].salePrice | times: msrpMultiplier | ceil | minus: 0.01 -%}                                    
                                     <div class="col-md-4 col-sm-4 col-xs-12">                                                                                                                        
                                         <div class="product product-grid">
                                             <a href="{{newArrivalsCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">
@@ -49,7 +68,11 @@
                                                         <span class="amount">${{Price.items[0].salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>
                                                     </div><!-- /.product-price -->
                                                     <div class="product-price-msrp">
+                                                        {% if Price.items[0].retailPrice > 0 -%}
                                                         <span>MSRP ${{Price.items[0].retailPrice}}</span>
+                                                        {% else %}
+                                                        <span>MSRP from ${{baseMSRP}}</span>
+                                                        {% endif %}
                                                     </div>                                                                               
                                                     {% endif -%}                                                                                                                                                         
 
@@ -87,6 +110,25 @@
                                 <div class="row">
                                     {% for item in BestSellers.items -%}
                                     {module_data resource="prices" version="v3" collection="Price" where="\{'productId':'{{item.product.id}}'\}" limit="1"}
+                                    {% assign msrpMultiplier = 0 -%}
+                                    {% if Price.items[0].salePrice <= 5 -%}
+                                        {% assign msrpMultiplier = 4 -%}
+                                    {% elsif Price.items[0].salePrice <= 10 -%}
+                                        {% assign msrpMultiplier = 3.9 -%}
+                                    {% elsif Price.items[0].salePrice <= 15 -%}
+                                        {% assign msrpMultiplier = 3.8 -%}                
+                                    {% elsif Price.items[0].salePrice <= 20 -%}
+                                        {% assign msrpMultiplier = 3.7 -%}                
+                                    {% elsif Price.items[0].salePrice <= 25 -%}
+                                        {% assign msrpMultiplier = 3.4 -%}                
+                                    {% elsif Price.items[0].salePrice <= 30 -%}
+                                        {% assign msrpMultiplier = 3.2 -%}                
+                                    {% elsif Price.items[0].salePrice > 30 -%}
+                                        {% assign msrpMultiplier = 3 -%}                
+                                    {% else -%}
+                                        {% assign msrpMultiplier = 3 -%}                
+                                    {% endif -%}
+                                    {% assign baseMSRP = Price.items[0].salePrice | times: msrpMultiplier | ceil | minus: 0.01 -%}                                    
                                     <div class="col-md-4 col-sm-4 col-xs-12">                                                                                                                
                                         <div class="product product-grid">
                                             <a href="{{bestSellersCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">        
@@ -114,7 +156,11 @@
                                                         <span class="amount">${{Price.items[0].salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                    
                                                     </div><!-- /.product-price -->
                                                     <div class="product-price-msrp">
+                                                        {% if Price.items[0].retailPrice > 0 -%}
                                                         <span>MSRP ${{Price.items[0].retailPrice}}</span>
+                                                        {% else %}
+                                                        <span>MSRP from ${{baseMSRP}}</span>
+                                                        {% endif %}
                                                     </div>                        
                                                     {% endif -%}   
 
@@ -152,6 +198,25 @@
                                 <div class="row">
                                     {% for item in OnSale.items -%}
                                     {module_data resource="prices" version="v3" collection="Price" where="\{'productId':'{{item.product.id}}'\}" limit="1"}
+                                    {% assign msrpMultiplier = 0 -%}
+                                    {% if Price.items[0].salePrice <= 5 -%}
+                                        {% assign msrpMultiplier = 4 -%}
+                                    {% elsif Price.items[0].salePrice <= 10 -%}
+                                        {% assign msrpMultiplier = 3.9 -%}
+                                    {% elsif Price.items[0].salePrice <= 15 -%}
+                                        {% assign msrpMultiplier = 3.8 -%}                
+                                    {% elsif Price.items[0].salePrice <= 20 -%}
+                                        {% assign msrpMultiplier = 3.7 -%}                
+                                    {% elsif Price.items[0].salePrice <= 25 -%}
+                                        {% assign msrpMultiplier = 3.4 -%}                
+                                    {% elsif Price.items[0].salePrice <= 30 -%}
+                                        {% assign msrpMultiplier = 3.2 -%}                
+                                    {% elsif Price.items[0].salePrice > 30 -%}
+                                        {% assign msrpMultiplier = 3 -%}                
+                                    {% else -%}
+                                        {% assign msrpMultiplier = 3 -%}                
+                                    {% endif -%}
+                                    {% assign baseMSRP = Price.items[0].salePrice | times: msrpMultiplier | ceil | minus: 0.01 -%}                                    
                                     <div class="col-md-4 col-sm-4 col-xs-12">                                                                                                                  
                                         <div class="product product-grid">
                                             <a href="{{onSaleCatalogUrl | append: '/' | append: item.product.slug}}" title="{{item.product.name}}">      
@@ -179,7 +244,11 @@
                                                         <span class="amount">${{Price.items[0].salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                    
                                                     </div><!-- /.product-price -->
                                                     <div class="product-price-msrp">
+                                                        {% if Price.items[0].retailPrice > 0 -%}
                                                         <span>MSRP ${{Price.items[0].retailPrice}}</span>
+                                                        {% else %}
+                                                        <span>MSRP from ${{baseMSRP}}</span>
+                                                        {% endif %}
                                                     </div>  
                                                     {% endif -%}                         
 
