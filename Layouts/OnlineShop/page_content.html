@@ -317,7 +317,7 @@
                                             {% if productDetail.retailPrice > 0 -%}
                                             <span>MSRP {{productDetail.retailPrice | money}}</span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% else %}
-                                            <span>MSRP <span id="product-msrp">From ${{baseMSRP}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
+                                            <span>MSRP <span id="product-msrp">from ${{baseMSRP}}</span></span><span data-toggle="modal" data-target="#helpModalMSRP"><a class="help" data-toggle="tooltip" title="Help on MSRP"><i class="icon icon-help"></i></a></span>
                                             {% endif %}
                                         </div>                                                
                                         <!-- Quantity -->                                                                                                                                      
@@ -869,6 +869,28 @@
 
                                 {% for item in ProductPrices.items -%}                                                                    
                                 {% assign modCheck = forloop.index | modulo: 3 -%}
+
+                                {% if item.salePrice <= 5 -%}
+                                    {% assign msrpMultiplier = 4 -%}
+                                {% elsif item.salePrice <= 10 -%}
+                                    {% assign msrpMultiplier = 3.9 -%}
+                                {% elsif item.salePrice <= 15 -%}
+                                    {% assign msrpMultiplier = 3.8 -%}                
+                                {% elsif item.salePrice <= 20 -%}
+                                    {% assign msrpMultiplier = 3.7 -%}                
+                                {% elsif item.salePrice <= 25 -%}
+                                    {% assign msrpMultiplier = 3.4 -%}                
+                                {% elsif item.salePrice <= 30 -%}
+                                    {% assign msrpMultiplier = 3.2 -%}                
+                                {% elsif item.salePrice > 30 -%}
+                                    {% assign msrpMultiplier = 3 -%}                
+                                {% else -%}
+                                    {% assign msrpMultiplier = 3 -%}                
+                                {% endif -%}
+
+                                {% assign baseMSRP = item.salePrice | times: msrpMultiplier | round | minus: 0.01 -%}
+
+
                                 <!-- Product Item -->
                                 {% if forloop.first == true -%}
                                 <div class="row is-table-row">
@@ -924,13 +946,14 @@
                                                     <div class="product-price">                                                        
                                                         <span class="amount">${{item.salePrice}}</span><span class="price-label gray"> ({{item.product.unitType}})</span>                                                        
                                                     </div><!-- /.product-price -->
-                                                    {% if item.retailPrice > 0 -%}
                                                     <div class="product-price-msrp">
+                                                    {% if item.retailPrice > 0 -%}
                                                         <span>MSRP ${{item.retailPrice}}</span>
-                                                    </div>                       
-                                                    {% endif %}                                                        
+                                                    {% else %}
+                                                        <span>MSRP from ${{baseMSRP}}</span>                                                        
+                                                    {% endif %}
+                                                    </div>                                                                               
                                                     {% endif %}                  
-
                                                 </div><!-- /.product-body -->
                                             </a>         
 
